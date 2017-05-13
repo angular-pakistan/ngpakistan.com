@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  currentMeetup = '../../../assets/img/meetup-3-banner.png';
+  prevMeetup = ['Meetup 2', 'Meetup 1', 'Check details ...'];
 }
