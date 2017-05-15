@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {
+  RouterModule,
+  PreloadAllModules
+} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { MeetupCardComponent } from './shared/meetup-card/meetup-card.component';
@@ -17,6 +21,12 @@ import { SmallCardComponent } from './shared/small-card/small-card.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ContactusCardComponent } from './shared/contactus-card/contactus-card.component';
 import { PartnersComponent } from './shared/partners/partners.component';
+import { NoContentComponent } from './no-content';
+import { HomeComponent } from './home';
+import { ContactusComponent } from './contactus';
+import { JoinComponent } from './join';
+
+import { ROUTES } from './app.route';
 
 @NgModule({
   declarations: [
@@ -33,12 +43,17 @@ import { PartnersComponent } from './shared/partners/partners.component';
     SmallCardComponent,
     FooterComponent,
     ContactusCardComponent,
-    PartnersComponent
+    PartnersComponent,
+    NoContentComponent,
+    HomeComponent,
+    ContactusComponent,
+    JoinComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   providers: [],
   bootstrap: [AppComponent]

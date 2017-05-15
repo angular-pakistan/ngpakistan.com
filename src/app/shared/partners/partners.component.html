@@ -1,0 +1,26 @@
+<section id ="pricing" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Proud Partneres</h2>
+        <p>Here are our great partners helping us bring open source software revolution in Pakistan. We love them<br>Check them out!</p>
+        <hr class="bottom-line">
+      </div>
+      <div class="col-md-4 col-sm-4" *ngFor="let partner of partners">
+        <div class="price-table">
+          <!-- Plan  -->
+          <div class="pricing-head" alt="" style="overflow:hidden">
+            <h4> {{ partner.name }} </h4>
+            <!--<span class="fa fa-usd curency"></span> <span class="amount">200</span>-->
+            <img [src]="partner.logo" class="partner-logo">
+          </div>
+
+          <!-- Plean Detail -->
+          <div class="price-in mart-15">
+            <a href="{{partner.web}}" class="btn btn-bg green btn-block" target="_blank">Visit {{ partner.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

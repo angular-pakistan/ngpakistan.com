@@ -1,0 +1,36 @@
+<!--meetup-card-->
+<section id="work-shop" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Meetups</h2>
+        <p>Free events every other month where we meet, eat and share knowledge. New talks on latest trends in Angular & JavaScript.
+          <br>Check out current meetups:</p>
+        <hr class="bottom-line">
+      </div>
+      <div class="col-md-9 col-sm-12">
+        <app-big-card [meetupImage]="currentMeetup" ></app-big-card>
+        <span style="background-color: red; color:#ffffff; padding:5px 15px; position: absolute; top:0; ">Latest</span>
+      </div>
+      <div class="col-md-3 col-sm-0">
+        <div class="service-box text-center" *ngFor="let meetup of prevMeetup">
+          <!--<div class="icon-box">-->
+            <!--<i class="fa fa-css3 color-green"></i>-->
+          <!--</div>-->
+          <div class="icon-text">
+            <h4 class="ser-text"><a href="#">{{meetup.name}} </a></h4>
+            <h6> {{ meetup.location }}</h6>
+          </div>
+        </div>
+
+         <div class="service-box text-center">
+            <a href="#"> See all meetups </a>
+          </div>
+
+        <span style="background-color: red; color:#ffffff; padding:5px 15px; position: absolute; top:0; ">Past </span>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--/ meetup-card-->

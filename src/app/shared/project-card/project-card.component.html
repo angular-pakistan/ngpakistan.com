@@ -1,0 +1,65 @@
+<section id="work-shop" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Projects</h2>
+        <p>We work on open source projects. <br> Would you like to join us?</p>
+        <hr class="bottom-line">
+      </div>
+      <div class="col-md-4 col-sm-6" *ngFor="let project of projects">
+        <div class="service-box text-center">
+          <div class="icon-box">
+            <!--<i class="fa fa-html5 color-green"></i>-->
+            <img [src]="project.image" alt="" style="height: 48px; width: 48px;">
+          </div>
+          <div class="icon-text">
+            <h4 class="ser-text">
+              <a href="#">{{ project.name }}</a>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top: 20px;">
+    <div class="row ">
+      <div class="service-box text-center">
+        <a href="#">See more projects</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--&lt;!&ndash;Projects&ndash;&gt;-->
+<!--<section id ="courses" class="section-padding">-->
+  <!--<div class="container">-->
+    <!--<div class="row">-->
+      <!--<div class="header-section text-center">-->
+        <!--<h2>Projects</h2>-->
+        <!--<p>Here are some of the project we are doing.<br> Would you like to join us?</p>-->
+        <!--<hr class="bottom-line">-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="container">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-4 col-sm-6 padleft-right" *ngFor="let project of projects">-->
+        <!--<figure class="imghvr-fold-up">-->
+          <!--<img [src]="project.image" class="img-responsive">-->
+          <!--<figcaption>-->
+            <!--<h3> {{ project.name }} </h3>-->
+            <!--<p> {{ project.details }} </p>-->
+          <!--</figcaption>-->
+          <!--<a href="#"></a>-->
+        <!--</figure>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row ">-->
+      <!--<div class="service-box text-center">-->
+        <!--<a href="#">See more projects</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</section>-->
+<!--&lt;!&ndash;/ Projects&ndash;&gt;-->
