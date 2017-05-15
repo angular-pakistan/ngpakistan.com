@@ -14,6 +14,9 @@ import { MainBannerComponent } from './shared/main-banner/main-banner.component'
 import { PakistanCardComponent } from './shared/pakistan-card/pakistan-card.component';
 import { BigCardComponent } from './shared/big-card/big-card.component';
 import { SmallCardComponent } from './shared/small-card/small-card.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { ContactusCardComponent } from './shared/contactus-card/contactus-card.component';
+import { PartnersComponent } from './shared/partners/partners.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { SmallCardComponent } from './shared/small-card/small-card.component';
     MainBannerComponent,
     PakistanCardComponent,
     BigCardComponent,
-    SmallCardComponent
+    SmallCardComponent,
+    FooterComponent,
+    ContactusCardComponent,
+    PartnersComponent
   ],
   imports: [
     BrowserModule,
