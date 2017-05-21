@@ -13,6 +13,9 @@ body {
 	font-family: 'Open Sans', sans-serif;
     font-weight: 400;
 }
+.green {
+  color: #5fcf80;
+}
 ol, ul {
 	list-style: none;
 }
@@ -320,7 +323,7 @@ h4.sm-txt {
 p.det-p {
     padding: 40px 0px;
 }
-#pricing{
+#partners{
     background: rgb(247, 247, 247);
 }
 /***********************************
