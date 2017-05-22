@@ -525,6 +525,7 @@ Contact Us
     margin: 0 0 20px;
     font-weight:400;
     font-size:13px;
+    display: block;
 }
 
 #sendmessage {

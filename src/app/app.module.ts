@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+
+import { DefaultRequestOptions } from './services/default-request-options.service';
 
 import { AppComponent } from './app.component';
 import { MeetupCardComponent } from './shared/meetup-card/meetup-card.component';
@@ -25,6 +28,8 @@ import { NoContentComponent } from './no-content';
 import { HomeComponent } from './home';
 import { ContactusComponent } from './contactus';
 import { JoinComponent } from './join';
+
+import { ContactusService } from './services/contactus.service';
 
 import { ROUTES } from './app.route';
 
@@ -52,10 +57,11 @@ import { ROUTES } from './app.route';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [],
+  providers: [ DefaultRequestOptions, ContactusService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

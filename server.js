@@ -4,8 +4,10 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+const db = require('./server/db/db');
 // Get our API routes
 const api = require('./server/routes/api');
+const contact = require('./server/routes/contactus.route');
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/api', api);
+app.use('/api/v1/contact', contact);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
