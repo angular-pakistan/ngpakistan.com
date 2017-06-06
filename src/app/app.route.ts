@@ -8,6 +8,7 @@ export const ROUTES: Routes = [
   { path: 'meetups', loadChildren: './meetups/meetups.module.ts#MeetupsModule' },
   { path: 'conferences', loadChildren: './conferences/conferences.module.ts#ConferencesModule'},
   { path: 'projects', loadChildren: './projects/projects.module.ts#ProjectsModule'},
+  { path: 'presskit', loadChildren: './presskit/presskit.module.ts#PressKitModule'},
   { path: '**',    component: NoContentComponent },
 ];
 
