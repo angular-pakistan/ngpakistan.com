@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent  {
-  currentMeetup = '../../../assets/img/meetup-3-banner.png';
+  currentMeetup = '../../../assets/img/meetup-4-banner.png';
   prevMeetup = [
+    {
+      name: 'Meetup 3',
+      location: 'folio3, Karachi'
+    },
     {
       name: 'Meetup 2',
       location: '10Pearls, Karachi'
@@ -75,3 +79,4 @@ export class HomeComponent  {
     }
   ];
 }
+
