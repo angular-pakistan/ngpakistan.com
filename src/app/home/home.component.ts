@@ -76,6 +76,11 @@ export class HomeComponent  {
       name: 'Folio3',
       logo: 'assets/img/logo-folio3.jpeg',
       web: 'http://www.folio3.com/'
+    },
+    {
+      name: 'Recurship',
+      logo: 'assets/img/logo-recurship.png',
+      web: 'http://recurship.com/'
     }
   ];
 }
