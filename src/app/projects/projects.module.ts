@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { routes } from './meetups.routes';
+import { routes } from './projects.routes';
 import { ProjectsComponent } from './projects.component';
 
 console.log('`projects` bundle loaded asynchronously');
