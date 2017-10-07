@@ -35,7 +35,7 @@
         <div class="col-md-6 col-sm-6 col-xs-12 right">
           <div class="form-group">
             <textarea formControlName="message" class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us (*)" placeholder="Message"></textarea>
-            <div class="validation" *ngIf="contactUsForm.get('message').hasError() && contactUsForm.get('message').touched">
+            <div class="validation" *ngIf="contactUsForm.get('message').hasError('maxlength') && contactUsForm.get('message').touched">
               Please enter message up to 500 characters only.
             </div>
           </div>
