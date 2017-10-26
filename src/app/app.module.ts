@@ -32,6 +32,8 @@ import { JoinComponent } from './join';
 import { ContactusService } from './services/contactus.service';
 
 import { ROUTES } from './app.route';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ROUTES } from './app.route';
     NoContentComponent,
     HomeComponent,
     ContactusComponent,
-    JoinComponent
+    JoinComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
