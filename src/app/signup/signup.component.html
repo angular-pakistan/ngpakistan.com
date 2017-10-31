@@ -6,19 +6,37 @@
             <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
                 <div class="col-md-6">
                     <div class="controls">
-                        <input name="name" placeholder="Enter Your Name" class="form-control" type="text">
+                        <input name="name" placeholder="Enter Your Name" class="form-control" type="text" [(ngModel)]="User.name" required>
                     </div>
                     <div class="buffer">
                     </div>
                     <div class="form-group">
                         <label for="phone1" class="sr-only">phone 1</label>
-                        <input type="text" name="phone1" id="phone1" class="form-control" placeholder="Phone 1">
+                        <input type="text" name="phone1" id="phone1" class="form-control" placeholder="Phone 1" [(ngModel)]="User.phone1">
                     </div>
                     <div class="buffer">
                     </div>
                     <div class="form-group">
                         <label for="phone2" class="sr-only">phone 2</label>
-                        <input type="phone2" name="phone2" id="phone2" class="form-control" placeholder="phone 2">
+                        <input type="text" name="phone2" id="phone2" class="form-control" placeholder="phone 2" [(ngModel)]="User.phone2">
+                    </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="github" class="sr-only">github</label>
+                        <input type="text" name="github" id="github" class="form-control" placeholder="github" [(ngModel)]="User.github">
+                    </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="facebook" class="sr-only">facebook</label>
+                        <input type="text" name="facebook" id="facebook" class="form-control" placeholder="facebook" [(ngModel)]="User.facebook">
+                    </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter" class="sr-only">twitter</label>
+                        <input type="text" name="twitter" id="twitter" class="form-control" placeholder="twitter" [(ngModel)]="User.twitter">
                     </div>
                     <div class="buffer">
                     </div>
@@ -27,20 +45,39 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email1" class="sr-only">Email 1</label>
-                        <input type="email1" name="email1" id="email1" class="form-control" placeholder="somebody@example.com">
+                        <input type="text" name="email1" id="email1" class="form-control" placeholder="email 1" [(ngModel)]="User.email1" required>
                     </div>
                     <div class="buffer">
                     </div>
                     <div class="form-group">
                         <label for="email2" class="sr-only">email 2</label>
-                        <input type="email2" name="email2" id="email2" class="form-control" placeholder="email 2">
+                        <input type="text" name="email2" id="email2" class="form-control" placeholder="email 2" [(ngModel)]="User.email2">
                     </div>
                     <div class="buffer">
                     </div>
                     <div class="form-group">
-                        <label for="key" class="sr-only">Password</label>
-                        <input type="password" name="key" id="key" class="form-control" placeholder="Password">
+                        <label for="dob" class="sr-only">DOB</label>
+                        <input type="text" name="dob" id="dob" class="form-control" placeholder="Date of birth (DD/MM/YY)" [(ngModel)]="User.dob">
                     </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin" class="sr-only">linkedin</label>
+                        <input type="text" name="linkedin" id="linkedin" class="form-control" placeholder="linkedin" [(ngModel)]="User.linkedin">
+                    </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" [(ngModel)]="User.password" required>
+                    </div>
+                    <div class="buffer">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2" class="sr-only">confirm password</label>
+                        <input type="password" name="password2" id="password" class="form-control" placeholder="confirm password" [(ngModel)]="password2" required>
+                    </div>
+                    <p *ngIf="User.password!==password2&&password2&&User.password"> password doesnt match</p>
                     <div class="buffer">
                     </div>
                 </div>
@@ -50,7 +87,7 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="signup">
+                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="signup" [disabled]="User.password!==password2" (click)="signup()">
             </div>
             <div class="col-md-4">
             </div>

@@ -8,12 +8,12 @@
             <div class="col-md-4">
                 <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
                     <div class="controls">
-                        <input name="name" placeholder="Enter Your Name" class="form-control" type="text">
+                        <input name="email" placeholder="Enter Your email" class="form-control" type="text" [(ngModel)]="email">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="password" class="sr-only">password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="password">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="password" [(ngModel)]="password">
                     </div>
                 </form>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
+                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in" (click)="login()">
             </div>
             <div class="col-md-4">
             </div>
