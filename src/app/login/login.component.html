@@ -1,21 +1,21 @@
 <section id="testimonial" class="section-padding">
     <div class="container">
+            <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="buffer">
         </div>
         <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
                     <div class="controls">
-                        <input name="email" placeholder="Enter Your email" class="form-control" type="text" [(ngModel)]="email">
+                        <input name="email" placeholder="Enter Your email" class="form-control" type="email"  required [(ngModel)]="email">
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="password" class="sr-only">password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="password" [(ngModel)]="password">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="password" required [(ngModel)]="password">
                     </div>
-                </form>
+               
             </div>
             <div class="col-md-4">
             </div>
@@ -24,10 +24,11 @@
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in" (click)="login()">
+                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in" [disabled]="!loginForm.form.valid">
             </div>
             <div class="col-md-4">
             </div>
         </div>
+        </form>
     </div>
 </section>
