@@ -1,0 +1,101 @@
+<section id="testimonial" class="section-padding">
+        <div class="container">
+            <form (ngSubmit)="signup()" #signupForm="ngForm">
+                <div class="buffer">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="controls">
+                            <input name="name" placeholder="Enter Your Name" class="form-control" type="text" #name="ngModel" [(ngModel)]="User.name" required>
+                        </div>
+                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone1" class="sr-only">phone 1</label>
+                            <input type="text" name="phone1" id="phone1" class="form-control" placeholder="Phone 1" #phon1="ngModel" [(ngModel)]="User.phone1">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone2" class="sr-only">phone 2</label>
+                            <input type="text" name="phone2" id="phone2" class="form-control" placeholder="phone 2" #phone2="ngModel" [(ngModel)]="User.phone2">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="github" class="sr-only">github</label>
+                            <input type="text" name="github" id="github" class="form-control" placeholder="github" #github="ngModel" [(ngModel)]="User.github">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook" class="sr-only">facebook</label>
+                            <input type="text" name="facebook" id="facebook" class="form-control" placeholder="facebook" #facebook="ngModel" [(ngModel)]="User.facebook">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter" class="sr-only">twitter</label>
+                            <input type="text" name="twitter" id="twitter" class="form-control" placeholder="twitter" #twitter="ngModel" [(ngModel)]="User.twitter">
+                        </div>
+                        <div class="buffer">
+                        </div>
+    
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email1" class="sr-only">Email 1</label>
+                            <input type="email" name="email1" id="email1" class="form-control" placeholder="email 1" #email1="ngModel" [(ngModel)]="User.email1" required>
+                        </div>
+                        <div [hidden]="email1.valid || email1.pristine" class="alert alert-danger">email is required
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="email2" class="sr-only">email 2</label>
+                            <input type="email" name="email2" id="email2" class="form-control" placeholder="email 2" #email2="ngModel" [(ngModel)]="User.email2">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob" class="sr-only">DOB</label>
+                            <input type="text" name="dob" id="dob" class="form-control" placeholder="Date of birth (DD/MM/YY)" #dob="ngModel" [(ngModel)]="User.dob">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin" class="sr-only">linkedin</label>
+                            <input type="text" name="linkedin" id="linkedin" class="form-control" placeholder="linkedin" #linkedin="ngModel" [(ngModel)]="User.linkedin">
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="sr-only">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Password" #password="ngModel" [(ngModel)]="User.password" required>
+                        </div>
+                        <div class="buffer">
+                        </div>
+                        <div class="form-group">
+                            <label for="password2" class="sr-only">confirm password</label>
+                            <input type="password" name="password2" id="password" class="form-control" placeholder="confirm password" [(ngModel)]="password2" required>
+                        </div>
+                        <div *ngIf="User.password!==password2&&password2&&User.password" class="alert alert-danger">password does not match
+                        </div>
+                        <div class="buffer">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="signup" [disabled]="User.password!==password2||!signupForm.form.valid">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>

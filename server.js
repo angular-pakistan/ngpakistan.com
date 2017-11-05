@@ -8,8 +8,10 @@ const db = require('./server/db/db');
 // Get our API routes
 const api = require('./server/routes/api');
 const contact = require('./server/routes/contactus.route');
+const user = require('./server/routes/user.route');
 
 const app = express();
+
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -21,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Set our api routes
 app.use('/api', api);
 app.use('/api/v1/contact', contact);
+app.use('/api/v1/user', user);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

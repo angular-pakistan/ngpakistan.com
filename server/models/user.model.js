@@ -12,15 +12,16 @@ var mongoose = require('mongoose')
 //////////////////////////
 
 var usersModel = Schema({
-  _id: ObjectId,
-  cell: [String],
-  email: [String],
-  company: String,
-  institute: String,
-  dob:String,
-  city: String,
-  referrer: String,
-  username:String,
+  name: [String],
+  email1: [String],
+  email2: String,
+  phone1: String,
+  phone2:String,
+  dob: String,
+  github: String,
+  facebook:String,
+  twitter:String,
+  linkedin:String,
   password:String
 });
 

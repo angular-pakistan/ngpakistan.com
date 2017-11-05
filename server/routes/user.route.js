@@ -34,8 +34,8 @@ router.get('/:ID', function(req, res, next) {
   })
 });
 
-router.get('/username/:username', function(req, res, next) {
-  var username = req.params.username;
+router.get('/email/:email', function(req, res, next) {
+  var username = req.params.email;
 
   userService.getUserByUsername(username,function (err,user) {
     if(err){
@@ -50,5 +50,49 @@ router.get('/username/:username', function(req, res, next) {
   })
 });
 
+router.post('/', function(req, res, next) {
+  
+    const name = req.body.name;
+    const email1 = req.body.email1;
+    const email2= req.body.email2;
+    const phone1= req.body.phone1;
+    const phone2= req.body.phone2;
+    const dob= req.body.dob;
+    const github= req.body.github;
+    const facebook= req.body.facebook;
+    const twitter= req.body.twitter;
+    const linkedin= req.body.linkedin;
+    const password= req.body.password;
+  
+    userService.save(name, email1, email2, phone1, phone2, dob, github, facebook, twitter, linkedin, password,function (err,user) {
+      if(err){
+        throw err;
+      }
+  
+      res.json({
+        href:req.hostname ,
+        data:user
+      })
+  
+    })
+  });
+
+  router.post('/login', function(req, res, next) {
+    
+      const email = req.body.email;
+      const password = req.body.password;
+    
+      userService.login(email, password,function (err,user) {
+        if(err){
+          throw err;
+        }
+    
+        res.json({
+          href:req.hostname ,
+          data:user
+        })
+    
+      })
+    });
 
 module.exports = router;
