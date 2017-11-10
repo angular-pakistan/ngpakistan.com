@@ -12,7 +12,7 @@ import { user } from '../model/user.interface';
 export class UserService {
   private api = '/api/v1/user';
 
-  constructor(private http: Http,private ErrorService) { }
+  constructor(private http: Http,private ErrorService:ErrorService) { }
 
   save(user: user): any {
     const headers = new Headers({ 'Content-Type': 'application/json' });
