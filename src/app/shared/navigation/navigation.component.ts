@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -18,11 +16,6 @@ export class NavigationComponent implements OnInit {
     this.nameHover = '';
   }
   ngOnInit() {
-  }
-
-  logout() {
-    this.UserService.clearUser();
-
   }
 
 }
