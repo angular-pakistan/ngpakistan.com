@@ -7,14 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  nameHover= 'btn-trial';
   constructor() { }
-  showOptions() {
-    this.nameHover = 'btn-trial';
-  }
-  hideOptions(){
-    this.nameHover = '';
-  }
+
   ngOnInit() {
   }
 
