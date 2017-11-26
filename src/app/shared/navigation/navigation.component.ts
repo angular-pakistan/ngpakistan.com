@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
+<<<<<<< HEAD
   nameHover= 'btn-trial';
   constructor(private router: Router, private UserService: UserService) { }
   showOptions() {
@@ -15,6 +16,10 @@ export class NavigationComponent implements OnInit {
   hideOptions(){
     this.nameHover = '';
   }
+=======
+  constructor() { }
+
+>>>>>>> parent of 7a71e7d... jwt authentication added , user stored in service and other fixes
   ngOnInit() {
   }
 
