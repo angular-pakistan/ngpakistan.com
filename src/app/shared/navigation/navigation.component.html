@@ -32,9 +32,7 @@
         <li><a href="#pricing">Social</a></li>
         <li><a [routerLink]=" ['../../home']" fragment="partners">Partners</a></li>
         <li><a href="#" data-target="#login" data-toggle="modal">Contact</a></li>
-        <li class="btn-trial"><a href="#login" *ngIf="!UserService.getUser()">Join Us</a></li>
-        <li (mouseenter)="showOptions()" (mouseleave)="hideOptions()" *ngIf="UserService.getUser()"><a href="#profile">{{UserService.getUser().user.name}}</a></li>
-        <li ><a href="#home" *ngIf="UserService.getUser()" (click)="logout()">log out</a></li> 
+        <li class="btn-trial"><a href="#footer">Join Us</a></li>
       </ul>
     </div>
   </div>
