@@ -10,7 +10,6 @@ import { UserService } from '../../services/user.service';
 export class NavigationComponent implements OnInit {
 
   nameHover= 'btn-trial';
-
   constructor(private router: Router, private UserService: UserService) { }
   showOptions() {
     this.nameHover = 'btn-trial';
