@@ -36,6 +36,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
   const sequenceNo = req.body.sequenceNo;
+  const name = req.body.name;
   const date = req.body.date;
   const startTime = req.body.startTime;
   const endTime = req.body.endTime;
@@ -44,6 +45,7 @@ router.post('/', function (req, res, next) {
   const host = req.body.host;
   const talks = req.body.talks;
   const meetup = {sequenceNo,
+                  name,
                   date, 
                   startTime,
                   endTime, 
@@ -67,6 +69,7 @@ router.post('/', function (req, res, next) {
 
 router.put('/:id', function (req, res, next) {
   const sequenceNo = req.body.sequenceNo;
+  const name = req.body.name;
   const date = req.body.date;
   const startTime = req.body.startTime;
   const endTime = req.body.endTime;
@@ -75,6 +78,7 @@ router.put('/:id', function (req, res, next) {
   const host = req.body.host;
   const talks = req.body.talks;
   const meetup = {sequenceNo,
+                  name,
                   date, 
                   startTime,
                   endTime, 
@@ -97,7 +101,11 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/:id/subscriber', function (req, res, next) {
-  const subscriber = req.body.subscriber;
+  const userID = req.body.userID;
+  const date = req.body.date;
+  const level = req.body.level;
+  const code = req.body.code;
+  const subscriber = {userID,date,level,code};
   const id = req.params.id;
   console.log(subscriber);
   meetupService.addSubscriber(id, subscriber, function (err, meetup) {
@@ -125,7 +133,7 @@ router.delete('/:id/subscriber/:subscriberID', function (req, res, next){
       data: meetup
     })
   })
-})
+});
 
 router.delete('/:id', function (req, res, next) {
   const id = req.params.id;
@@ -139,7 +147,7 @@ router.delete('/:id', function (req, res, next) {
       data: meetup
     })
   })
-})
+});
 
 
 

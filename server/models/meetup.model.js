@@ -13,6 +13,7 @@ var mongoose = require('mongoose')
 
 var meetupSchema = Schema({
   sequenceNo: Number,
+  name: String,
   date:String,
   startTime:String,
   endTime:String,
