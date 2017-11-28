@@ -36,9 +36,9 @@ var meetupSchema = Schema({
       ]
     }
   ],
-  subscriber:[
+  subscribers:[
     {
-      userID: ObjectId,
+      userID: String,
       date: String,
       level: Number,
       code: Number
