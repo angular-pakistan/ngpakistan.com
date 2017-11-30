@@ -34,6 +34,7 @@ import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
 import { UserService } from './services/user.service';
+import { MeetupService } from './services/meetup.service';
 import { ConferenceService } from './services/conference.service';
 
 import { ROUTES } from './app.route';
@@ -71,7 +72,7 @@ import { SignupComponent } from './signup/signup.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ DefaultRequestOptions, ContactusService, ErrorService, UserService, ConferenceService ],
+  providers: [ DefaultRequestOptions, ContactusService, UserService, MeetupService, ConferenceService, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
