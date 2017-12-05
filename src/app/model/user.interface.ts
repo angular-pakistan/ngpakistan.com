@@ -1,4 +1,4 @@
-export interface user {
+export interface User {
     name: string;
     email1: string;
     email2: string;
@@ -10,5 +10,5 @@ export interface user {
     twitter: string;
     linkedin: string;
     password: string;
-  }
+}
   

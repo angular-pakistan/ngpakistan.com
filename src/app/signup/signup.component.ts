@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { user } from '../model/user.interface';
+import { User } from '../model/user.interface';
 
 import { UserService } from '../services/user.service';
 
@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
 
   password2= null;
 
-  User: user= {
+  User: User= {
     name: '',
     email1: '',
     email2: '',

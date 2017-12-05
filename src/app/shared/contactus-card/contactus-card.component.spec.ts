@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ContactusService } from '../../services/contactus.service';
 import { ContactusCardComponent } from './contactus-card.component';
+
+class ContactusServiceStub {
+  
+}
 
 describe('ContactusCardComponent', () => {
   let component: ContactusCardComponent;
@@ -8,7 +14,11 @@ describe('ContactusCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactusCardComponent ]
+      declarations: [ ContactusCardComponent ],
+      imports: [ReactiveFormsModule,
+                FormsModule,
+      ],
+      providers: [ { provide: ContactusService, useClass: ContactusServiceStub} ]
     })
     .compileComponents();
   }));

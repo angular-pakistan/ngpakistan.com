@@ -9,12 +9,12 @@ export interface Meetup {
   location:string,
   city:string,
   host:string,
-  talks:[
+  talks?:[
     {
       title : string ,
-      slides : string,
-      video : string,
-      speaker : [
+      slides? : string,
+      video? : string,
+      speaker? : [
         {
           name : string,
           company : string,
