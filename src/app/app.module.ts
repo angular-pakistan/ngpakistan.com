@@ -1,3 +1,4 @@
+import { ErrorService } from './services/error.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { IntroCardComponent } from './shared/intro-card/intro-card.component';
 import { ConferenceCardComponent } from './shared/conference-card/conference-card.component';
 import { ProjectCardComponent } from './shared/project-card/project-card.component';
 import { SocialCardComponent } from './shared/social-card/social-card.component';
+import { JoinUsComponent } from './shared/joinUs-card/joinUs-card';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { MainBannerComponent } from './shared/main-banner/main-banner.component';
 import { PakistanCardComponent } from './shared/pakistan-card/pakistan-card.component';
@@ -49,6 +51,7 @@ import { SignupComponent } from './signup/signup.component';
     NavigationComponent,
     MainBannerComponent,
     PakistanCardComponent,
+    JoinUsComponent,
     BigCardComponent,
     SmallCardComponent,
     FooterComponent,
@@ -68,7 +71,7 @@ import { SignupComponent } from './signup/signup.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ DefaultRequestOptions, ContactusService, UserService, ConferenceService ],
+  providers: [ DefaultRequestOptions, ContactusService, ErrorService, UserService, ConferenceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
