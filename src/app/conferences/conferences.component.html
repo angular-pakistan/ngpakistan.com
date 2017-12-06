@@ -1,8 +1,17 @@
-<section id="testimonial" class="section-padding">
+<section class="section-padding">
   <div class="container">
     <div class="row">
-      <div class="col">
-        <h1>Hello from conferences : This is under construction</h1>
+      <div class="header-section text-center">
+        <h2 class="">Open Source Software Conferences in Pakistan</h2>
+        <p class="">Bringing Software revolution in Pakistan<br>Join us!</p>
+        <hr class="bottom-line">
+      </div>
+      <div *ngFor="let conference of conferences" class="col-md-6 col-sm-6">
+        <div class="text-comment">
+            <h3 class="green"><a [href]="conference.url">{{conference.name}}</a></h3>
+            <h6>{{conference.date}}</h6>
+          <p class="text-name">By {{conference.organiser}}</p>
+        </div>
       </div>
     </div>
   </div>
