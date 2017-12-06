@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './conferences.routes';
 import { ConferencesComponent } from './conferences.component';
 
+import { ConferenceService } from '../services/conference.service';
 console.log('`Conferences` bundle loaded asynchronously');
 
 @NgModule({
@@ -17,6 +18,9 @@ console.log('`Conferences` bundle loaded asynchronously');
     FormsModule,
     RouterModule.forChild(routes),
   ],
+  providers: [
+    ConferenceService
+  ]
 })
 export class ConferencesModule {
   public static routes = routes;

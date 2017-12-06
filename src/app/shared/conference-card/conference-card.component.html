@@ -4,21 +4,14 @@
     <div class="row">
       <div class="header-section text-center">
         <h2 class="white">Open Source Software Conferences in Pakistan</h2>
-        <p class="white">Bringing Software revolution in Pakistan<br> Join us!</p>
+        <p class="white">Bringing Software revolution in Pakistan<br>Join us!</p>
         <hr class="bottom-line bg-white">
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div *ngFor="let conference of conferences" class="col-md-6 col-sm-6">
         <div class="text-comment">
-            <h3 class="green">Angular Conf Pakistan 2018</h3>
-            <h6>February 2018</h6>
-          <p class="text-name">By Pakistan Open Source ™ & Angular Pakistan</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6">
-        <div class="text-comment">
-          <h3 class="green">JS Pakistan Conf 2018</h3>
-          <h6>November 2018</h6>
-          <p class="text-name">By Pakistan Open Source ™</p>
+            <h3 class="green"><a [href]="conference.url">{{conference.name}}</a></h3>
+            <h6>{{conference.date}}</h6>
+          <p class="text-name">By {{conference.organiser}}</p>
         </div>
       </div>
     </div>

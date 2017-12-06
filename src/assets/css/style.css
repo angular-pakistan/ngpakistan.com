@@ -429,6 +429,7 @@ Testimonial
 .text-comment{
   background-color: rgb(255, 255, 255);
   padding: 20px;
+  margin-bottom: 20px;
 }
 .text-par{
   font-size: 20px;
