@@ -3,6 +3,8 @@ import { HomeComponent } from './home';
 import { NoContentComponent } from './no-content';
 import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
+import { ProfileComponent } from './profile';
+import { AuthGuard } from './auth.guard';
 import {
   MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
   SocialCardComponent, PartnersComponent, ContactusCardComponent, JoinUsComponent
@@ -13,6 +15,7 @@ export const ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'profile',  component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'meetups', component: MeetupCardComponent },
   { path: 'conferences', component: ConferenceCardComponent },
   { path: 'projects', component: ProjectCardComponent },

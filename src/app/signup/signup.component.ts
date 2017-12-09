@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from '../model/user.interface';
+import { Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
 
@@ -27,8 +28,7 @@ export class SignupComponent implements OnInit {
     password: ''
   };
 
-  
-  constructor(private UserService: UserService) { }
+  constructor(private UserService: UserService, private Router: Router) { }
 
   ngOnInit() {
     console.log(this.User);
@@ -36,7 +36,9 @@ export class SignupComponent implements OnInit {
 
   signup(){
     this.UserService.save(this.User).subscribe( data => {
-      console.log(data);
+      if (data.data) {
+        this.Router.navigate(['login']);
+      }
     });
   }
 }

@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const userService = require('../services/user.service');
 const _ = require('lodash');
@@ -78,21 +79,40 @@ router.post('/', function(req, res, next) {
   });
 
   router.post('/login', function(req, res, next) {
+    const email = req.body.email;
+    const password = req.body.password;
     
-      const email = req.body.email;
-      const password = req.body.password;
-    
-      userService.login(email, password,function (err,user) {
-        if(err){
-          throw err;
+    userService.login(email, password,function (err,user) {
+      if(err){
+        
+        throw err;
+        
+      }else{
+        if(user){
+          const payload = {
+            user: user 
+          };
+          
+          var token = jwt.sign(payload,'superSecret', {
+            expiresIn: 1440 // expires in 24 hours
+          });
+          
+          res.json({
+            success: true,
+            message: 'Enjoy your token!',
+            token: token
+          });
+          
+        }else{
+          res.json({
+            success: false,
+            message: 'failed to authenticate, invalid email or password',
+            token: null
+          });
         }
-    
-        res.json({
-          href:req.hostname ,
-          data:user
-        })
-    
-      })
+      }
+    })
+
     });
 
 module.exports = router;
