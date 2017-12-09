@@ -8,8 +8,8 @@ export class UserService {
 
   private api = '/api/v1/user';
 
-  constructor(private http: Http, private ErrorService: ErrorService) {}
-
+  constructor(private http: Http,private errorService: ErrorService) { }
+  
   save(user: user): any {
 
     const headers = new Headers({ 'Content-Type': 'application/json' });
@@ -17,7 +17,7 @@ export class UserService {
 
     return this.http.post(this.api, user, options)
                 .map(res => res.json())
-                .catch(this.ErrorService.handleError);
+                .catch(this.errorService.handleError);
   }
 
   setUser(token) {
@@ -48,7 +48,7 @@ export class UserService {
 
     return this.http.post(this.api + '/login', body, options)
               .map(res => res.json())
-              .catch(this.ErrorService.handleError);
+              .catch(this.errorService.handleError);
   }
 
 }

@@ -32,7 +32,7 @@ table {
 	border-spacing: 0;
 }
 .section-padding{
-	padding: 60px 0px;
+	padding: 120px 0px;
 }
 h1, h2, h3, h4, h5, h6{
     font-family: Open Sans, sans-serif;
@@ -429,6 +429,7 @@ Testimonial
 .text-comment{
   background-color: rgb(255, 255, 255);
   padding: 20px;
+  margin-bottom: 20px;
 }
 .text-par{
   font-size: 20px;

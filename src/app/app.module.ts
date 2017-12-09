@@ -1,3 +1,4 @@
+import { ErrorService } from './services/error.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { IntroCardComponent } from './shared/intro-card/intro-card.component';
 import { ConferenceCardComponent } from './shared/conference-card/conference-card.component';
 import { ProjectCardComponent } from './shared/project-card/project-card.component';
 import { SocialCardComponent } from './shared/social-card/social-card.component';
+import { JoinUsComponent } from './shared/joinUs-card/joinUs-card';
 import { NavigationComponent } from './shared/navigation/navigation.component';
 import { MainBannerComponent } from './shared/main-banner/main-banner.component';
 import { PakistanCardComponent } from './shared/pakistan-card/pakistan-card.component';
@@ -33,8 +35,8 @@ import { JoinComponent } from './join';
 import { ContactusService } from './services/contactus.service';
 import { UserService } from './services/user.service';
 import { ErrorService } from './services/error.service';
-
 import { AuthGuard } from './auth.guard';
+import { ConferenceService } from './services/conference.service';
 
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
@@ -52,6 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
     NavigationComponent,
     MainBannerComponent,
     PakistanCardComponent,
+    JoinUsComponent,
     BigCardComponent,
     SmallCardComponent,
     FooterComponent,
@@ -72,7 +75,9 @@ import { ProfileComponent } from './profile/profile.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, UserService],
+  providers: [ DefaultRequestOptions, ContactusService, UserService],
+
+  providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, UserService, ConferenceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

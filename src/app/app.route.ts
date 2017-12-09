@@ -5,17 +5,25 @@ import { LoginComponent } from './login';
 import { SignupComponent } from './signup';
 import { ProfileComponent } from './profile';
 import { AuthGuard } from './auth.guard';
+import {
+  MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
+  SocialCardComponent, PartnersComponent, ContactusCardComponent, JoinUsComponent
+} from './shared/index';
 
 export const ROUTES: Routes = [
-  { path: '',      component: HomeComponent },
-  { path: 'home',  component: HomeComponent },
-  { path: 'login',  component: LoginComponent },
-  { path: 'signup',  component: SignupComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'meetups', loadChildren: './meetups/meetups.module.ts#MeetupsModule' },
-  { path: 'conferences', loadChildren: './conferences/conferences.module.ts#ConferencesModule'},
-  { path: 'projects', loadChildren: './projects/projects.module.ts#ProjectsModule'},
+  { path: 'meetups', component: MeetupCardComponent },
+  { path: 'conferences', component: ConferenceCardComponent },
+  { path: 'projects', component: ProjectCardComponent },
+  { path: 'social', component: SocialCardComponent },
+  { path: 'partners', component: PartnersComponent },
+  { path: 'contactUs', component: ContactusCardComponent },
+  { path: 'joinUs', component: JoinUsComponent },
   { path: 'presskit', loadChildren: './presskit/presskit.module.ts#PressKitModule'},
-  { path: '**',    component: NoContentComponent },
+  { path: '**', component: NoContentComponent },
 ];
 
