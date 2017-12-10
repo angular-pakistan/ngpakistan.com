@@ -13,6 +13,7 @@ var mongoose = require('mongoose')
 
 var meetupSchema = Schema({
   sequenceNo: Number,
+  name: String,
   date:String,
   startTime:String,
   endTime:String,
@@ -36,9 +37,9 @@ var meetupSchema = Schema({
       ]
     }
   ],
-  subscriber:[
+  subscribers:[
     {
-      userID: ObjectId,
+      userID: { type:ObjectId , ref:'users' },
       date: String,
       level: Number,
       code: Number
@@ -51,5 +52,5 @@ var meetupSchema = Schema({
 // Export Schema
 //////////////////////////
 
-var Meetup = mongoose.model('Meetup',meetupSchema,'meetups');
+var Meetup = mongoose.model('meetup',meetupSchema);
 module.exports.Meetup = Meetup;

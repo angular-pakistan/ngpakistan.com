@@ -16,31 +16,28 @@ import {
   MockConnection
 } from '@angular/http/testing';
 
-import { UserService } from './user.service';
-import { ErrorService } from './error.service';
-import { User } from '../model/user.interface';
+import { MeetupService } from './meetup.service';
+import { Meetup } from '../model/meetup.interface';
+import { TestData } from './test-data';
 
-class ErrorServiceStub{}
-
-describe('UserService', () => {
+describe('MeetupService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
-        UserService,
+        MeetupService,
         MockBackend,
         BaseRequestOptions,
         {
           provide: Http, 
           useFactory: (backend, options) => new Http(backend, options), 
           deps: [MockBackend, BaseRequestOptions] 
-        },
-        {provide: ErrorService, useClass: ErrorServiceStub}
+        }
       ]
     });
   });
 
-  it('should be created', inject([UserService], (service: UserService) => {
+  it('should be created', inject([MeetupService], (service: MeetupService) => {
     expect(service).toBeTruthy();
   }));
 });

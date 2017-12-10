@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { user } from '../model/user.interface';
+import { User } from '../model/user.interface';
 
 @Injectable()
 export class UserService {
@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(private http: Http,private errorService: ErrorService) { }
 
-  save(user: user): any {
+  save(user: User): any {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
