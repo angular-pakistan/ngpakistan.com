@@ -9,7 +9,7 @@ export class NavigationComponent implements OnInit {
 
   nameHover= 'btn-trial';
 
-  constructor(private router: Router, private UserService: UserService) { }
+  constructor() { }
   showOptions() {
     this.nameHover = 'btn-trial';
   }
