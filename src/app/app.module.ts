@@ -34,7 +34,6 @@ import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
 import { UserService } from './services/user.service';
-import { ErrorService } from './services/error.service';
 import { AuthGuard } from './auth.guard';
 import { ConferenceService } from './services/conference.service';
 
@@ -75,8 +74,6 @@ import { ProfileComponent } from './profile/profile.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ DefaultRequestOptions, ContactusService, UserService],
-
   providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, UserService, ConferenceService ],
   bootstrap: [AppComponent]
 })
