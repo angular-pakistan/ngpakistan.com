@@ -41,6 +41,7 @@ import { ConferenceService } from './services/conference.service';
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { SignupComponent } from './signup/signup.component';
     ContactusComponent,
     JoinComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
