@@ -38,12 +38,12 @@
           <a [routerLink]=" ['../../contactUs']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
         <li class="btn-trial">
-          <a href="#login" *ngIf="!UserService.getUser()">login</a>
+          <a [routerLink]=" ['../../login']" *ngIf="!userService.getUser()">login</a>
         </li>
-        <li (mouseenter)="showOptions()" (mouseleave)="hideOptions()" *ngIf="UserService.getUser()">
-          <a href="#profile">{{UserService.getUser().user.name}}</a></li>
+        <li (mouseenter)="showOptions()" (mouseleave)="hideOptions()" *ngIf="userService.getUser()">
+          <a [routerLink]=" ['../../profile']">{{userService.getUser().user.name}}</a></li>
         <li>
-          <a href="#home" *ngIf="UserService.getUser()" (click)="logout()">log out</a>
+          <a [routerLink]=" ['../../home']" *ngIf="userService.getUser()" (click)="logout()">log out</a>
         </li> 
       </ul>
     </div>

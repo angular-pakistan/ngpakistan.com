@@ -4,7 +4,7 @@ import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
 @Injectable()
-export class UserService {
+export class userService {
 
   private api = '/api/v1/user';
 

@@ -16,18 +16,18 @@ import {
   MockConnection
 } from '@angular/http/testing';
 
-import { UserService } from './user.service';
+import { userService } from './user.service';
 import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
 class ErrorServiceStub{}
 
-describe('UserService', () => {
+describe('userService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
-        UserService,
+        userService,
         MockBackend,
         BaseRequestOptions,
         {
@@ -40,7 +40,7 @@ describe('UserService', () => {
     });
   });
 
-  it('should be created', inject([UserService], (service: UserService) => {
+  it('should be created', inject([userService], (service: userService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -33,7 +33,7 @@ import { ContactusComponent } from './contactus';
 import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
-import { UserService } from './services/user.service';
+import { userService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
 import { AuthGuard } from './auth.guard';
 import { ConferenceService } from './services/conference.service';
@@ -75,7 +75,7 @@ import { ProfileComponent } from './profile/profile.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, UserService, MeetupService, ConferenceService],
+  providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, userService, MeetupService, ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
