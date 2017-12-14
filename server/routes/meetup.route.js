@@ -33,6 +33,22 @@ router.get('/:id', function (req, res, next) {
   })
 });
 
+router.get('/sequence/:id', function (req, res, next) {
+  const id = req.params.id;
+
+  meetupService.getMeetupBySequenceNo(id, function (err, meetup) {
+    if (err) {
+      throw err;
+    }
+
+    res.json({
+      href: req.hostname,
+      data: meetup
+    })
+
+  })
+});
+
 router.post('/', function (req, res, next) {
 
   const sequenceNo = req.body.sequenceNo;

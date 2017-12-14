@@ -20,6 +20,11 @@ module.exports = {
         meetups.findOne(query, callback);
     },
 
+    getMeetupBySequenceNo: function(sequenceNo, callback) {
+        const query = { sequenceNo: sequenceNo };
+        meetups.findOne(query, callback);
+    },
+
     save: function (meetup, callback) {
         meetups.create(meetup, callback);
     },
