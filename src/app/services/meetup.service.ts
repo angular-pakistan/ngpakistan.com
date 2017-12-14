@@ -40,7 +40,7 @@ export class MeetupService {
                 .catch(this.handleError);
   }
 
-  getBySequenceNo(sequenceNo: number): any {
+  getBySequenceNo(sequenceNo): Observable<Response | any> {
     return this.http.get(`${this.api}/sequence/${sequenceNo}`, this.options)
                 .map(res => res.json())
                 .catch(this.handleError);
