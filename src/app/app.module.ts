@@ -9,6 +9,7 @@ import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
+import { MeetupsModule } from './meetups/meetups.module';
 
 import { DefaultRequestOptions } from './services/default-request-options.service';
 
@@ -73,7 +74,8 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    MeetupsModule
   ],
   providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, userService, MeetupService, ConferenceService],
   bootstrap: [AppComponent]

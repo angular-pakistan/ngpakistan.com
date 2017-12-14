@@ -32,10 +32,10 @@
           <a [routerLink]=" ['../../social']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Social</a>
         </li>
         <li>
-          <a [routerLink]=" ['../../partners']" fragment="partners" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Partners</a>
+          <a [routerLink]=" ['../../partners']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Partners</a>
         </li>
         <li>
-          <a [routerLink]=" ['../../contactUs']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
+          <a [routerLink]=" ['../../contact']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
         <li class="btn-trial">
           <a [routerLink]=" ['../../login']" *ngIf="!userService.getUser()">login</a>
