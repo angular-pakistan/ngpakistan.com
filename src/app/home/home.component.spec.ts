@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ROUTES } from '../app.route';
+
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -16,9 +19,14 @@ import { PartnersComponent } from '../shared/partners/partners.component';
 import { ContactusCardComponent } from '../shared/contactus-card/contactus-card.component';
 import { IntroCardComponent } from '../shared/intro-card/intro-card.component';
 import { BigCardComponent } from '../shared/big-card/big-card.component';
+import { JoinUsComponent } from '../shared/joinUs-card/joinUs-card';
+import { LoginComponent } from '../login';
+import { SignupComponent } from '../signup';
+import { NoContentComponent } from '../no-content';
 
 import { MeetupService } from '../services/meetup.service';
 import { ContactusService } from '../services/contactus.service';
+import { ConferenceService } from '../services/conference.service';
 
 import { Meetup } from '../model/meetup.interface';
 import { TestData } from '../services/test-data';
@@ -39,6 +47,23 @@ class ContactusServiceStub {
   }
 }
 
+class ConferenceServiceStub {
+  getConferences(){
+    return [{
+            name: 'Angular Conf Pakistan 2018',
+            date: 'February 2018',
+            organiser: 'Pakistan Open Source ™ & Angular Pakistan',
+            url: 'https://osconf.org/'
+        },
+        {
+            name: 'JS Pakistan Conf 2018',
+            date: 'November 2018',
+            organiser: 'Pakistan Open Source ™',
+            url: 'https://osconf.org/'
+        }];
+  }
+}
+
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
@@ -55,12 +80,17 @@ describe('HomeComponent', () => {
                       SocialCardComponent,
                       PartnersComponent,
                       IntroCardComponent,
-                      BigCardComponent
+                      BigCardComponent,
+                      JoinUsComponent,
+                      LoginComponent,
+                      SignupComponent,
+                      NoContentComponent
       ],
-      imports: [ FormsModule, ReactiveFormsModule ],
+      imports: [ FormsModule, ReactiveFormsModule, RouterTestingModule.withRoutes(ROUTES) ],
       providers: [ 
         { provide: MeetupService, useClass: MeetupServiceStub },
         { provide: ContactusService, useClass: ContactusServiceStub },
+        { provide: ConferenceService, useClass: ConferenceServiceStub },
       ]
     })
     .compileComponents();
