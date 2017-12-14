@@ -34,8 +34,14 @@ export class MeetupService {
                 .catch(this.handleError);
   }
 
-  getById(meetupID: String): any {
+  getById(meetupID: string): any {
     return this.http.get(`${this.api}/${meetupID}`, this.options)
+                .map(res => res.json())
+                .catch(this.handleError);
+  }
+
+  getBySequenceNo(sequenceNo: number): any {
+    return this.http.get(`${this.api}/sequence/${sequenceNo}`, this.options)
                 .map(res => res.json())
                 .catch(this.handleError);
   }
