@@ -18,7 +18,7 @@
             <!--<i class="fa fa-css3 color-green"></i>-->
           <!--</div>-->
           <div class="icon-text">
-            <h4 class="ser-text"><a [routerLink]=" ['../meetups', meetup.sequenceNo] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{meetup.name}} #{{meetup.sequenceNo}}</a></h4>
+            <h4 class="ser-text"><a [routerLink]=" ['../meetups', meetup._id] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{meetup.name}} #{{meetup.sequenceNo}}</a></h4>
             <h6> {{ meetup.location }}</h6>
           </div>
         </div>
@@ -27,7 +27,7 @@
             <a [routerLink]=" ['../meetups/all'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> See all meetups </a>
           </div>
 
-        <span style="background-color: red; color:#ffffff; padding:5px 15px; position: absolute; top:0; ">Past </span>
+        <span id="past">Past</span>
       </div>
 
     </div>

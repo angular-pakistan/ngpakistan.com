@@ -9,12 +9,9 @@
       </div>
       <div class="col">
         <div class="service-box text-center" *ngFor="let meetup of meetups">
-           <!-- <div class="icon-box">
-            <i class="fa fa-css3 color-green"></i>
-          </div>   -->
           <div class="title">
             <h4 class="ser-text">{{meetup.name}} #{{meetup.sequenceNo}}</h4>
-            <a [routerLink]=" ['../../meetups', meetup.sequenceNo] "
+            <a [routerLink]=" ['../../meetups', meetup._id] "
                 routerLinkActive="active"
                [routerLinkActiveOptions]="{exact: true}"
                class="btn btn-default">Show Details</a>
@@ -38,8 +35,6 @@
             </span>
           </div>
         </div>
-
-        <span style="background-color: red; color:#ffffff; padding:5px 15px; position: absolute; top:0; ">Past </span>
       </div>
     </div>
   </div>

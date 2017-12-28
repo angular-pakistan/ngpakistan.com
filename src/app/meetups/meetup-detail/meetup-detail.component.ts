@@ -18,8 +18,8 @@ export class MeetupDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let sequenceNo = this.route.snapshot.paramMap.get('id');
-    this.service.getBySequenceNo(sequenceNo).subscribe(val => {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getById(id).subscribe(val => {
       this.meetup = val.data;
     });
   }
