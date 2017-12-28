@@ -1,0 +1,21 @@
+.dropdown-content{
+    display: none;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.dropdown-content a {
+    color: #717f86;
+    font-size: 14px;
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+
+.dropdown-content a:hover {
+    color: #5FCF80;
+    text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}

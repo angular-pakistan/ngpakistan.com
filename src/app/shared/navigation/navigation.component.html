@@ -37,6 +37,13 @@
         <li>
           <a [routerLink]=" ['../../contact']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
+        <li class="dropdown">
+          <a [routerLink]=" ['../../admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Admin</a>
+          <span class="dropdown-content">
+            <a href="#">Users</a>
+            <a [routerLink]=" ['../../admin/meetups']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Meetups</a>
+          </span>
+        </li>
         <li class="btn-trial">
           <a [routerLink]=" ['../../login']" *ngIf="!userService.getUser()">login</a>
         </li>
