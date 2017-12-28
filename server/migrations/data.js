@@ -2,7 +2,7 @@ const meetups = [
     {
     sequenceNo: 1,
     name: 'Angular JS Meetup',
-    date: '2017-1-6',
+    date: '2017-01-06',
     startTime: '19:30',
     endTime: '22:00',
     location: 'Attribe Solutions, Shahra-e-Faisal, Karachi',
@@ -14,7 +14,7 @@ const meetups = [
     {
     sequenceNo: 2,
     name: 'Angular JS Meetup',
-    date: '2017-4-22',
+    date: '2017-04-22',
     startTime: '14:00',
     endTime: '16:00',
     location: '10Pearls University, 8th Floor, Parsa Tower, Shahra-e-Faisal, Karachi',
@@ -26,7 +26,7 @@ const meetups = [
     {
     sequenceNo: 3,
     name: 'Angular JS Meetup',
-    date: '2017-5-24',
+    date: '2017-05-24',
     startTime: '16:00',
     endTime: '19:30',
     location: 'Folio3 - 805 Business Center, PECHS Block-6, Shahra-e-Faisal, Karachi',
@@ -103,7 +103,7 @@ const meetups = [
     {
     sequenceNo: 4,
     name: 'Angular JS Meetup',
-    date: '2017-9-14',
+    date: '2017-09-14',
     startTime: '18:00',
     endTime: '20:30',
     location: 'Recurship - House 9/A, Block A, SMCHS, Karachi',
