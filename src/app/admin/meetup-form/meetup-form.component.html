@@ -1,55 +1,63 @@
 <form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
-	<label>Name 
+	<label>Name<br>
 		<input  id="name"
 		type="text"
 		name="name"
 		[ngModel]="meetup?.name">
 	</label>
-	<label>Sequence Number 
+	<label>Sequence Number<br>
 		<input  id="sequenceNo"
 		type="number"
 		name="sequenceNo"
 		[ngModel]="meetup?.sequenceNo">
 	</label>
-	<label>Date
+	<label>Date<br>
 		<input  id="date"
 		type="date"
 		name="date"
 		[ngModel]="meetup?.date">
 	</label>
-	<label>Start Time
+	<label>Start Time<br>
 		<input  id="start-time"
 		type="time"
 		name="startTime"
 		[ngModel]="meetup?.startTime">
 	</label>
-	<label>End Time
+	<label>End Time<br>
 		<input  id="end-time"
 		type="time"
 		name="endTime"
 		[ngModel]="meetup?.endTime">
 	</label>
-	<label>Location
+	<label>Location<br>
 		<input  id="location"
 		type="text"
 		name="location"
 		[ngModel]="meetup?.location">
 	</label>
-	<label>City
+	<label>City<br>
 		<input  id="city"
 		type="text"
 		name="city"
 		[ngModel]="meetup?.city">
 	</label>
-	<label>Host
+	<label>Host<br>
 		<input  id="host"
 		type="text"
 		name="host"
 		[ngModel]="meetup?.host">
 	</label>
-	<button id="submit"
-	type="submit"
-	[disabled]="submit || disable">
-	Submit
-	</button>
+	<span id="button-container">
+		<button id="cancel"
+		class="btn"
+		[disabled]="submit || disable">
+		Cancel
+		</button>
+		<button id="submit"
+		class="btn btn-success"
+		type="submit"
+		[disabled]="submit || disable">
+		Publish
+		</button>
+	</span>
 </form>

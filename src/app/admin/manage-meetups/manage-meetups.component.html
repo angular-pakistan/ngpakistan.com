@@ -3,6 +3,7 @@
         <div class="row">
             <div class="header-section text-center">
                 <h2>Manage Meetups</h2>
+                <hr class="bottom-line">
             </div>
             <div class="col">
                 <div class="service-box text-center" *ngFor="let meetup of meetups">
@@ -12,7 +13,7 @@
                             id="delete-btn" class="btn btn-default">Delete</a>
                         <a [routerLink]=" ['./edit', meetup._id] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                             id="edit-btn" class="btn btn-default">Edit</a>
-                        <a [routerLink]=" ['../../meetups', meetup._id] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        <a [routerLink]=" ['../../../meetups', meetup._id] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                             class="btn btn-default">Preview</a>
                     </div>
                     <div class="icon-text">
