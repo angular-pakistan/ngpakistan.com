@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meetup } from '../model/meetup.interface';
 import { MeetupService } from '../services/meetup.service';
+import { MeetupListComponent } from './meetup-list/meetup-list.component';
 @Component({
   selector: 'app-meetups',
   templateUrl: './meetups.component.html',

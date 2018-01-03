@@ -19,15 +19,14 @@
     padding-right: 30px;
 }
 
-a{
+.title a{
     background-color: #5fcf80;
     color: white;
     height: 30px;
     padding: 5px 5px;
-    margin-right: 10px;
     border-color: #5fcf80;
 }
-a:hover{
+.title a:hover{
     background-color: white;
     color: #5fcf80;
 }

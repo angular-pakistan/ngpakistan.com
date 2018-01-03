@@ -8,8 +8,9 @@ import { AdminComponent } from './admin.component';
 import { ManageMeetupsComponent } from './manage-meetups/manage-meetups.component';
 import { EditMeetupComponent } from './edit-meetup/edit-meetup.component';
 import { MeetupFormComponent } from './meetup-form/meetup-form.component';
+import { MeetupsModule } from '../meetups/meetups.module';
 
-console.log('`Conferences` bundle loaded asynchronously');
+console.log('`Admin` bundle loaded asynchronously');
 
 @NgModule({
   declarations: [
@@ -17,12 +18,13 @@ console.log('`Conferences` bundle loaded asynchronously');
     ManageMeetupsComponent,
     ManageMeetupsComponent,
     EditMeetupComponent,
-    MeetupFormComponent
+    MeetupFormComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
+    MeetupsModule
   ],
   providers: [
   ]
