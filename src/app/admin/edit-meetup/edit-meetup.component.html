@@ -6,7 +6,7 @@
 				<hr class="bottom-line">
             </div>
 			<div class="col">
-				<app-meetup-form [meetup]="meetup"></app-meetup-form>
+				<app-meetup-form *ngIf="meetup" [meetup]="meetup"></app-meetup-form>
 			</div>
 		</div>
 	</div>

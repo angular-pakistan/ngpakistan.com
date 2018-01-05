@@ -1,53 +1,145 @@
-<form (ngSubmit)="onSubmit(form.value)" #form="ngForm">
-	<label>Name<br>
-		<input  id="name"
-		type="text"
-		name="name"
-		[ngModel]="meetup?.name">
-	</label>
-	<label>Sequence Number<br>
-		<input  id="sequenceNo"
-		type="number"
-		name="sequenceNo"
-		[ngModel]="meetup?.sequenceNo">
-	</label>
-	<label>Date<br>
-		<input  id="date"
-		type="date"
-		name="date"
-		[ngModel]="meetup?.date">
-	</label>
-	<label>Start Time<br>
-		<input  id="start-time"
-		type="time"
-		name="startTime"
-		[ngModel]="meetup?.startTime">
-	</label>
-	<label>End Time<br>
-		<input  id="end-time"
-		type="time"
-		name="endTime"
-		[ngModel]="meetup?.endTime">
-	</label>
-	<label>Location<br>
-		<input  id="location"
-		type="text"
-		name="location"
-		[ngModel]="meetup?.location">
-	</label>
-	<label>City<br>
-		<input  id="city"
-		type="text"
-		name="city"
-		[ngModel]="meetup?.city">
-	</label>
-	<label>Host<br>
-		<input  id="host"
-		type="text"
-		name="host"
-		[ngModel]="meetup?.host">
-	</label>
-	<span id="button-container">
+<form [formGroup]="form">
+      <h3>Details</h3>
+      <div id="details" formGroupName="details">
+        <span class="block">
+          <label><p>Name</p>
+            <input
+            type="text"
+            formControlName="name">
+          </label>
+          <label><p>Sequence Number</p>
+            <input
+            type="number"
+            formControlName="sequenceNo">
+          </label>
+        </span>
+        <span class="block">
+          <label><p>Date</p>
+            <input
+            type="date"
+            formControlName="date">
+          </label>
+          <label><p>Start Time</p>
+            <input
+            type="time"
+            formControlName="startTime">
+          </label>
+          <label><p>End Time</p>
+            <input
+            type="time"
+            formControlName="endTime">
+          </label>
+        </span>
+        <span class="block">
+          <label><p>Location</p>
+            <input
+            id="location"
+            type="text"
+            formControlName="location">
+          </label>
+          <label><p>City</p>
+            <input
+            type="text"
+            formControlName="city">
+          </label>
+          <label><p>Host</p>
+            <input
+            type="text"
+            formControlName="host">
+          </label>
+        </span>
+      </div>
+      <span id="talk-title">
+        <h3>Talks</h3>
+        <span id="add-talk"(click)="onAddTalk()">
+          <i class="material-icons">add</i>
+          <p> Add Talk</p>
+        </span>
+      </span>
+      <div formArrayName="talks">
+        <div class="lower-buffer" *ngFor="let talk of talks.controls; let i = index;">
+          <div class="accordion" [class.active]="i === selectedTalk" (click)="onShowTalk(i)">
+            <p>Talk {{i + 1}}</p>
+            <i class="material-icons close" (click)="removeTalk(i)">close</i>
+          </div>
+          <div class="box" 
+          [class.box-show]="i === selectedTalk" 
+          [formGroupName]="i">
+            <label><p>Title</p>
+              <input
+              class="title"
+              type="text"
+              formControlName="title">
+            </label>
+            <span class="block">
+              <label><p>Slides Link</p>
+                <input
+                class="link"
+                type="text"
+                formControlName="slides">
+              </label>
+              <label><p>Video Link</p>
+                <input
+                class="link"
+                type="text"
+                formControlName="video">
+              </label>
+            </span>
+            <span class="speaker-title">
+              <h4>Speakers</h4>
+              <span id="add-speaker"(click)="onAddSpeaker(i)">
+                <i class="material-icons">add</i>
+                <p> Add Speaker</p>
+              </span>
+            </span>
+            <div formArrayName="speakers">
+              <div class="lower-buffer" *ngFor="let speaker of talk.controls.speakers.controls; let j = index;">
+                <div class="accordion small" [class.active]="j === selectedSpeaker" (click)="onShowSpeaker(j)">
+                  <p>Speaker {{j + 1}}</p>
+                  <i class="material-icons close" (click)="removeSpeaker(i,j)">close</i>
+                </div>
+                <div class="box" [class.box-show]="j === selectedSpeaker" [formGroupName]="j">
+                  <div class="block">
+                  <label><p>Name</p>
+                    <input
+                    type="text"
+                    formControlName="name">
+                  </label>
+                  <label><p>Company</p>
+                    <input
+                    type="text"
+                    formControlName="company">
+                  </label>
+                  <label><p>E-mail</p>
+                    <input
+                    type="text"
+                    formControlName="email">
+                  </label>
+                  </div>
+                  <div class="block">
+                  <label><p>Github Profile</p>
+                    <input
+                    type="text"
+                    formControlName="github">
+                  </label>
+                  <label><p>LinkedIn Profile</p>
+                    <input
+                    type="text"
+                    formControlName="linkedIn">
+                  </label>
+                  <label><p>Twitter Profile</p>
+                    <input
+                    type="text"
+                    formControlName="twitter">
+                  </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		</div>
+	  </div>
+	 <span id="button-container">
 		<button id="cancel"
 		class="btn"
 		[disabled]="submit || disable">
@@ -59,5 +151,5 @@
 		[disabled]="submit || disable">
 		Publish
 		</button>
-	</span>
-</form>
+	</span> 
+    </form>

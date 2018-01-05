@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { routes } from './admin.routes';
 import { AdminComponent } from './admin.component';
@@ -23,6 +25,7 @@ console.log('`Admin` bundle loaded asynchronously');
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     MeetupsModule
   ],
