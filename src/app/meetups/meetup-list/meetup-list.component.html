@@ -1,27 +1,28 @@
  <div class="service-box text-center" > 
     <div class="title">
     <h4 class="ser-text">{{meetup.name}} #{{meetup.sequenceNo}}</h4>
-    <ng-content></ng-content>
+    <span><ng-content></ng-content>
     <ng-content></ng-content>
     <a [routerLink]=" ['/meetups', meetup._id] "
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}"
         class="btn btn-default">Show Details</a>
+    </span>
     </div>
     <div class="icon-text">
-        <span class="location">
+    <span class="location detail">
         <i class="material-icons">location_on</i>
         <p>{{meetup.location}}</p>
     </span> 
-    <span>
+    <span class="detail">
         <i class="material-icons">today</i>
         <p>{{meetup.date}}</p>
     </span>
-    <span>
+    <span class="detail">
         <i class="material-icons">access_time</i>
         <p>{{meetup.startTime}}</p>
     </span>
-    <span>
+    <span class="detail">
         <i class="material-icons">watch_later</i>
         <p>{{meetup.endTime}}</p>
     </span>

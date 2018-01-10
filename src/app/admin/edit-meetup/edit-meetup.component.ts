@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meetup } from '../../model/meetup.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MeetupService } from '../../services/meetup.service';
 
 @Component({
@@ -9,15 +9,25 @@ import { MeetupService } from '../../services/meetup.service';
   styleUrls: ['./edit-meetup.component.css']
 })
 export class EditMeetupComponent implements OnInit {
-    meetup: Meetup;
+  meetup: Meetup;
+  response;
+  constructor(private route: ActivatedRoute, 
+              private router: Router, 
+              private service: MeetupService) { }
 
-    constructor(private route: ActivatedRoute, private service: MeetupService) { }
+  ngOnInit() {
+    this.response = this.route.snapshot.data.response;
+    this.meetup = this.response.data;
+  }
 
-    ngOnInit() {
-      let id = this.route.snapshot.paramMap.get('id');
-      this.service.getById(id).subscribe(val => {
-        this.meetup = val.data;
-      });
-    }
+  handleSubmit(meetups: Meetup){
+    this.service.update(meetups).subscribe(val => {
+      this.router.navigate(['../../'], { relativeTo: this.route });
+    });
+  }
+
+  onCancel(cancel){
+    this.router.navigate(['../../'], { relativeTo: this.route });
+  }
 
 }

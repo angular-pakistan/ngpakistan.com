@@ -12,16 +12,11 @@ const meetups = require('../models/meetup.model').Meetup;
 module.exports = {
 
     getAll: function (callback) {
-        meetups.find({}, callback);
+        meetups.find({}, callback).sort({date: -1});
     },
 
     getMeetup: function (meetupID, callback) {
         const query = { _id: meetupID };
-        meetups.findOne(query, callback);
-    },
-
-    getMeetupBySequenceNo: function(sequenceNo, callback) {
-        const query = { sequenceNo: sequenceNo };
         meetups.findOne(query, callback);
     },
 

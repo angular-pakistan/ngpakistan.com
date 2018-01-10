@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meetup } from '../../model/meetup.interface';
 import { MeetupService } from '../../services/meetup.service';
-// import { MeetupListComponent } from '../../meetups/meetup-list/meetup-list.module';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-meetups',
@@ -10,14 +10,12 @@ import { MeetupService } from '../../services/meetup.service';
 })
 export class ManageMeetupsComponent implements OnInit {
     meetups: Meetup[];
-
-    constructor(private service: MeetupService) { }
+    response;
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.service.getAll().subscribe(val => {
-        this.meetups = val.data;
-        this.meetups.sort((a: Meetup, b: Meetup) => Date.parse(b.date) - Date.parse(a.date));
-        });
+        this.response = this.route.snapshot.data.response;
+        this.meetups = this.response.data;
     }
 
 }

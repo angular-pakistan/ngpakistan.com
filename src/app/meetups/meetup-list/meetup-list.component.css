@@ -31,7 +31,7 @@
     color: #5fcf80;
 }
 
-span{
+.detail{
     display: flex;
     flex-direction:row;
     margin: 0 auto;

@@ -4,6 +4,7 @@ const meetupService = require('../services/meetup.service');
 const _ = require('lodash');
 
 router.get('/', function (req, res, next) {
+  console.log("I was called");
   meetupService.getAll(function (err, meetups) {
     if (err) {
       throw err;
@@ -21,22 +22,6 @@ router.get('/:id', function (req, res, next) {
   const id = req.params.id;
 
   meetupService.getMeetup(id, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-
-  })
-});
-
-router.get('/sequence/:id', function (req, res, next) {
-  const id = req.params.id;
-
-  meetupService.getMeetupBySequenceNo(id, function (err, meetup) {
     if (err) {
       throw err;
     }

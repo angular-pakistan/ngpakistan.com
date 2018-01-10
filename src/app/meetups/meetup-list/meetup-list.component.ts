@@ -9,7 +9,6 @@ import { Meetup } from '../../model/meetup.interface';
 export class MeetupListComponent {
   @Input() meetup: Meetup[];
   @Input() admin: boolean = false;
-  previousMeetups: Meetup[];
   constructor() { }
 
 }
