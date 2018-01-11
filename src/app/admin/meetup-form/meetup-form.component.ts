@@ -48,16 +48,19 @@ export class MeetupFormComponent implements OnInit {
       this.form.patchValue(this.meetup);
     }
   }
+
   onSubmit(meetup: Meetup) {
     if(this.form.valid){
       //this.disable = true;
       this.onsubmit.emit(meetup);
     }
   }
+
   onCancel() {
    this.disable = true;
    this.cancel.emit(true);
   }
+
   private createTalkGroup(isNew: boolean, speakers = []): FormGroup {
     var talkGroup;
     if(isNew){
@@ -78,6 +81,7 @@ export class MeetupFormComponent implements OnInit {
     }
     return this.formBuilder.group(talkGroup);
   }
+
   private createSpeakerGroup(isNew: boolean): FormGroup {
     var speakerGroup;
     if(isNew){
@@ -102,6 +106,7 @@ export class MeetupFormComponent implements OnInit {
     }
     return this.formBuilder.group(speakerGroup);
   }
+
   private createSubscriberGroup(): FormGroup {
     const subscriberGroup = {
       _id: [''],
@@ -112,10 +117,12 @@ export class MeetupFormComponent implements OnInit {
     }
     return this.formBuilder.group(subscriberGroup);
   }
+
   isValid(name: string){
     const field = this.form.get(name);
     return field.invalid && (field.dirty || field.touched);
   }
+
   isValidTalk(index: number){
     const field = this.talks.at(index);
     return field.invalid && (field.dirty || field.touched);
@@ -125,6 +132,7 @@ export class MeetupFormComponent implements OnInit {
     const field = speakers.at(speakerIndex);
     return field.invalid && (field.dirty || field.touched);
   }
+
   isValidTalkField(name: string, index: number){
     const field = this.talks.controls[index].get(name);
     return field.invalid && (field.dirty || field.touched);
@@ -134,22 +142,27 @@ export class MeetupFormComponent implements OnInit {
     const field = speakers.at(speakerIndex).get(name);
     return field.invalid && (field.dirty || field.touched);
   }
+
   onAddTalk() {
     this.talks.push(this.createTalkGroup(true));
     this.selectedTalk = this.talks.length - 1;
   }
+
   onAddSpeaker(talkIndex: number) {
     const speakers = this.talks.controls[talkIndex].get('speaker') as FormArray;
     speakers.push(this.createSpeakerGroup(true));
     this.selectedSpeaker = speakers.length - 1;
   }
+
   onShowSpeaker(index: number) {
     this.selectedSpeaker = index;
   }
+
   onShowTalk(index: number){
     this.selectedTalk = index;
     this.selectedSpeaker = 0;
   }
+  
   removeTalk(index: number){
     this.talks.removeAt(index);
   }
