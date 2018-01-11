@@ -9,15 +9,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
-  response;
+
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
-    this.response = this.route.snapshot.data.response;
-    this.meetup = this.response.data;
+    this.meetup = this.route
+        .snapshot
+        .data
+        .response
+        .data;
   }
 
   sanitizeUrl(url: string){

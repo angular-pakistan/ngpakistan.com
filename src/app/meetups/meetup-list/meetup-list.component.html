@@ -1,12 +1,13 @@
  <div class="service-box text-center" > 
     <div class="title">
     <h4 class="ser-text">{{meetup.name}} #{{meetup.sequenceNo}}</h4>
-    <span><ng-content></ng-content>
-    <ng-content></ng-content>
-    <a [routerLink]=" ['/meetups', meetup._id] "
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-        class="btn btn-default">Show Details</a>
+    <span>
+        <ng-content select=".admin-options"></ng-content>
+        <ng-content select=".admin-options"></ng-content>
+        <a [routerLink]=" ['/meetups', meetup._id] "
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="btn btn-default">Show Details</a>
     </span>
     </div>
     <div class="icon-text">

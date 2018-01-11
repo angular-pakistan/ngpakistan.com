@@ -37,7 +37,7 @@
         <li>
           <a [routerLink]=" ['../../contact']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
-        <li>
+        <li *ngIf="userService.getUser()">
           <a [routerLink]=" ['../../admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Admin</a>
         </li>
         <li class="btn-trial">

@@ -4,7 +4,6 @@ const meetupService = require('../services/meetup.service');
 const _ = require('lodash');
 
 router.get('/', function (req, res, next) {
-  console.log("I was called");
   meetupService.getAll(function (err, meetups) {
     if (err) {
       throw err;
@@ -45,6 +44,7 @@ router.post('/', function (req, res, next) {
   const city = req.body.city;
   const host = req.body.host;
   const talks = req.body.talks;
+  const subscribers = req.body.subscribers;
   const meetup = {sequenceNo,
                   name,
                   date, 
@@ -53,7 +53,8 @@ router.post('/', function (req, res, next) {
                   location,
                   city,
                   host,
-                  talks
+                  talks,
+                  subscribers
                 };
   meetupService.save(meetup, function (err, meetup) {
     if (err) {
@@ -108,7 +109,7 @@ router.post('/:id/subscriber', function (req, res, next) {
   const code = req.body.code;
   const subscriber = {userID,date,level,code};
   const id = req.params.id;
-  console.log(subscriber);
+
   meetupService.addSubscriber(id, subscriber, function (err, meetup) {
     if (err) {
       throw err;

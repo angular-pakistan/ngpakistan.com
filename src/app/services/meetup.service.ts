@@ -16,6 +16,8 @@ export class MeetupService {
   constructor(private http: Http) { }
 
   save(meetup: Meetup): Observable<Response | any> {
+    console.log(meetup);
+    // return
     return this.http.post(this.api, meetup, this.options)
                 .map(res => res.json())
                 .catch(this.handleError);

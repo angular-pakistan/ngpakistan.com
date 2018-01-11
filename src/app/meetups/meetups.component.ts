@@ -11,12 +11,15 @@ import { MeetupListComponent } from './meetup-list/meetup-list.component';
 export class MeetupsComponent implements OnInit {
   meetups: Meetup[];
   previousMeetups: Meetup[];
-  response;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.response = this.route.snapshot.data.response;
-    this.meetups = this.response.data;
+    this.meetups = this.route
+        .snapshot
+        .data
+        .response
+        .data;
   }
 
 }

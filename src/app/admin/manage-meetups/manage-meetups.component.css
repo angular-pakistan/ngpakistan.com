@@ -18,8 +18,7 @@
     padding-left: 30px;
     padding-right: 30px;
 }
-
-a{
+.btn{
     background-color: #5fcf80;
     color: white;
     height: 30px;
@@ -27,21 +26,12 @@ a{
     margin-right: 10px;
     border-color: #5fcf80;
 }
-a:hover{
+.btn:hover{
     background-color: white;
     color: #5fcf80;
 }
-
-span{
-    display: flex;
-    flex-direction:row;
-    margin: 0 auto;
-}
-h4{
-    padding-left: 10px;
-    margin-top: 25px;
-    color: #5fcf80;
-    text-align: left;
+.header-section{
+    margin-bottom: 50px;
 }
 #edit-btn{
     background-color: #2d8ce5;
