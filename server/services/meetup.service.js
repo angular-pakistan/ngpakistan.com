@@ -11,48 +11,45 @@ const meetups = require('../models/meetup.model').Meetup;
 
 module.exports = {
 
-    getAll: function (callback) {
-        meetups.find({}, callback).sort({date: -1});
+    getAll: function () {
+        return meetups.find({}).sort({date: -1}).exec();
     },
 
-    getMeetup: function (meetupID, callback) {
+    getMeetup: function (meetupID) {
         const query = { _id: meetupID };
-        meetups.findOne(query, callback);
+        return meetups.findOne(query).exec();
     },
 
-    save: function (meetup, callback) {
-        meetups.create(meetup, callback);
+    save: function (meetup) {
+        return meetups.create(meetup);
     },
 
-    updateMeetup: function (meetupID, meetup, callback) {
-        meetups.findByIdAndUpdate(
+    updateMeetup: function (meetupID, meetup) {
+        return meetups.findByIdAndUpdate(
             meetupID,
             meetup,
-            { new: true },
-            callback
-        );
+            { new: true }
+        ).exec();
     },
 
-    addSubscriber: function (meetupID, subscriber, callback) {
-        meetups.findByIdAndUpdate(
+    addSubscriber: function (meetupID, subscriber) {
+        return meetups.findByIdAndUpdate(
             meetupID,
             {$push: {"subscribers": subscriber}},
-            { new: true },
-            callback
-        );     
+            { new: true }
+        ).exec();     
     },
 
-    remove: function (meetupID, callback) {
-        meetups.findByIdAndRemove(meetupID, callback);
+    remove: function (meetupID) {
+        return meetups.findByIdAndRemove(meetupID).exec();
     },
 
-    removeSubscriber: function (meetupID, subscriberID, callback) {
-        meetups.findByIdAndUpdate(
+    removeSubscriber: function (meetupID, subscriberID) {
+        return meetups.findByIdAndUpdate(
             meetupID,
             {$pull: {"subscribers": { "_id": subscriberID}}},
-            { new: true },
-            callback
-        );     
+            { new: true }
+        ).exec();     
     },
 
 };

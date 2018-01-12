@@ -11,52 +11,35 @@ const users = require('../models/user.model').users;
 
 module.exports ={
 
-  getUsers : function (callback) {
-    users.find({},callback);
+  getUsers : function () {
+    return users.find({}).exec;
   },
 
-  getUser : function (userID,callback) {
+  getUser : function (userID) {
     const query = { _id: userID};
-    users.findOne(query,callback);
+    return users.findOne(query).exec();
   },
 
-  getUserByemail1 : function (email,callback) {
+  getUserByemail1 : function (email) {
     const query = { email1: email};
-    users.findOne(query,callback);
+    return users.findOne(query).exec();
   },
 
-  getUserByemail2 : function (email,callback) {
+  getUserByemail2 : function (email) {
     const query = { email2: email};
-    users.findOne(query,callback);
+    return users.findOne(query).exec();
   },
 
-  login : function (email,password,callback) {
+  login : function (email,password) {
     const query = { 
       email1: email,
       password:password
     };
-    users.findOne(query,callback);
+    return users.findOne(query).exec();
   },
 
-  save: function (name, email1, email2, phone1, phone2, dob, github, facebook, twitter, linkedin, password, callback) {
-    
-        const query = {
-          name: name,
-          email1: email1,
-          email2: email2,
-          phone1: phone1,
-          phone2:phone2,
-          dob: dob,
-          github:github,
-          facebook:facebook,
-          twitter:twitter,
-          linkedin:linkedin,
-          password:password
-        };
-        console.log('calling ....user create()');
-        users.create(query, callback);
-    
-    
-      }
+  save: function (user) {
+    return users.create(user);
+  }
 
 };

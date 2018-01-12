@@ -5,6 +5,9 @@ mongoose.set('debug', true);
 // Build the connection string
 var dbURI = 'mongodb://localhost/ng-pakistan';
 
+// Set mongoose to use native ES6 promises
+mongoose.Promise = global.Promise;
+
 // Create the database connection
 mongoose.connect(dbURI);
 
