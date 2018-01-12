@@ -10,13 +10,13 @@ import { Meetup } from '../../model/meetup.interface';
 })
 export class MeetupFormComponent implements OnInit {
   @Input() meetup: Meetup;
+  @Input() disable: boolean = false;
   @Output() onsubmit: EventEmitter<Meetup> = new EventEmitter<Meetup>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
   form: FormGroup;
   talks: FormArray;
   selectedTalk: number = 0;
   selectedSpeaker: number = 0;
-  disable: boolean = false;
 
   constructor(private formBuilder: FormBuilder) { }
   
@@ -51,13 +51,11 @@ export class MeetupFormComponent implements OnInit {
 
   onSubmit(meetup: Meetup) {
     if(this.form.valid){
-      //this.disable = true;
       this.onsubmit.emit(meetup);
     }
   }
 
   onCancel() {
-   this.disable = true;
    this.cancel.emit(true);
   }
 

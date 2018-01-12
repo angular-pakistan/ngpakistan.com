@@ -6,7 +6,8 @@
 				<hr class="bottom-line">
             </div>
 			<div class="col">
-				<app-meetup-form 
+				<app-meetup-form
+				[disable]="disable"
 				[meetup]="meetup"
 				(onsubmit)="handleSubmit($event)"
 				(cancel)="onCancel($event)"></app-meetup-form>

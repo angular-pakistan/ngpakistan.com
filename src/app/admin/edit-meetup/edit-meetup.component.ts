@@ -12,7 +12,7 @@ import 'rxjs/add/operator/first';
 })
 export class EditMeetupComponent implements OnInit {
   meetup: Meetup;
-
+  disable: boolean;
   constructor(private route: ActivatedRoute, 
               private router: Router, 
               private service: MeetupService) { }
@@ -26,10 +26,13 @@ export class EditMeetupComponent implements OnInit {
   }
 
   handleSubmit(meetups: Meetup){
-    this.service.update(meetups)
-    .first()
-    .subscribe( val => this.router.navigate(['../../'], { relativeTo: this.route }),
-        err => console.log(err));
+    if(!this.disable){
+      this.disable = true;
+      this.service.update(meetups)
+      .first()
+      .subscribe( val => this.router.navigate(['../../'], { relativeTo: this.route }),
+          err => this.disable = false);
+    } 
   }
 
   onCancel(cancel){

@@ -12,15 +12,19 @@ import 'rxjs/add/operator/first';
 })
 export class AddMeetupComponent {
   private alive: boolean = true;
+  disable: boolean = false;
   constructor(private route: ActivatedRoute, 
               private router: Router, 
               private service: MeetupService) { }
 
   handleSubmit(meetups: Meetup){
-    this.service.save(meetups)
-    .first()
-    .subscribe( val => this.router.navigate(['../'], { relativeTo: this.route }),
-        err => console.log(err));
+    if(!this.disable){
+      this.disable = true;
+      this.service.save(meetups)
+      .first()
+      .subscribe( val => this.router.navigate(['../'], { relativeTo: this.route }),
+          err => this.disable = false);
+    }
   }
 
   onCancel(cancel){
