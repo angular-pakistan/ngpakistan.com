@@ -275,7 +275,60 @@ const meetups = [
     location: '10Pearls University, 8th Floor, Parsa Tower, Shahra-e-Faisal, Karachi',
     city: 'Karachi',
     host: '10Pearls',
-    talks:[],
+    talks:[
+        {
+        title: 'Performance Optimizations in Angular',
+        slides: 'http://bit.ly/ng-pk-m6-talk-1',
+        video: '',
+        speaker: [{
+            name: 'Obaid ur Rehman',
+            company: 'Folio3',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'The power of decorators in TypeScript',
+        slides: 'http://bit.ly/ng-pk-m6-talk-3',
+        video: '',
+        speaker: [{
+            name: 'Rahil Khurshid',
+            company: 'Ouzels System',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'RxJS Hot and Cold Observable',
+        slides: 'http://bit.ly/ng-pk-m6-talk-2',
+        video: '',
+        speaker: [{
+            name: 'Zainab Saleem',
+            company: 'Recurship',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'Building Better Apps with Angular V5 & beyond',
+        slides: '',
+        video: '',
+        speaker: [{
+            name: 'Stephen Fluin',
+            company: 'Google',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+    ],
     subscribers:[]
     },
 ];
