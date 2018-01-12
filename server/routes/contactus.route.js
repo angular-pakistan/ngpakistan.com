@@ -3,38 +3,28 @@ const router = express.Router();
 const contactUsService = require('../services/contactus.service');
 const _ = require('lodash');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 
-  contactUsService.getAll(function (err,users) {
-    if(err){
-      throw err;
-    }
-
-    res.json({
-      href:req.hostname,
-      data:users
-    })
-
-  })
+  contactUsService.getAll()
+    .then((contacts) => res.json({
+                        href: req.hostname,
+                        data: contacts
+                      }))
+    .catch(err => {throw err;});
 });
 
-router.get('/:email', function(req, res, next) {
+router.get('/:email', (req, res, next) => {
   const email = req.params.email;
 
-  contactUsService.getByEmail(email,function (err,user) {
-    if(err){
-      throw err;
-    }
-
-    res.json({
-      href:req.hostname ,
-      data:user
-    })
-
-  })
+  contactUsService.getByEmail(email)
+    .then((contact) => res.json({
+                        href: req.hostname,
+                        data: contact
+                      }))
+    .catch(err => {throw err;});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
 
   const name = req.body.name;
   const email = req.body.email;
@@ -42,17 +32,19 @@ router.post('/', function(req, res, next) {
   const message= req.body.message;
   const date= req.body.date;
 
-  contactUsService.save(name, email, subject, message , date,function (err,user) {
-    if(err){
-      throw err;
-    }
-
-    res.json({
-      href:req.hostname ,
-      data:user
-    })
-
-  })
+  const contactUs = {
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+      date: date,
+    };
+  contactUsService.save(contactUs)
+    .then((contact) => res.json({
+                        href: req.hostname,
+                        data: contact
+                      }))
+    .catch(err => {throw err;});
 });
 
 

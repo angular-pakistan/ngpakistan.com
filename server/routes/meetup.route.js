@@ -3,37 +3,29 @@ const router = express.Router();
 const meetupService = require('../services/meetup.service');
 const _ = require('lodash');
 
-router.get('/', function (req, res, next) {
-  meetupService.getAll(function (err, meetups) {
-    if (err) {
-      throw err;
-    }
+router.get('/', (req, res, next) => {
 
-    res.json({
-      href: req.hostname,
-      data: meetups
-    })
+  meetupService.getAll()
+    .then((meetups) => res.json({
+                        href: req.hostname,
+                        data: meetups
+                      }))
+    .catch(err => {throw err;});
 
-  })
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:id', (req, res, next) => {
   const id = req.params.id;
 
-  meetupService.getMeetup(id, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-
-  })
+  meetupService.getMeetup(id)
+    .then((meetup) => res.json({
+                          href: req.hostname,
+                          data: meetup
+                        }))
+    .catch(err => {throw err;});
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', (req, res, next) => {
 
   const sequenceNo = req.body.sequenceNo;
   const name = req.body.name;
@@ -56,20 +48,15 @@ router.post('/', function (req, res, next) {
                   talks,
                   subscribers
                 };
-  meetupService.save(meetup, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-
-  })
+  meetupService.save(meetup)
+    .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+    .catch(err => {throw err;});
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/:id', (req, res, next) => {
   const sequenceNo = req.body.sequenceNo;
   const name = req.body.name;
   const date = req.body.date;
@@ -90,19 +77,15 @@ router.put('/:id', function (req, res, next) {
                   talks
                 };
   const id = req.params.id;
-  meetupService.updateMeetup(id, meetup, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-  });
+  meetupService.updateMeetup(id, meetup)
+    .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+    .catch(err => {throw err;});
 })
 
-router.post('/:id/subscriber', function (req, res, next) {
+router.post('/:id/subscriber', (req, res, next) => {
   const userID = req.body.userID;
   const date = req.body.date;
   const level = req.body.level;
@@ -110,45 +93,33 @@ router.post('/:id/subscriber', function (req, res, next) {
   const subscriber = {userID,date,level,code};
   const id = req.params.id;
 
-  meetupService.addSubscriber(id, subscriber, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-  })
+  meetupService.addSubscriber(id, subscriber)
+    .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+    .catch(err => {throw err;});
 });
 
-router.delete('/:id/subscriber/:subscriberID', function (req, res, next){
+router.delete('/:id/subscriber/:subscriberID', (req, res, next) => {
   const subscriberID = req.params.subscriberID;
   const id = req.params.id;
-  meetupService.removeSubscriber(id, subscriberID, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-  })
+  meetupService.removeSubscriber(id, subscriberID)
+    .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+    .catch(err => {throw err;});
 });
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/:id', (req, res, next) => {
   const id = req.params.id;
-  meetupService.remove(id, function (err, meetup) {
-    if (err) {
-      throw err;
-    }
-
-    res.json({
-      href: req.hostname,
-      data: meetup
-    })
-  })
+  meetupService.remove(id)
+    .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+    .catch(err => {throw err;});
 });
 
 
