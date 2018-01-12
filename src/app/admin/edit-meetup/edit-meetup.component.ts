@@ -23,7 +23,6 @@ export class EditMeetupComponent implements OnInit {
         .data
         .response
         .data;
-    console.log(this.meetup);
   }
 
   handleSubmit(meetups: Meetup){

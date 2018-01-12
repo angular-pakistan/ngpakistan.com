@@ -26,7 +26,6 @@ export class ManageMeetupsComponent implements OnInit {
     }
 
     onDelete(meetup: Meetup){
-        console.log(meetup._id);
         if(confirm(`Are you sure you want to delete ${meetup.name} #${meetup.sequenceNo}?`))
             this.alive = true;
             this.service.delete(meetup._id).first()
