@@ -37,7 +37,7 @@ import { JoinComponent } from './join';
 import { ContactusService } from './services/contactus.service';
 import { userService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { ConferenceService } from './services/conference.service';
 
 import { ROUTES } from './app.route';

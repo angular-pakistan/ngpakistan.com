@@ -5,7 +5,7 @@ import { AddMeetupComponent } from './add-meetup/add-meetup.component';
 import { NoContentComponent } from '../no-content';
 import { MeetupsResolver } from '../resolvers/meetups.resolver';
 import { MeetupResolver } from '../resolvers/meetup.resolver';
-import { AuthGuard } from '../auth.guard';
+import { AdminGuard } from '../guards/admin.guard';
 export const routes = [
   {
     path: 'admin', children: [
@@ -16,6 +16,6 @@ export const routes = [
         { path: 'add', component: AddMeetupComponent }
     ]},
     { path: '**', component: NoContentComponent }
-  ], canActivate: [AuthGuard] 
+  ], canActivate: [AdminGuard] 
   }
 ];

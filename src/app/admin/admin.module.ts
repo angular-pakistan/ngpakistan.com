@@ -11,6 +11,7 @@ import { ManageMeetupsComponent } from './manage-meetups/manage-meetups.componen
 import { EditMeetupComponent } from './edit-meetup/edit-meetup.component';
 import { MeetupFormComponent } from './meetup-form/meetup-form.component';
 import { AddMeetupComponent } from './add-meetup/add-meetup.component';
+import { AdminGuard } from '../guards/admin.guard';
 import { MeetupsModule } from '../meetups/meetups.module';
 import { MeetupsResolver } from '../resolvers/meetups.resolver';
 import { MeetupResolver } from '../resolvers/meetup.resolver';
@@ -36,6 +37,7 @@ console.log('`Admin` bundle loaded asynchronously');
   providers: [
     MeetupsResolver,
     MeetupResolver,
+    AdminGuard
   ]
 })
 export class AdminModule {
