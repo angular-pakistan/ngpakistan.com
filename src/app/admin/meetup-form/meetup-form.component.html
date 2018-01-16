@@ -1,0 +1,140 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <h3>Details</h3>
+      <div id="details">
+        <span class="block">
+          <label [class.has-error]="isValid('name')">
+            <p>Name <span *ngIf="isValid('name')" class="help-block pull-right">Required</span></p>
+            <input type="text" class="form-control" formControlName="name">
+          </label>
+          <label [class.has-error]="isValid('sequenceNo')">
+            <p>Sequence No. <span *ngIf="isValid('sequenceNo')" class="help-block pull-right">Required</span></p>
+            <input type="number" class="form-control" formControlName="sequenceNo">
+          </label>
+        </span>
+        <span class="block">
+          <label [class.has-error]="isValid('date')">
+            <p>Date <span *ngIf="isValid('date')" class="help-block pull-right">Required</span></p>
+            <input type="date" class="form-control" formControlName="date">
+          </label>
+          <label [class.has-error]="isValid('startTime')">
+            <p>Start Time <span *ngIf="isValid('startTime')" class="help-block pull-right">Required</span></p>
+            <input type="time" class="form-control" formControlName="startTime">
+          </label>
+          <label [class.has-error]="isValid('endTime')">
+            <p>End Time <span *ngIf="isValid('endTime')" class="help-block pull-right">Required</span></p>
+            <input type="time" class="form-control" formControlName="endTime">
+          </label>
+        </span>
+        <span class="block">
+          <label [class.has-error]="isValid('location')">
+            <p>Location <span *ngIf="isValid('location')" class="help-block pull-right">Required</span></p>
+            <input id="location" type="text" class="form-control" formControlName="location">
+          </label>
+          <label [class.has-error]="isValid('city')">
+            <p>City <span *ngIf="isValid('city')" class="help-block pull-right">Required</span></p>
+            <input type="text" class="form-control" formControlName="city">
+          </label>
+          <label [class.has-error]="isValid('host')">
+            <p>Host <span *ngIf="isValid('host')" class="help-block pull-right">Required</span></p>
+            <input type="text" class="form-control" formControlName="host">
+          </label>
+        </span>
+      </div>
+      <span id="talk-title">
+        <h3>Talks</h3>
+        <span id="add-talk"(click)="onAddTalk()">
+          <i class="material-icons">add</i>
+          <p> Add Talk</p>
+        </span>
+      </span>
+      <div formArrayName="talks">
+        <div class="lower-buffer" *ngFor="let talk of talks.controls; let i = index;">
+          <div [class.has-error]="isValidTalk(i)" class="accordion" [class.active]="i === selectedTalk" (click)="onShowTalk(i)">
+            <p>Talk {{i + 1}}</p>
+            <span *ngIf="isValidTalk(i)" class="help-block">This talk has errors</span>
+            <i class="material-icons close" (click)="removeTalk(i)">close</i>
+          </div>
+          <div class="box" 
+          [class.box-show]="i === selectedTalk" 
+          [formGroupName]="i">
+            <label [class.has-error]="isValidTalkField('title', i)">
+              <p>Title <span *ngIf="isValidTalkField('title', i)" class="help-block">Required</span></p>
+              <input class="form-control title" type="text" formControlName="title">
+            </label>
+            <span class="block">
+              <label>
+                <p>Slides Link</p>
+                <input class="form-control link" type="text" formControlName="slides">
+              </label>
+              <label>
+                <p>Video Link</p>
+                <input class="form-control link" type="text" formControlName="video">
+              </label>
+            </span>
+            <span class="speaker-title">
+              <h4>Speakers</h4>
+              <span id="add-speaker"(click)="onAddSpeaker(i)">
+                <i class="material-icons">add</i>
+                <p> Add Speaker</p>
+              </span>
+            </span>
+            <div formArrayName="speaker">
+              <div class="lower-buffer" *ngFor="let speaker of talk.controls.speaker.controls; let j = index;">
+                <div class="accordion small" 
+                [class.active]="j === selectedSpeaker"
+                [class.has-error]="isValidSpeaker(i,j)"
+                (click)="onShowSpeaker(j)">
+                  <p>Speaker {{j + 1}}</p>
+                  <span *ngIf="isValidSpeaker(i,j)" class="help-block">This speaker has errors</span>
+                  <i class="material-icons close" (click)="removeSpeaker(i,j)">close</i>
+                </div>
+                <div class="box" [class.box-show]="j === selectedSpeaker" [formGroupName]="j">
+                  <div class="block">
+                  <label [class.has-error]="isValidSpeakerField('name', i, j)">
+                    <p>Name <span *ngIf="isValidSpeakerField('name', i, j)" class="help-block pull-right">Required</span></p>
+                    <input type="text" class="form-control" formControlName="name">
+                  </label>
+                  <label [class.has-error]="isValidSpeakerField('company', i, j)">
+                    <p>Company <span *ngIf="isValidSpeakerField('company', i, j)" class="help-block pull-right">Required</span></p>
+                    <input type="text" class="form-control" formControlName="company">
+                  </label>
+                  <label>
+                    <p>E-mail</p>
+                    <input type="text" class="form-control" formControlName="email">
+                  </label>
+                  </div>
+                  <div class="block">
+                  <label>
+                    <p>Github Profile</p>
+                    <input type="text" class="form-control" formControlName="github">
+                  </label>
+                  <label>
+                    <p>LinkedIn Profile</p>
+                    <input type="text" class="form-control" formControlName="linkedIn">
+                  </label>
+                  <label>
+                    <p>Twitter Profile</p>
+                    <input type="text" class="form-control" formControlName="twitter">
+                  </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+		</div>
+	  </div>
+	 <span id="button-container">
+		<button id="cancel"
+    class="btn"
+    (click)="onCancel()"
+		[disabled]="disable">
+		Cancel
+		</button>
+		<button id="submit"
+		class="btn btn-success"
+		type="submit"
+		[disabled]="disable">
+		Publish
+		</button>
+	</span> 
+    </form>

@@ -1,0 +1,52 @@
+.icon-text{
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.icon-text p{
+    padding-left: 5px;
+}
+.location{
+    width: 300px;
+}
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.btn{
+    background-color: #5fcf80;
+    color: white;
+    height: 30px;
+    padding: 5px 5px;
+    margin-right: 10px;
+    border-color: #5fcf80;
+}
+.btn:hover{
+    background-color: white;
+    color: #5fcf80;
+}
+.header-section{
+    margin-bottom: 50px;
+}
+#edit-btn{
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
+    width: 45px;
+}
+#edit-btn:hover{
+    background-color: white;
+    color: #2d8ce5;
+}
+#delete-btn{
+    background-color: red;
+    border-color: red;
+}
+#delete-btn:hover{
+    background-color: white;
+    color: red;
+}

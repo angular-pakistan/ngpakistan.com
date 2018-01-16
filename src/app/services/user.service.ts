@@ -36,7 +36,7 @@ export class userService {
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace('-', '+').replace('_', '/');
         return JSON.parse(atob(base64));
-      }
+  }
 
   login(email: string, password: string): any {
     const headers = new Headers({ 'Content-Type': 'application/json' });

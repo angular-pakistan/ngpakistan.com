@@ -1,0 +1,17 @@
+<section id="workshop" class="section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="header-section text-center">
+				<h2>Edit Meetup</h2>
+				<hr class="bottom-line">
+            </div>
+			<div class="col">
+				<app-meetup-form
+				[disable]="disable"
+				[meetup]="meetup"
+				(onsubmit)="handleSubmit($event)"
+				(cancel)="onCancel($event)"></app-meetup-form>
+			</div>
+		</div>
+	</div>
+</section>

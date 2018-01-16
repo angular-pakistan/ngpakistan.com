@@ -1,0 +1,135 @@
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 20px;
+    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+label{
+    padding-bottom: 15px; 
+}
+input{
+    margin-top: 5px;
+}
+button{
+    height: 40px;
+    padding: 10px 10px;
+    margin-right: 10px;
+}
+.btn-success{
+    color: white;
+    background-color: #5fcf80;
+    border-color: #5fcf80;
+}
+.btn-success:hover{
+    color: #5fcf80;
+    background-color: white;
+}
+.block label{
+    margin-right: 20px;
+}
+.box{
+    display: none;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top: none;
+    margin-bottom: 20px;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+}
+.box-show{
+    display: flex;
+}
+.lower-buffer{
+    margin-bottom: 3px;
+}
+.title{
+    width: 40rem;
+}
+.close:hover{
+    color: red;
+    opacity: 0.5;
+}
+.link{
+    width: 20em;
+}
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(0,0,0,0.2); 
+    outline: none;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.small{
+    padding: 5px;
+    padding-left: 10px;
+}
+.accordion:hover{
+    background-color: #ddd;
+}
+.active {
+    border-bottom: none;
+}
+.speaker-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+#details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 20px;
+}
+#location{
+    width: 28em;
+}
+#cancel{
+    color: white;
+    background-color: lightgray;
+    border-color: lightgray; 
+}
+#cancel:hover{
+    color: lightgray;
+    background-color: white;
+}
+#button-container{
+    margin: 20px auto;
+}
+#talk-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+#add-talk{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+#add-talk:hover{
+    color: #5fcf80;
+    cursor: pointer;
+}
+#add-speaker{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+#add-speaker:hover{
+    color: #5fcf80;
+    cursor: pointer;
+}

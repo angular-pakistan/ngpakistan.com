@@ -1,0 +1,25 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#card{
+    width: 200px;
+    height: 200px;
+    background-color: lightgrey;
+    box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.1);
+    color: white;
+    text-align: center;
+    margin-right: 30px;
+}
+#card:hover{
+    background-color: #5FCF80;
+}
+#card p{
+    margin: 0 auto;
+    color: white;
+}
+.material-icons{
+    font-size: 120px;
+    margin-top: 20px;
+}

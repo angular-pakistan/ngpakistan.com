@@ -19,6 +19,7 @@ import { PartnersComponent } from '../partners/partners.component';
 import { ContactusCardComponent } from '../contactus-card/contactus-card.component';
 import { IntroCardComponent } from '../intro-card/intro-card.component';
 import { BigCardComponent } from '../big-card/big-card.component';
+import { JoinUsComponent } from '../joinUs-card/joinUs-card';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -42,6 +43,7 @@ describe('NavigationComponent', () => {
         PartnersComponent,
         IntroCardComponent,
         BigCardComponent,
+        JoinUsComponent
       ],
       imports: [ 
         RouterTestingModule.withRoutes(ROUTES),

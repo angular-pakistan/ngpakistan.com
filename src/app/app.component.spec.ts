@@ -18,6 +18,7 @@ import { SmallCardComponent } from './shared/small-card/small-card.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ContactusCardComponent } from './shared/contactus-card/contactus-card.component';
 import { PartnersComponent } from './shared/partners/partners.component';
+import { JoinUsComponent } from './shared/joinUs-card/joinUs-card';
 import { NoContentComponent } from './no-content';
 import { HomeComponent } from './home';
 import { ContactusComponent } from './contactus';
@@ -44,6 +45,7 @@ describe('AppComponent', () => {
         SmallCardComponent,
         FooterComponent,
         ContactusCardComponent,
+        JoinUsComponent,
         PartnersComponent,
         NoContentComponent,
         HomeComponent,

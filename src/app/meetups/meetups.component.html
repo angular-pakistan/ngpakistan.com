@@ -1,8 +1,14 @@
-<section id="testimonial" class="section-padding">
+<section id="work-shop" class="section-padding">
   <div class="container">
     <div class="row">
-      <div class="col">
-        <h1>Hello from meetups : This is under construction</h1>
+      <div class="header-section text-center">
+        <h2>Meetups</h2>
+        <p>Free events every other month where we meet, eat and share knowledge. New talks on latest trends in Angular & JavaScript.
+          <br>Check out all of our meetups:</p>
+        <hr class="bottom-line">
+      </div>
+      <div class="col" *ngFor="let meetup of meetups">
+        <meetup-list [meetup]="meetup"></meetup-list>
       </div>
     </div>
   </div>

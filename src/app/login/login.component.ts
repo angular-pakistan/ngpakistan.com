@@ -21,12 +21,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.userService.login(this.email, this.password).subscribe( data => {
-      if(data.success) {
+      if(data) {
+      console.log(data);
       this.userService.setUser(data.token);
+      console.log("Login successful!");
       this.errorMessage = '';
       this.Router.navigate(['profile']);
       }else {
         this.errorMessage = 'Incorrect email or password!';
+        console.log("Invalid password");
+        console.log(data);
       }
     });
   }
