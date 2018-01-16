@@ -1,0 +1,63 @@
+.icon-text{
+    display:flex;
+    flex-direction:row;
+    margin-top: 30px;
+}
+.icon-text p{
+    margin-left: 5px;
+}
+h1{
+    font-size: 40px;
+}
+.material-icons{
+    font-size: 30px;
+    color: #91E1B4;
+}
+.talks{
+    margin-top: 60px;
+    padding-left: 20px;
+    text-align: left;
+}
+.talks h2{
+    font-size: 30px;
+}
+.talks div{
+    margin-bottom: 75px;
+}
+.talks img{
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+.title{
+    color: #5FCF80;
+    margin-bottom: 25px;
+}
+.content-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.content-block div{
+    margin-left: 20px;
+}
+.btn{
+    background-color: #5fcf80;
+    color: white;
+    height: 30px;
+    padding: 5px 5px;
+    border-color: #5fcf80;
+}
+.btn:hover{
+    background-color: white;
+    color: #5fcf80;
+}
+.service-box span{
+    display: flex;
+    flex-direction:row;
+    margin: 0 auto;
+}
+.service-box span p{
+    padding-top: 2px;
+    font-size: 15px;
+}

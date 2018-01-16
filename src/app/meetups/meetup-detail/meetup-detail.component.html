@@ -1,0 +1,58 @@
+<section id="work-shop" class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div *ngIf="meetup" class="service-box text-center">
+          <h1>{{meetup.name}}#{{meetup.sequenceNo}}</h1>
+          <div class="icon-text">
+            <span>
+              <i class="material-icons">location_on</i>
+              <p>{{meetup.location}}</p>
+            </span>
+            <span>
+              <i class="material-icons">today</i>
+              <p>{{meetup.date}}</p>
+            </span>
+            <span>
+              <i class="material-icons">access_time</i>
+              <p>{{meetup.startTime}}</p>
+            </span>
+            <span>
+              <i class="material-icons">watch_later</i>
+              <p>{{meetup.endTime}}</p>
+            </span>
+          </div>
+          <div class="talks" *ngIf="meetup?.talks[0]">
+            <h2>Talks</h2>
+            <div *ngFor="let talk of meetup?.talks">
+              <h3 class="title">{{talk.title}}</h3>
+              <div class="content-block">
+                <iframe *ngIf="talk?.video" 
+                      [src]="sanitizeUrl(talk.video)" 
+                      width="560" height="315" 
+                      style="border:none;overflow:hidden" 
+                      scrolling="no" frameborder="0" 
+                      allowTransparency="true" 
+                      allowFullScreen="true"></iframe>
+                <div>
+                  <h4 *ngIf="talk?.speaker[0]">Speakers</h4>
+                  <span *ngFor="let speaker of talk.speaker">
+                    <p>{{speaker.name}} 
+                      <a *ngIf="speaker?.linkedIn" [href]="talk?.speaker[0]?.linkedIn">
+                        <img src="../../../assets/img/linkedin.png" height="20"></a>
+                      <a *ngIf="speaker?.github" [href]="talk?.speaker[0]?.github">
+                        <img src="../../../assets/img/github.png" height="20"></a>
+                      <a *ngIf="speaker?.twitter" [href]="talk?.speaker[0]?.twitter">
+                        <img src="../../../assets/img/twitter.png" height="20"></a>
+                    </p> 
+                  </span>
+                  <a class="btn btn-success" *ngIf="talk?.slides" [href]="talk?.slides">Get Slides</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -19,6 +19,7 @@ import { PartnersComponent } from '../partners/partners.component';
 import { ContactusCardComponent } from '../contactus-card/contactus-card.component';
 import { IntroCardComponent } from '../intro-card/intro-card.component';
 import { BigCardComponent } from '../big-card/big-card.component';
+import { JoinUsComponent } from '../../shared/joinUs-card/joinUs-card';
 
 
 
@@ -43,7 +44,8 @@ describe('FooterComponent', () => {
         BigCardComponent,
         LoginComponent,
         SignupComponent,
-        NoContentComponent
+        NoContentComponent,
+        JoinUsComponent
       ],
       imports: [ RouterTestingModule.withRoutes(ROUTES), FormsModule, ReactiveFormsModule]
     })

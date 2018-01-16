@@ -19,6 +19,7 @@ export class MeetupCardComponent implements OnInit {
       this.meetups = val.data;
       this.previousMeetups = this.meetups.filter(meetup => Date.now() > Date.parse(meetup.date));
       this.previousMeetups.sort((a: Meetup, b: Meetup) => Date.parse(b.date) - Date.parse(a.date));
+      this.previousMeetups = this.previousMeetups.slice(0,3);
     });
   }
 

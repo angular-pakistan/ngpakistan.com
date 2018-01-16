@@ -2,9 +2,9 @@ const meetups = [
     {
     sequenceNo: 1,
     name: 'Angular JS Meetup',
-    date: '1-6-2017',
-    startTime: '7:30 PM',
-    endTime: '10:00 PM',
+    date: '2017-01-06',
+    startTime: '19:30',
+    endTime: '22:00',
     location: 'Attribe Solutions, Shahra-e-Faisal, Karachi',
     city: 'Karachi',
     host: 'Attribe Solutions',
@@ -14,9 +14,9 @@ const meetups = [
     {
     sequenceNo: 2,
     name: 'Angular JS Meetup',
-    date: '4-22-2017',
-    startTime: '2:00 PM',
-    endTime: '4:00 PM',
+    date: '2017-04-22',
+    startTime: '14:00',
+    endTime: '16:00',
     location: '10Pearls University, 8th Floor, Parsa Tower, Shahra-e-Faisal, Karachi',
     city: 'Karachi',
     host: '10Pearls University',
@@ -26,9 +26,9 @@ const meetups = [
     {
     sequenceNo: 3,
     name: 'Angular JS Meetup',
-    date: '5-24-2017',
-    startTime: '4:00 PM',
-    endTime: '7:30 PM',
+    date: '2017-05-24',
+    startTime: '16:00',
+    endTime: '19:30',
     location: 'Folio3 - 805 Business Center, PECHS Block-6, Shahra-e-Faisal, Karachi',
     city: 'Karachi',
     host: 'Folio3',
@@ -103,9 +103,9 @@ const meetups = [
     {
     sequenceNo: 4,
     name: 'Angular JS Meetup',
-    date: '9-14-2017',
-    startTime: '6:00 PM',
-    endTime: '8:30 PM',
+    date: '2017-09-14',
+    startTime: '18:00',
+    endTime: '20:30',
     location: 'Recurship - House 9/A, Block A, SMCHS, Karachi',
     city: 'Karachi',
     host: 'Recurship',
@@ -179,9 +179,9 @@ const meetups = [
     {
     sequenceNo: 5,
     name: 'Angular JS Meetup',
-    date: '10-25-2017',
-    startTime: '6:00 PM',
-    endTime: '8:30 PM',
+    date: '2017-10-25',
+    startTime: '18:00',
+    endTime: '20:30',
     location: 'DotZero - 14th Floor, Dilkusha Forum, Main Tariq Road, Karachi',
     city: 'Karachi',
     host: 'DotZero',
@@ -269,13 +269,66 @@ const meetups = [
     {
     sequenceNo: 6,
     name: 'Angular JS Meetup',
-    date: '12-20-2017',
-    startTime: '6:00 PM',
-    endTime: '8:00 PM',
+    date: '2017-12-20',
+    startTime: '18:00',
+    endTime: '20:00',
     location: '10Pearls University, 8th Floor, Parsa Tower, Shahra-e-Faisal, Karachi',
     city: 'Karachi',
     host: '10Pearls',
-    talks:[],
+    talks:[
+        {
+        title: 'Performance Optimizations in Angular',
+        slides: 'http://bit.ly/ng-pk-m6-talk-1',
+        video: '',
+        speaker: [{
+            name: 'Obaid ur Rehman',
+            company: 'Folio3',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'The power of decorators in TypeScript',
+        slides: 'http://bit.ly/ng-pk-m6-talk-3',
+        video: '',
+        speaker: [{
+            name: 'Rahil Khurshid',
+            company: 'Ouzels System',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'RxJS Hot and Cold Observable',
+        slides: 'http://bit.ly/ng-pk-m6-talk-2',
+        video: '',
+        speaker: [{
+            name: 'Zainab Saleem',
+            company: 'Recurship',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+        {
+        title: 'Building Better Apps with Angular V5 & beyond',
+        slides: '',
+        video: '',
+        speaker: [{
+            name: 'Stephen Fluin',
+            company: 'Google',
+            email: '',
+            github: '',
+            linkedIn: '',
+            twitter: ''
+            }]
+        },
+    ],
     subscribers:[]
     },
 ];
