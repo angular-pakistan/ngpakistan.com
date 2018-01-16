@@ -33,13 +33,15 @@ import { ContactusComponent } from './contactus';
 import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
-import { UserService } from './services/user.service';
+import { userService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
+import { AuthGuard } from './auth.guard';
 import { ConferenceService } from './services/conference.service';
 
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { SignupComponent } from './signup/signup.component';
     ContactusComponent,
     JoinComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,7 @@ import { SignupComponent } from './signup/signup.component';
     HttpModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
-  providers: [ DefaultRequestOptions, ContactusService, UserService, MeetupService, ConferenceService, ErrorService],
+  providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, userService, MeetupService, ConferenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

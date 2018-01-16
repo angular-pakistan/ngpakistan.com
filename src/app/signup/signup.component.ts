@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.interface';
+import { Router } from '@angular/router';
 
-import { UserService } from '../services/user.service';
+import { userService } from '../services/user.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  providers: [UserService]
+  providers: [userService]
 })
 export class SignupComponent implements OnInit {
 
@@ -27,16 +28,16 @@ export class SignupComponent implements OnInit {
     password: ''
   };
 
-  
-  constructor(private UserService: UserService) { }
+  constructor(private userService: userService, private Router: Router) { }
 
   ngOnInit() {
-    console.log(this.User);
   }
 
   signup(){
-    this.UserService.save(this.User).subscribe( data => {
-      console.log(data);
+    this.userService.save(this.User).subscribe( data => {
+      if (data.data) {
+        this.Router.navigate(['login']);
+      }
     });
   }
 }
