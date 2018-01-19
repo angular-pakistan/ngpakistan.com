@@ -12,7 +12,6 @@ import 'rxjs/add/operator/first';
 })
 export class ManageMeetupsComponent implements OnInit {
     meetups: Meetup[];
-    alive: boolean = true;
     constructor(private route: ActivatedRoute,
                 private service: MeetupService,
                 private location: Location) {}
@@ -21,16 +20,16 @@ export class ManageMeetupsComponent implements OnInit {
         this.meetups = this.route
             .snapshot
             .data
-            .response
+            .meetups
             .data;
     }
 
     onDelete(meetup: Meetup){
-        if(confirm(`Are you sure you want to delete ${meetup.name} #${meetup.sequenceNo}?`))
-            this.alive = true;
+        if(confirm(`Are you sure you want to delete ${meetup.name} #${meetup.sequenceNo}?`)){
             this.service.delete(meetup._id).first()
                 .subscribe(val => this.service.getAll().first()
                     .subscribe(res => this.meetups = res.data));
+        }      
     }
 
 }

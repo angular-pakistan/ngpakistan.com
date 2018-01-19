@@ -39,6 +39,7 @@ import { userService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ConferenceService } from './services/conference.service';
+import { SpeakerService } from './services/speaker.service';
 
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
@@ -79,7 +80,15 @@ import { ProfileComponent } from './profile/profile.component';
     MeetupsModule,
     AdminModule
   ],
-  providers: [ErrorService, AuthGuard, DefaultRequestOptions, ContactusService, userService, MeetupService, ConferenceService],
+  providers: [ErrorService,
+    AuthGuard, 
+    DefaultRequestOptions, 
+    ContactusService, 
+    userService, 
+    MeetupService, 
+    ConferenceService,
+    SpeakerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

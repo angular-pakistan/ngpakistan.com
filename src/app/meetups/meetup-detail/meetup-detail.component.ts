@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meetup } from '../../model/meetup.interface';
+import { Speaker } from '../../model/speaker.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 @Component({
@@ -9,7 +10,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
-
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
@@ -19,7 +19,7 @@ export class MeetupDetailComponent implements OnInit {
     this.meetup = this.route
         .snapshot
         .data
-        .response
+        .meetup
         .data;
   }
 

@@ -11,7 +11,7 @@
         class="btn btn-default pull-right">+ Add Meetup</a>
       </div>
       <div class="col" *ngFor="let meetup of meetups">
-        <meetup-list [meetup]="meetup" [admin]="true">
+        <meetup-list [meetup]="meetup">
           <button class="admin-options"
           (click)="onDelete(meetup)"
           id="delete-btn" class="btn btn-default">Delete</button>

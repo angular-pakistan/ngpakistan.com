@@ -1,0 +1,39 @@
+<section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Manage Speakers</h2>
+        <hr class="bottom-line"><br>
+        <a class="admin-options"
+        [routerLink]=" ['./add'] " 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact: true}"
+        class="btn btn-default pull-right">+ Add Speaker</a>
+      </div>
+      <div class="col" *ngFor="let speaker of speakers">
+            <div class="service-box text-center" >
+                <div class="title">
+                    <p class="ser-text">{{speaker.name}}</p>
+                    <span>
+                         <button class="admin-options"
+                        (click)="onDelete(speaker)"
+                        id="delete-btn" class="btn btn-default">Delete</button>
+                        <a class="admin-options" 
+                        [routerLink]=" ['./edit', speaker._id] " 
+                        routerLinkActive="active" 
+                        [routerLinkActiveOptions]="{exact: true}"
+                        id="edit-btn" class="btn btn-default">Edit</a> 
+                    </span>
+                </div>
+                <span class="icon-text">
+                    <p *ngIf="speaker.company !== ''">Company: {{speaker.company}}</p>
+                    <p *ngIf="speaker.email !== ''">Email: {{speaker.email}}</p>
+                    <a *ngIf="speaker.github !== ''" [href]="speaker.github"><p>Github</p></a>
+                    <a *ngIf="speaker.linkedIn !== ''" [href]="speaker.linkedIn"><p>LinkedIn</p></a>
+                    <a *ngIf="speaker.twitter !== ''" [href]="speaker.twitter"><p>Twitter</p></a>
+                </span>
+            </div>
+      </div>
+    </div>
+  </div>
+</section>

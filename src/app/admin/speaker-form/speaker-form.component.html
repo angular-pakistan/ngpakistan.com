@@ -1,0 +1,44 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="block">
+        <label [class.has-error]="isValid('name')">
+            <p>Name <span *ngIf="isValid('name')" class="help-block pull-right">Required</span></p>
+            <input class="form-control" type="text" formControlName="name">
+        </label>
+        <label>
+            <p>Email</p>
+            <input class="form-control" type="text" formControlName="email">
+        </label>
+        <label>
+            <p>Company</p>
+            <input class="form-control" type="text" formControlName="company">
+        </label>
+    </div>
+    <div class="block">
+        <label>
+            <p>Github</p>
+            <input class="form-control" type="text" formControlName="github">
+        </label>
+        <label>
+            <p>LinkedIn</p>
+            <input class="form-control" type="text" formControlName="linkedIn">
+        </label>
+        <label>
+            <p>Twitter</p>
+            <input class="form-control" type="text" formControlName="twitter">
+        </label>
+    </div>
+    <div id="button-container">
+		<button id="cancel"
+        class="btn"
+        (click)="onCancel()"
+		[disabled]="disable">
+		Cancel
+		</button>
+		<button id="submit"
+		class="btn btn-success"
+		type="submit"
+		[disabled]="disable">
+		Publish
+		</button>
+	</div> 
+</form>

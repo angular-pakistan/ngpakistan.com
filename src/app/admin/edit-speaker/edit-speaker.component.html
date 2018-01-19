@@ -1,0 +1,17 @@
+<section id="workshop" class="section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="header-section text-center">
+				<h2>Edit Speaker</h2>
+				<hr class="bottom-line">
+            </div>
+			<div class="col shadow">
+				<app-speaker-form
+                [disable]="disable"
+                [speaker]="speaker"
+				(submitEvent)="handleSubmit($event)"
+				(cancelEvent)="onCancel($event)"></app-speaker-form>
+			</div>
+		</div>
+	</div>
+</section>
