@@ -1,3 +1,4 @@
+const mongoose = require( 'mongoose' );
 const meetups = [
     {
     sequenceNo: 1,
@@ -167,13 +168,13 @@ const meetups = [
         title: 'Performance Optimizations in Angular',
         slides: 'http://bit.ly/ng-pk-m6-talk-1',
         video: '',
-        speaker: []
+        speaker: [new mongoose.Types.ObjectId("5a5dd1f090793a0766a19f3b")]
         },
         {
         title: 'The power of decorators in TypeScript',
         slides: 'http://bit.ly/ng-pk-m6-talk-3',
         video: '',
-        speaker: []
+        speaker: [new mongoose.Types.ObjectId("5a5dd1f090793a0766a19f3b")]
         },
         {
         title: 'RxJS Hot and Cold Observable',

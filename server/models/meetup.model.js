@@ -26,9 +26,7 @@ var meetupSchema = Schema({
       slides : String,
       video : String,
       speaker : [
-        {
-          speakerID: { type: ObjectId, ref: 'speaker'}
-        }
+        { type: ObjectId, ref: 'speakers'}
       ]
     }
   ],

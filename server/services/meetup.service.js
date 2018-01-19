@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 // Models
 const meetups = require('../models/meetup.model').Meetup;
+const speaker = require('../models/speaker.model').speaker;
 
 //////////////////////////
 // Export Utilities
@@ -18,6 +19,11 @@ module.exports = {
     getMeetup: (meetupID) => {
         const query = { _id: meetupID };
         return meetups.findOne(query).exec();
+    },
+
+    getMeetupAndPopulate: (meetupID) => {
+        const query = { _id: meetupID };
+        return meetups.findOne(query).populate('talks.speaker').exec();
     },
 
     save: (meetup) => {

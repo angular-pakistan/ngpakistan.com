@@ -25,5 +25,5 @@ var speakerModel = Schema({
 // Export Schema
 //////////////////////////
 
-const speaker = mongoose.model('speaker',speakerModel);
+const speaker = mongoose.model('speakers',speakerModel);
 module.exports.speaker = speaker;
