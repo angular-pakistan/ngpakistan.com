@@ -26,14 +26,7 @@ var meetupSchema = Schema({
       slides : String,
       video : String,
       speaker : [
-        {
-          name : String,
-          company : String,
-          email : String,
-          github : String ,
-          linkedIn : String,
-          twitter : String
-        }
+        { type: ObjectId, ref: 'speakers'}
       ]
     }
   ],

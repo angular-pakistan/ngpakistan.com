@@ -16,12 +16,13 @@ export interface Meetup {
       video? : string,
       speaker? : [
         {
-          name : string,
-          company : string,
-          email : string,
-          github : string ,
-          linkedIn : string,
-          twitter : string
+          speakerID?: string,
+          name?: string,
+          company?: string,
+          email?: string,
+          github?: string,
+          twitter?: string,
+          linkedIn?: string
         }
       ]
     }

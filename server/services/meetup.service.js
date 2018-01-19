@@ -11,20 +11,25 @@ const meetups = require('../models/meetup.model').Meetup;
 
 module.exports = {
 
-    getAll: function () {
+    getAll: () => {
         return meetups.find({}).sort({date: -1}).exec();
     },
 
-    getMeetup: function (meetupID) {
+    getMeetup: (meetupID) => {
         const query = { _id: meetupID };
         return meetups.findOne(query).exec();
     },
 
-    save: function (meetup) {
+    getMeetupAndPopulate: (meetupID) => {
+        const query = { _id: meetupID };
+        return meetups.findOne(query).populate('talks.speaker').exec();
+    },
+
+    save: (meetup) => {
         return meetups.create(meetup);
     },
 
-    updateMeetup: function (meetupID, meetup) {
+    updateMeetup: (meetupID, meetup) => {
         return meetups.findByIdAndUpdate(
             meetupID,
             meetup,
@@ -32,7 +37,7 @@ module.exports = {
         ).exec();
     },
 
-    addSubscriber: function (meetupID, subscriber) {
+    addSubscriber: (meetupID, subscriber) => {
         return meetups.findByIdAndUpdate(
             meetupID,
             {$push: {"subscribers": subscriber}},
@@ -40,11 +45,11 @@ module.exports = {
         ).exec();     
     },
 
-    remove: function (meetupID) {
+    remove: (meetupID) => {
         return meetups.findByIdAndRemove(meetupID).exec();
     },
 
-    removeSubscriber: function (meetupID, subscriberID) {
+    removeSubscriber: (meetupID, subscriberID) => {
         return meetups.findByIdAndUpdate(
             meetupID,
             {$pull: {"subscribers": { "_id": subscriberID}}},

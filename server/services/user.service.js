@@ -11,26 +11,26 @@ const users = require('../models/user.model').users;
 
 module.exports ={
 
-  getUsers : function () {
+  getUsers : () => {
     return users.find({}).exec;
   },
 
-  getUser : function (userID) {
+  getUser : (userID) => {
     const query = { _id: userID};
     return users.findOne(query).exec();
   },
 
-  getUserByemail1 : function (email) {
+  getUserByemail1 : (email) => {
     const query = { email1: email};
     return users.findOne(query).exec();
   },
 
-  getUserByemail2 : function (email) {
+  getUserByemail2 : (email) => {
     const query = { email2: email};
     return users.findOne(query).exec();
   },
 
-  login : function (email,password) {
+  login : (email,password) => {
     const query = { 
       email1: email,
       password:password
@@ -38,7 +38,7 @@ module.exports ={
     return users.findOne(query).exec();
   },
 
-  save: function (user) {
+  save: (user) => {
     return users.create(user);
   }
 

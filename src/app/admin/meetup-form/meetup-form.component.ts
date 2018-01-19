@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Meetup } from '../../model/meetup.interface';
+import { Speaker } from '../../model/speaker.interface';
 
 
 @Component({
@@ -11,8 +12,10 @@ import { Meetup } from '../../model/meetup.interface';
 export class MeetupFormComponent implements OnInit {
   @Input() meetup: Meetup;
   @Input() disable: boolean = false;
-  @Output() onsubmit: EventEmitter<Meetup> = new EventEmitter<Meetup>();
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter();
+  @Input() speakers: Speaker[];
+  @Output() submitEvent: EventEmitter<Meetup> = new EventEmitter<Meetup>();
+  @Output() cancelEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() speakerEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   form: FormGroup;
   talks: FormArray;
   selectedTalk: number = 0;
@@ -34,29 +37,33 @@ export class MeetupFormComponent implements OnInit {
       host: ['', Validators.required],
       talks: this.formBuilder.array([]),
       subscribers: this.formBuilder.array([])
-    })
+    });
     this.talks = this.form.get('talks') as FormArray;
     const subscribers = this.form.get('subscribers') as FormArray;
     if(this.meetup) {
       this.meetup.talks.map((talk) => {
-        let speakers = talk.speaker.map((speaker) => this.createSpeakerGroup(false));
+        let speakers = talk.speaker.map((speaker) => new FormControl('', Validators.required));
         this.talks.push(this.createTalkGroup(false, speakers));
       });
       this.meetup.subscribers.map((sub) => {
         subscribers.push(this.createSubscriberGroup());
-      })
+      });
       this.form.patchValue(this.meetup);
     }
   }
 
   onSubmit(meetup: Meetup) {
-    if(this.form.valid){
-      this.onsubmit.emit(meetup);
+    if(this.form.valid && !this.disable){
+      this.submitEvent.emit(meetup);
     }
   }
 
   onCancel() {
-   this.cancel.emit(true);
+    this.cancelEvent.emit(true);
+  }
+
+  onNewSpeaker() {
+    this.speakerEvent.emit(true);
   }
 
   private createTalkGroup(isNew: boolean, speakers = []): FormGroup {
@@ -80,31 +87,6 @@ export class MeetupFormComponent implements OnInit {
     return this.formBuilder.group(talkGroup);
   }
 
-  private createSpeakerGroup(isNew: boolean): FormGroup {
-    var speakerGroup;
-    if(isNew){
-      speakerGroup = {
-        name: ['', Validators.required],
-        company: ['', Validators.required],
-        email: [''],
-        github: [''],
-        linkedIn: [''],
-        twitter: ['']
-      };
-    } else {
-      speakerGroup = {
-        _id: [''],
-        name: ['', Validators.required],
-        company: ['', Validators.required],
-        email: [''],
-        github: [''],
-        linkedIn: [''],
-        twitter: ['']
-      };
-    }
-    return this.formBuilder.group(speakerGroup);
-  }
-
   private createSubscriberGroup(): FormGroup {
     const subscriberGroup = {
       _id: [''],
@@ -112,7 +94,7 @@ export class MeetupFormComponent implements OnInit {
       date: [''],
       level: [''],
       code: ['']
-    }
+    };
     return this.formBuilder.group(subscriberGroup);
   }
 
@@ -125,6 +107,7 @@ export class MeetupFormComponent implements OnInit {
     const field = this.talks.at(index);
     return field.invalid && (field.dirty || field.touched);
   }
+
   isValidSpeaker(talkIndex: number, speakerIndex: number){
     const speakers = this.talks.at(talkIndex).get('speaker') as FormArray;
     const field = speakers.at(speakerIndex);
@@ -135,11 +118,6 @@ export class MeetupFormComponent implements OnInit {
     const field = this.talks.controls[index].get(name);
     return field.invalid && (field.dirty || field.touched);
   }
-  isValidSpeakerField(name: string, talkIndex: number, speakerIndex: number){
-    const speakers = this.talks.controls[talkIndex].get('speaker') as FormArray;
-    const field = speakers.at(speakerIndex).get(name);
-    return field.invalid && (field.dirty || field.touched);
-  }
 
   onAddTalk() {
     this.talks.push(this.createTalkGroup(true));
@@ -148,7 +126,7 @@ export class MeetupFormComponent implements OnInit {
 
   onAddSpeaker(talkIndex: number) {
     const speakers = this.talks.controls[talkIndex].get('speaker') as FormArray;
-    speakers.push(this.createSpeakerGroup(true));
+    speakers.push(new FormControl('', Validators.required));
     this.selectedSpeaker = speakers.length - 1;
   }
 

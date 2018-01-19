@@ -10,6 +10,7 @@ const api = require('./server/routes/api');
 const contact = require('./server/routes/contactus.route');
 const user = require('./server/routes/user.route');
 const meetup = require('./server/routes/meetup.route');
+const speaker = require('./server/routes/speaker.route');
 const app = express();
 
 
@@ -25,6 +26,7 @@ app.use('/api', api);
 app.use('/api/v1/contact', contact);
 app.use('/api/v1/user', user);
 app.use('/api/v1/meetup', meetup);
+app.use('/api/v1/speaker', speaker);
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
