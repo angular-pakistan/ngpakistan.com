@@ -167,7 +167,7 @@ const meetups = [
         {
         title: 'Performance Optimizations in Angular',
         slides: 'http://bit.ly/ng-pk-m6-talk-1',
-        video: '',
+        video: 'https://www.youtube.com/embed/X_ahGpSbrpA',
         speaker: [new mongoose.Types.ObjectId("5a5dd1f090793a0766a19f3b")]
         },
         {

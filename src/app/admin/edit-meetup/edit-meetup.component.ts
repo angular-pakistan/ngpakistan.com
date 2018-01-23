@@ -15,8 +15,8 @@ import 'rxjs/add/operator/first';
 export class EditMeetupComponent implements OnInit {
   meetup: Meetup;
   disable: boolean = false;
-  speakerDisable: boolean = false;
-  newSpeaker: boolean = false;
+  disableSpeakerSubmit: boolean = false;
+  showSpeakerForm: boolean = false;
   speakers: Speaker[];
   constructor(private route: ActivatedRoute, 
               private router: Router, 
@@ -36,13 +36,13 @@ export class EditMeetupComponent implements OnInit {
         .data;
   }
   
-  onNewSpeaker(event: boolean){
-    this.newSpeaker = event;
+  toggleSpeakerForm(event: boolean){
+    this.showSpeakerForm = event;
   }
 
   onSpeakerSubmit(speaker: Speaker){
-    if(!this.speakerDisable){
-      this.speakerDisable = true;
+    if(!this.disableSpeakerSubmit){
+      this.disableSpeakerSubmit = true;
       this.speakerService.save(speaker)
         .first()
         .subscribe(val => {
@@ -50,12 +50,12 @@ export class EditMeetupComponent implements OnInit {
             .first()
             .subscribe(val => {
               this.speakers = val.data;
-              this.newSpeaker = false;
-              this.speakerDisable = false;
+              this.showSpeakerForm = false;
+              this.disableSpeakerSubmit = false;
             })
         }, err => { 
-          this.speakerDisable = false;
-          this.newSpeaker = false;
+          this.disableSpeakerSubmit = false;
+          this.showSpeakerForm = false;
         })
     }
   }

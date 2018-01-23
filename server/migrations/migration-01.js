@@ -9,9 +9,9 @@
 var mongoose = require( 'mongoose' );
 mongoose.set('debug', true);
 //import the meetup model
-const Meetup = require('../../models/meetup.model').Meetup;
+const Meetup = require('../models/meetup.model').Meetup;
 //import meetups data
-const meetups = require('./data.js').meetups;
+const meetups = require('./meetup/data.js').meetups;
 // Build the connection string
 var dbURI = 'mongodb://localhost/ng-pakistan';
 

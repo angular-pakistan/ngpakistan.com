@@ -1,5 +1,5 @@
 const speakers = [
-    {
+    {//0
         name: 'Saad Zaman',
         company: '',
         email: '',
@@ -7,7 +7,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//1
         name: 'Mohammad Danish Siddiqui',
         company: '',
         email: '',
@@ -15,7 +15,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//2
         name: 'Ahsan Ayaz',
         company: '',
         email: '',
@@ -23,7 +23,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//3
         name: 'Obaid Ur Rehman',
         company: 'Folio3',
         email: '',
@@ -31,7 +31,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//4
         name: 'Narain Sagar',
         company: 'Recurship',
         email: '',
@@ -39,7 +39,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//5
         name: 'Muhammad Kamran Qadir',
         company: '',
         email: '',
@@ -47,7 +47,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//6
         name: 'Mashhood Rastgar',
         company: 'Recurship',
         email: '',
@@ -55,7 +55,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//7
         name: 'Anas Raza Firdousi',
         company: 'Apple',
         email: '',
@@ -63,7 +63,7 @@ const speakers = [
         linkedIn: 'https://www.linkedin.com/in/anasrfirdousi',
         twitter: 'https://twitter.com/anasfirdousi'
     },
-    {
+    {//8
         name: 'Faris Bin Abdul Hameed',
         company: 'KoderLabs',
         email: '',
@@ -71,7 +71,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//9
         name: 'Muhammad Abdul Moiz',
         company: 'Recurship',
         email: '',
@@ -79,7 +79,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//10
         name: 'Yousuf Qutubuddin',
         company: 'Panacloud',
         email: '',
@@ -87,7 +87,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//11
         name: 'Rana Ahmer Yasin',
         company: 'Tech Apps Solutions',
         email: '',
@@ -95,7 +95,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//12
         name: 'Rahil Khurshid',
         company: 'Ouzels System',
         email: '',
@@ -103,7 +103,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//13
         name: 'Zainab Saleem',
         company: 'Recurship',
         email: '',
@@ -111,7 +111,7 @@ const speakers = [
         linkedIn: '',
         twitter: ''
     },
-    {
+    {//14
         name: 'Stephen Fluin',
         company: 'Google',
         email: '',
