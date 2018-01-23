@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { allowEmptyEmail } from '../../shared/validators/empty-email.validator';
 import { Speaker } from '../../model/speaker.interface';
 
 @Component({
@@ -17,15 +18,16 @@ export class SpeakerFormComponent implements OnInit {
     constructor(private formBuilder: FormBuilder) { }
 
     ngOnInit(){
+        const urlRegex = '^(http[s]?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}$';
         this.form = this.formBuilder.group({
             __v: [''],
             _id: [''],
             name: ['', Validators.required],
-            email: [''],
+            email: ['', allowEmptyEmail],
             company: [''],
-            github: [''],
-            linkedIn: [''],
-            twitter: ['']
+            github: ['', Validators.pattern(urlRegex)],
+            linkedIn: ['', Validators.pattern(urlRegex)],
+            twitter: ['', Validators.pattern(urlRegex)]
         })
 
         if(this.speaker){

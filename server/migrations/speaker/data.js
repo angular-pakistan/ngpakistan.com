@@ -49,7 +49,7 @@ const speakers = [
     },
     {
         name: 'Mashhood Rastgar',
-        company: '',
+        company: 'Recurship',
         email: '',
         github: 'https://github.com/mashhoodr',
         linkedIn: '',

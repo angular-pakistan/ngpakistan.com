@@ -16,7 +16,7 @@ export interface Meetup {
       video? : string,
       speaker? : [
         {
-          speakerID?: string,
+          _id?: string,
           name?: string,
           company?: string,
           email?: string,

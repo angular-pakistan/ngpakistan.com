@@ -41,14 +41,14 @@ export class MeetupFormComponent implements OnInit {
     this.talks = this.form.get('talks') as FormArray;
     const subscribers = this.form.get('subscribers') as FormArray;
     if(this.meetup) {
+      this.form.patchValue(this.meetup);
       this.meetup.talks.map((talk) => {
-        let speakers = talk.speaker.map((speaker) => new FormControl('', Validators.required));
-        this.talks.push(this.createTalkGroup(false, speakers));
+        let speakers = talk.speaker.map((speaker) => new FormControl(speaker._id, Validators.required));
+        this.talks.push(this.createTalkGroup(speakers, talk));
       });
       this.meetup.subscribers.map((sub) => {
-        subscribers.push(this.createSubscriberGroup());
+        subscribers.push(this.createSubscriberGroup(sub));
       });
-      this.form.patchValue(this.meetup);
     }
   }
 
@@ -66,18 +66,18 @@ export class MeetupFormComponent implements OnInit {
     this.speakerEvent.emit(true);
   }
 
-  private createTalkGroup(isNew: boolean, speakers = []): FormGroup {
+  private createTalkGroup(speakers = [], talk = null): FormGroup {
     var talkGroup;
-    if(isNew){
+    if(talk){
       talkGroup = {
-        title: ['', Validators.required],
-        slides: [''],
-        video: [''],
+        _id: [talk._id],
+        title: [talk.title, Validators.required],
+        slides: [talk.slides],
+        video: [talk.video],
         speaker: this.formBuilder.array(speakers)
       };
     } else {
       talkGroup = {
-        _id: [''],
         title: ['', Validators.required],
         slides: [''],
         video: [''],
@@ -87,13 +87,13 @@ export class MeetupFormComponent implements OnInit {
     return this.formBuilder.group(talkGroup);
   }
 
-  private createSubscriberGroup(): FormGroup {
+  private createSubscriberGroup(subscriber): FormGroup {
     const subscriberGroup = {
-      _id: [''],
-      userID: [''],
-      date: [''],
-      level: [''],
-      code: ['']
+      _id: [subscriber._id],
+      userID: [subscriber.userID],
+      date: [subscriber.date],
+      level: [subscriber.level],
+      code: [subscriber.code]
     };
     return this.formBuilder.group(subscriberGroup);
   }
@@ -120,7 +120,7 @@ export class MeetupFormComponent implements OnInit {
   }
 
   onAddTalk() {
-    this.talks.push(this.createTalkGroup(true));
+    this.talks.push(this.createTalkGroup());
     this.selectedTalk = this.talks.length - 1;
   }
 

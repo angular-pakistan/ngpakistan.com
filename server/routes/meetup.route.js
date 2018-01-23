@@ -16,19 +16,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
-  
+
   meetupService.getMeetup(id)
-  .then((meetup) => res.json({
-                        href: req.hostname,
-                        data: meetup
-                      }))
-  .catch(err => {throw err;});
-});
-
-router.get('/:id/populate', (req, res, next) => {
-  const id = req.params.id;
-
-  meetupService.getMeetupAndPopulate(id)
   .then((meetup) => res.json({
                         href: req.hostname,
                         data: meetup

@@ -93,7 +93,7 @@
                   <label [class.has-error]="isValidSpeaker(i,j)">
                     <p>Select Speaker</p>
                     <select class="form-control" [formControlName]="j">
-                      <option *ngFor="let speaker of speakers" [value]="speaker._id" (select)="console.log(speaker._id)">{{ speaker.name }}, {{ speaker.company }}</option>
+                      <option *ngFor="let speaker of speakers" [value]="speaker._id">{{ speaker.name }}, {{ speaker.company }}</option>
                     </select>
                   </label>
                   <button class="btn btn-success" type="button" (click)="onNewSpeaker()">Register new speaker</button>

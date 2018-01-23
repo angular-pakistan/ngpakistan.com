@@ -17,11 +17,6 @@ module.exports = {
 
     getMeetup: (meetupID) => {
         const query = { _id: meetupID };
-        return meetups.findOne(query).exec();
-    },
-
-    getMeetupAndPopulate: (meetupID) => {
-        const query = { _id: meetupID };
         return meetups.findOne(query).populate('talks.speaker').exec();
     },
 

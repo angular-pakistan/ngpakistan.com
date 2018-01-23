@@ -40,12 +40,6 @@ export class MeetupService {
                 .catch(this.handleError);
   }
 
-  getByIdAndPopulate(meetupID: string): Observable<Response | any> {
-    return this.http.get(`${this.api}/${meetupID}/populate`, this.options)
-                .map(res => res.json())
-                .catch(this.handleError);
-  }
-
   update(meetup: Meetup): Observable<Response | any> {
     let meetupID = meetup._id;
     return this.http.put(`${this.api}/${meetupID}`, meetup, this.options)

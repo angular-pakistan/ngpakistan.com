@@ -4,27 +4,27 @@
             <p>Name <span *ngIf="isValid('name')" class="help-block pull-right">Required</span></p>
             <input class="form-control" type="text" formControlName="name">
         </label>
-        <label>
-            <p>Email</p>
-            <input class="form-control" type="text" formControlName="email">
+        <label [class.has-error]="isValid('email')">
+            <p>Email <span *ngIf="isValid('email')" class="help-block pull-right">Invalid</span></p>
+            <input class="form-control" type="email" formControlName="email">
         </label>
-        <label>
-            <p>Company</p>
+        <label [class.has-error]="isValid('company')">
+            <p>Company <span *ngIf="isValid('company')" class="help-block pull-right">Invalid</span></p>
             <input class="form-control" type="text" formControlName="company">
         </label>
     </div>
     <div class="block">
-        <label>
-            <p>Github</p>
-            <input class="form-control" type="text" formControlName="github">
+        <label [class.has-error]="isValid('github')">
+            <p>Github <span *ngIf="isValid('github')" class="help-block pull-right">Invalid</span></p>
+            <input class="form-control" type="url" formControlName="github">
         </label>
-        <label>
-            <p>LinkedIn</p>
-            <input class="form-control" type="text" formControlName="linkedIn">
+        <label [class.has-error]="isValid('linkedIn')">
+            <p>LinkedIn <span *ngIf="isValid('linkedIn')" class="help-block pull-right">Invalid</span></p>
+            <input class="form-control" type="url" formControlName="linkedIn">
         </label>
-        <label>
-            <p>Twitter</p>
-            <input class="form-control" type="text" formControlName="twitter">
+        <label [class.has-error]="isValid('twitter')">
+            <p>Twitter <span *ngIf="isValid('twitter')" class="help-block pull-right">Invalid</span></p>
+            <input class="form-control" type="url" formControlName="twitter">
         </label>
     </div>
     <div id="button-container">

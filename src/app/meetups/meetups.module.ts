@@ -8,7 +8,6 @@ import { MeetupsComponent } from './meetups.component';
 import { MeetupDetailComponent } from './meetup-detail/meetup-detail.component';
 import { MeetupListComponent } from './meetup-list/meetup-list.component';
 import { MeetupsResolver } from '../resolvers/meetups.resolver';
-import { PopulatedMeetupResolver } from '../resolvers/populated-meetup.resolver';
 import { SpeakersResolver } from '../resolvers/speakers.resolver';
 console.log('`Meetups` bundle loaded asynchronously');
 
@@ -28,7 +27,6 @@ console.log('`Meetups` bundle loaded asynchronously');
   ],
   providers: [
     MeetupsResolver,
-    PopulatedMeetupResolver,
     SpeakersResolver
   ]
 })
