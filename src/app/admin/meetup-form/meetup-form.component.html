@@ -115,7 +115,7 @@
 		<button id="submit"
 		class="btn btn-success"
 		type="submit"
-		[disabled]="disable">
+		[disabled]="disable || !form.valid">
 		Publish
 		</button>
 	</span> 

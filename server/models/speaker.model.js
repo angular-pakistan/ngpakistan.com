@@ -12,12 +12,31 @@ var mongoose = require('mongoose')
 //////////////////////////
 
 var speakerModel = Schema({
-    name : String,
-    company : String,
-    email : String,
-    github : String ,
-    linkedIn : String,
-    twitter : String
+    name : {
+      type: String,
+      required: true,
+      trim: true
+    },
+    company : {
+      type: String,
+      trim: true
+    },
+    email : {
+      type: String,
+      trim: true
+    },
+    github : {
+      type: String,
+      trim: true
+    },
+    linkedIn : {
+      type: String,
+      trim: true
+    },
+    twitter : {
+      type: String,
+      trim: true
+    },
 });
 
 

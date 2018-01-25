@@ -21,8 +21,9 @@ module.exports ={
     return contact.findOne(query).exec();
   },
 
-  save: (contact) => {
-    return contact.create(contact);
+  save: (obj) => {
+    console.log(obj)
+    return contact.create(obj);
   }
 
 };

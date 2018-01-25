@@ -15,6 +15,11 @@ form{
     color: #5fcf80;
     background-color: white;
 }
+#submit:disabled{
+    background-color: grey;
+    border-color: grey;
+    color: white;
+}
 .block{
     margin: 10px auto;
 }
@@ -31,10 +36,10 @@ form{
 
 #cancel{
     color: white;
-    background-color: lightgray;
-    border-color: lightgray; 
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
 }
 #cancel:hover{
-    color: lightgray;
+    color: #2d8ce5;
     background-color: white;
 }

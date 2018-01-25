@@ -12,19 +12,60 @@ var mongoose = require('mongoose')
 //////////////////////////
 
 var meetupSchema = Schema({
-  sequenceNo: Number,
-  name: String,
-  date:String,
-  startTime:String,
-  endTime:String,
-  location:String,
-  city:String,
-  host:String,
+  sequenceNo: {
+    type: Number,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  date:{
+    type: String,
+    required: true,
+    trim: true
+  },
+  startTime:{
+    type: String,
+    required: true,
+    trim: true
+  },
+  endTime:{
+    type: String,
+    required: true,
+    trim: true
+  },
+  location:{
+    type: String,
+    required: true,
+    trim: true
+  },
+  city:{
+    type: String,
+    required: true,
+    trim: true
+  },
+  host:{
+    type: String,
+    required: true,
+    trim: true
+  },
   talks:[
     {
-      title : String ,
-      slides : String,
-      video : String,
+      title : {
+        type: String,
+        required: true,
+        trim: true
+      },
+      slides : {
+        type: String,
+        trim: true
+      },
+      video : {
+        type: String,
+        trim: true
+      },
       speaker : [
         { type: ObjectId, ref: 'speakers'}
       ]
@@ -33,7 +74,10 @@ var meetupSchema = Schema({
   subscribers:[
     {
       userID: { type:ObjectId , ref:'users' },
-      date: String,
+      date: {
+        type: String,
+        trim: true
+      },
       level: Number,
       code: Number
     }
