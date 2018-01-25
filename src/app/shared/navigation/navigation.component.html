@@ -37,16 +37,16 @@
         <li>
           <a [routerLink]=" ['../../contact']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contact</a>
         </li>
-        <li *ngIf="userService.getUser().isAdmin">
+        <li *ngIf="showAdminMenu">
           <a [routerLink]=" ['../../admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Admin</a>
         </li>
         <li class="btn-trial">
-          <a [routerLink]=" ['../../login']" *ngIf="!userService.getUser()">login</a>
+          <a [routerLink]=" ['../../login']" *ngIf="canLogin">login</a>
         </li>
-        <li (mouseenter)="showOptions()" (mouseleave)="hideOptions()" *ngIf="userService.getUser()">
-          <a [routerLink]=" ['../../profile']">{{userService.getUser().user.name}}</a></li>
+        <li *ngIf="!canLogin">
+          <a [routerLink]=" ['../../profile']">{{user.name}}</a></li>
         <li>
-          <a [routerLink]=" ['../../home']" *ngIf="userService.getUser()" (click)="logout()">log out</a>
+          <a [routerLink]=" ['../../home']" *ngIf="!canLogin" (click)="logout()">log out</a>
         </li> 
       </ul>
     </div>

@@ -7,7 +7,7 @@ import { Meetup } from '../../model/meetup.interface';
   styleUrls: ['./meetup-list.component.css']
 })
 export class MeetupListComponent {
-  @Input() meetup: Meetup[];
+  @Input() meetup: Meetup;
   constructor() { }
 
 }
