@@ -12,11 +12,31 @@ const mongoose = require('mongoose')
 //////////////////////////
 
 const contactUsModel = Schema({
-  name: String,
-  email: String,
-  subject: String,
-  message: String,
-  date: String
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  subject: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  message: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  date: {
+    type: String,
+    required: true,
+    trim: true
+  },
 });
 
 

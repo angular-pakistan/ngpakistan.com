@@ -1,0 +1,45 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
+    padding-top: 40px;
+}
+.btn-success{
+    color: white;
+    background-color: #5fcf80;
+    border-color: #5fcf80;
+}
+.btn-success:hover{
+    color: #5fcf80;
+    background-color: white;
+}
+#submit:disabled{
+    background-color: grey;
+    border-color: grey;
+    color: white;
+}
+.block{
+    margin: 10px auto;
+}
+.block label{
+    margin-right: 20px;
+}
+
+#button-container{
+    margin: 50px auto;
+}
+#button-container button{
+    margin-right: 20px;
+}
+
+#cancel{
+    color: white;
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
+}
+#cancel:hover{
+    color: #2d8ce5;
+    background-color: white;
+}

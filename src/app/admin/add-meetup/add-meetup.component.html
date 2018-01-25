@@ -8,9 +8,23 @@
 			<div class="col">
 				<app-meetup-form
 				[disable]="disable"
-				(onsubmit)="handleSubmit($event)"
-				(cancel)="onCancel($event)"></app-meetup-form>
+				[speakers]="speakers"
+				(speakerEvent)="toggleSpeakerForm($event)"
+				(submitEvent)="handleSubmit($event)"
+				(cancelEvent)="onCancel($event)"></app-meetup-form>
 			</div>
+		</div>
+		<div *ngIf="showSpeakerForm" id="myModal" class="row modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close" (click)="toggleSpeakerForm(false)">&times;</span>
+			<app-speaker-form
+			[disable]="disableSpeakerSubmit"
+			(submitEvent)="onSpeakerSubmit($event)"
+			(cancelEvent)="toggleSpeakerForm($event)"></app-speaker-form>
+		</div>
+
 		</div>
 	</div>
 </section>

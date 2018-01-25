@@ -11,18 +11,19 @@ const contact = require('../models/contactus.model').contactus;
 
 module.exports ={
 
-  getAll : function () {
+  getAll : () => {
     return contact.find({}).exec();
   },
 
 
-  getByEmail : function (email) {
+  getByEmail : (email) => {
     const query = { email: email};
     return contact.findOne(query).exec();
   },
 
-  save: function (contact) {
-    return contact.create(contact);
+  save: (obj) => {
+    console.log(obj)
+    return contact.create(obj);
   }
 
 };

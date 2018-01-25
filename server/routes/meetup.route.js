@@ -18,71 +18,88 @@ router.get('/:id', (req, res, next) => {
   const id = req.params.id;
 
   meetupService.getMeetup(id)
-    .then((meetup) => res.json({
-                          href: req.hostname,
-                          data: meetup
-                        }))
-    .catch(err => {throw err;});
+  .then((meetup) => res.json({
+                        href: req.hostname,
+                        data: meetup
+                      }))
+  .catch(err => {throw err;});
 });
 
 router.post('/', (req, res, next) => {
-
-  const sequenceNo = req.body.sequenceNo;
-  const name = req.body.name;
-  const date = req.body.date;
-  const startTime = req.body.startTime;
-  const endTime = req.body.endTime;
-  const location = req.body.location;
-  const city = req.body.city;
-  const host = req.body.host;
-  const talks = req.body.talks;
-  const subscribers = req.body.subscribers;
-  const meetup = {sequenceNo,
-                  name,
-                  date, 
-                  startTime,
-                  endTime, 
-                  location,
-                  city,
-                  host,
-                  talks,
-                  subscribers
-                };
-  meetupService.save(meetup)
-    .then((meetup) => res.json({
-                        href: req.hostname,
-                        data: meetup
-                      }))
-    .catch(err => {throw err;});
+  if(req.body.sequenceNo && 
+  req.body.name &&
+  req.body.date &&
+  req.body.startTime &&
+  req.body.endTime &&
+  req.body.location &&
+  req.body.city &&
+  req.body.host) {
+    const sequenceNo = req.body.sequenceNo;
+    const name = req.body.name;
+    const date = req.body.date;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const location = req.body.location;
+    const city = req.body.city;
+    const host = req.body.host;
+    const talks = req.body.talks;
+    const subscribers = req.body.subscribers;
+    const meetup = {sequenceNo,
+                    name,
+                    date, 
+                    startTime,
+                    endTime, 
+                    location,
+                    city,
+                    host,
+                    talks,
+                    subscribers
+                  };
+    meetupService.save(meetup)
+      .then((meetup) => res.json({
+                          href: req.hostname,
+                          data: meetup
+                        }))
+      .catch(err => {throw err;});
+  }
 });
 
 router.put('/:id', (req, res, next) => {
-  const sequenceNo = req.body.sequenceNo;
-  const name = req.body.name;
-  const date = req.body.date;
-  const startTime = req.body.startTime;
-  const endTime = req.body.endTime;
-  const location = req.body.location;
-  const city = req.body.city;
-  const host = req.body.host;
-  const talks = req.body.talks;
-  const meetup = {sequenceNo,
-                  name,
-                  date, 
-                  startTime,
-                  endTime, 
-                  location,
-                  city,
-                  host,
-                  talks
-                };
-  const id = req.params.id;
-  meetupService.updateMeetup(id, meetup)
-    .then((meetup) => res.json({
-                        href: req.hostname,
-                        data: meetup
-                      }))
-    .catch(err => {throw err;});
+  if(req.body.sequenceNo && 
+  req.body.name &&
+  req.body.date &&
+  req.body.startTime &&
+  req.body.endTime &&
+  req.body.location &&
+  req.body.city &&
+  req.body.host) {
+    const sequenceNo = req.body.sequenceNo;
+    const name = req.body.name;
+    const date = req.body.date;
+    const startTime = req.body.startTime;
+    const endTime = req.body.endTime;
+    const location = req.body.location;
+    const city = req.body.city;
+    const host = req.body.host;
+    const talks = req.body.talks;
+    const meetup = {sequenceNo,
+                    name,
+                    date, 
+                    startTime,
+                    endTime, 
+                    location,
+                    city,
+                    host,
+                    talks
+                  };
+    const id = req.params.id;
+    meetupService.updateMeetup(id, meetup)
+      .then((meetup) => res.json({
+                          href: req.hostname,
+                          data: meetup
+                        }))
+      .catch(err => {throw err;});
+  }
 })
 
 router.post('/:id/subscriber', (req, res, next) => {

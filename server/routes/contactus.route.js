@@ -25,26 +25,31 @@ router.get('/:email', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  if(req.body.name &&
+  req.body.email &&
+  req.body.subject &&
+  req.body.message &&
+  req.body.date) {
+    const name = req.body.name;
+    const email = req.body.email;
+    const subject= req.body.subject;
+    const message= req.body.message;
+    const date= req.body.date;
 
-  const name = req.body.name;
-  const email = req.body.email;
-  const subject= req.body.subject;
-  const message= req.body.message;
-  const date= req.body.date;
-
-  const contactUs = {
-      name: name,
-      email: email,
-      subject: subject,
-      message: message,
-      date: date,
-    };
-  contactUsService.save(contactUs)
-    .then((contact) => res.json({
-                        href: req.hostname,
-                        data: contact
-                      }))
-    .catch(err => {throw err;});
+    const contactUs = {
+        name: name,
+        email: email,
+        subject: subject,
+        message: message,
+        date: date,
+      };
+    contactUsService.save(contactUs)
+      .then((contact) => res.json({
+                          href: req.hostname,
+                          data: contact
+                        }))
+      .catch(err => {throw err;});
+  } 
 });
 
 

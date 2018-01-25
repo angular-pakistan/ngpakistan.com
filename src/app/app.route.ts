@@ -5,7 +5,7 @@ import { LoginComponent } from './login';
 import { MeetupsComponent } from './meetups/meetups.component';
 import { SignupComponent } from './signup';
 import { ProfileComponent } from './profile';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import {
   MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
   SocialCardComponent, PartnersComponent, ContactusCardComponent, JoinUsComponent

@@ -9,7 +9,7 @@
 var mongoose = require( 'mongoose' );
 mongoose.set('debug', true);
 //import the meetup model
-const Meetup = require('../models/meetup.model').Meetup;
+const Meetup = require('../../models/meetup.model').Meetup;
 //import meetups data
 const meetups = require('./data.js').meetups;
 // Build the connection string
@@ -23,19 +23,11 @@ mongoose.connect(dbURI);
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open to ' + dbURI);
   
-  Meetup.insertMany(meetups, (err, docs) => {
-    if(err){
-        console.log("Error inserting meetups into collection", err);
-        mongoose.connection.close(function () {
-            console.log('Disconnecting Mongoose default connection');
-            process.exit(1);
-        });
-    }
-    console.log('Successfully inserted docs into collection', docs);
-    mongoose.connection.close(function () {
-        console.log('Disconnecting Mongoose default connection');
-        process.exit(0);
-    });
+  Meetup.remove({},(err) => {
+      if(err)
+        console.log(err);
+      else
+        console.log('Meetups successfully removed. Rollback Successful.');
   });
 });
 

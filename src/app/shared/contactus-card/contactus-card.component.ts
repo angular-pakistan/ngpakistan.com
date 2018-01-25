@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , FormGroup, Validators } from '@angular/forms';
 import { ContactusService } from '../../services/contactus.service';
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'app-contactus-card',
@@ -21,13 +22,11 @@ export class ContactusCardComponent implements OnInit {
       email: ['', Validators.compose([Validators.required, Validators.email ,  Validators.maxLength(75)]) ],
       subject: ['', Validators.compose([Validators.required, Validators.minLength(5),  Validators.maxLength(100)]) ],
       message: ['', Validators.compose([Validators.required, Validators.minLength(1),  Validators.maxLength(500)]) ],
+      date: [ moment().format("YYYY-MM-DD") ]
     });
   }
 
   onSubmit() {
-    console.log(this.contactUsForm.value);
-    console.log(this.contactUsForm.valid);
-      // this.contactUsService.
     this.contactUsService.save(this.contactUsForm.value)
       .subscribe((res) => {
         this.contactUsForm.reset();

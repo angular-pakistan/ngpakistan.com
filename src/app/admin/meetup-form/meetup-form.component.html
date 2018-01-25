@@ -79,7 +79,7 @@
               </span>
             </span>
             <div formArrayName="speaker">
-              <div class="lower-buffer" *ngFor="let speaker of talk.controls.speaker.controls; let j = index;">
+              <div class="lower-buffer" *ngFor="let control of talk.controls.speaker.controls; let j = index;">
                 <div class="accordion small" 
                 [class.active]="j === selectedSpeaker"
                 [class.has-error]="isValidSpeaker(i,j)"
@@ -88,36 +88,17 @@
                   <span *ngIf="isValidSpeaker(i,j)" class="help-block">This speaker has errors</span>
                   <i class="material-icons close" (click)="removeSpeaker(i,j)">close</i>
                 </div>
-                <div class="box" [class.box-show]="j === selectedSpeaker" [formGroupName]="j">
-                  <div class="block">
-                  <label [class.has-error]="isValidSpeakerField('name', i, j)">
-                    <p>Name <span *ngIf="isValidSpeakerField('name', i, j)" class="help-block pull-right">Required</span></p>
-                    <input type="text" class="form-control" formControlName="name">
+                <div class="box" [class.box-show]="j === selectedSpeaker" > 
+                  <div class="form-group block">
+                  <label [class.has-error]="isValidSpeaker(i,j)">
+                    <p>Select Speaker</p>
+                    <select class="form-control" [formControlName]="j">
+                      <option *ngFor="let speaker of speakers" [value]="speaker._id">{{ speaker.name }}, {{ speaker.company }}</option>
+                    </select>
                   </label>
-                  <label [class.has-error]="isValidSpeakerField('company', i, j)">
-                    <p>Company <span *ngIf="isValidSpeakerField('company', i, j)" class="help-block pull-right">Required</span></p>
-                    <input type="text" class="form-control" formControlName="company">
-                  </label>
-                  <label>
-                    <p>E-mail</p>
-                    <input type="text" class="form-control" formControlName="email">
-                  </label>
-                  </div>
-                  <div class="block">
-                  <label>
-                    <p>Github Profile</p>
-                    <input type="text" class="form-control" formControlName="github">
-                  </label>
-                  <label>
-                    <p>LinkedIn Profile</p>
-                    <input type="text" class="form-control" formControlName="linkedIn">
-                  </label>
-                  <label>
-                    <p>Twitter Profile</p>
-                    <input type="text" class="form-control" formControlName="twitter">
-                  </label>
-                  </div>
-                </div>
+                  <button class="btn btn-success" type="button" (click)="onNewSpeaker()">Register new speaker</button>
+                   </div>
+                </div>  
               </div>
             </div>
           </div>
@@ -126,6 +107,7 @@
 	 <span id="button-container">
 		<button id="cancel"
     class="btn"
+    type="button"
     (click)="onCancel()"
 		[disabled]="disable">
 		Cancel
@@ -133,7 +115,7 @@
 		<button id="submit"
 		class="btn btn-success"
 		type="submit"
-		[disabled]="disable">
+		[disabled]="disable || !form.valid">
 		Publish
 		</button>
 	</span> 

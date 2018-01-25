@@ -99,11 +99,11 @@ button{
 }
 #cancel{
     color: white;
-    background-color: lightgray;
-    border-color: lightgray; 
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
 }
 #cancel:hover{
-    color: lightgray;
+    color: #2d8ce5;
     background-color: white;
 }
 #button-container{
@@ -123,6 +123,11 @@ button{
 #add-talk:hover{
     color: #5fcf80;
     cursor: pointer;
+}
+#submit:disabled{
+    background-color: grey;
+    border-color: grey;
+    color: white;
 }
 #add-speaker{
     display: flex;
