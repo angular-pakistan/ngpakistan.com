@@ -4,12 +4,12 @@ import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
 @Injectable()
-export class userService {
+export class UserService {
 
   private api = '/api/v1/user';
 
-  constructor(private http: Http,private errorService: ErrorService) { }
-  
+  constructor(private http: Http, private errorService: ErrorService) { }
+
   save(user: User): any {
 
     const headers = new Headers({ 'Content-Type': 'application/json' });
@@ -41,7 +41,7 @@ export class userService {
   login(email: string, password: string): any {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
-    let body = {
+    const body = {
         email: email,
         password: password
     };

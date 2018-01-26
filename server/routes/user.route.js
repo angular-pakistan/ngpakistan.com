@@ -24,44 +24,21 @@ router.get('/:ID', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.get('/email/:email', (req, res, next) => {
-  var username = req.params.email;
-
-  userService.getUserByUsername(username)
-    .then((user) => res.json({
-                        href: req.hostname,
-                        data: user
-                      }))
-    .catch(err => {throw err;});
-});
-
 router.post('/', (req, res, next) => {
   
     const {
       name,
-      email1,
-      email2,
-      phone1,
-      phone2,
-      dob,
+      email,
+      phone,
       github,
-      facebook,
-      twitter,
-      linkedin,
       password
     } = req.body;
 
     const user = {
       name,
-      email1,
-      email2,
-      phone1,
-      phone2,
-      dob,
+      email,
+      phone,
       github,
-      facebook,
-      twitter,
-      linkedin,
       password
     };
     userService.save(user)

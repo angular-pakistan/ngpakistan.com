@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.interface';
 import { Router } from '@angular/router';
 
-import { userService } from '../services/user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  providers: [userService]
+  providers: [UserService]
 })
 export class SignupComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     password: ''
   };
 
-  constructor(private userService: userService, private Router: Router) { }
+  constructor(private userService: UserService, private Router: Router) { }
 
   ngOnInit() {
   }

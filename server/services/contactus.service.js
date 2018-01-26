@@ -22,7 +22,6 @@ module.exports ={
   },
 
   save: (obj) => {
-    console.log(obj)
     return contact.create(obj);
   }
 

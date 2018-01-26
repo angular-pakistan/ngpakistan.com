@@ -20,16 +20,6 @@ module.exports ={
     return users.findOne(query).exec();
   },
 
-  getUserByemail1 : (email) => {
-    const query = { email1: email};
-    return users.findOne(query).exec();
-  },
-
-  getUserByemail2 : (email) => {
-    const query = { email2: email};
-    return users.findOne(query).exec();
-  },
-
   login : (email,password) => {
     const query = { 
       email1: email,

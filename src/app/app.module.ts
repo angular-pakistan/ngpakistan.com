@@ -35,7 +35,7 @@ import { ContactusComponent } from './contactus';
 import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
-import { userService } from './services/user.service';
+import { UserService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ConferenceService } from './services/conference.service';
@@ -84,7 +84,7 @@ import { ProfileComponent } from './profile/profile.component';
     AuthGuard, 
     DefaultRequestOptions, 
     ContactusService, 
-    userService, 
+    UserService, 
     MeetupService, 
     ConferenceService,
     SpeakerService

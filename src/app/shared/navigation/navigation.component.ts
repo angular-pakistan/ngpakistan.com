@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { userService } from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +12,7 @@ export class NavigationComponent implements OnInit {
   canLogin: boolean = true;
   showAdminMenu: boolean = false;
   
-  constructor(private router: Router, private userService: userService) { }
+  constructor(private router: Router, private userService: UserService) { }
   
   ngOnInit() {
     this.user = this.userService.getUser();
