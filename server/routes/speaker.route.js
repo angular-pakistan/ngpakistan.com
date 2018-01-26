@@ -27,13 +27,15 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   if(req.body.name){
-    const name = req.body.name;
-    const email = req.body.email;
-    const company = req.body.company;
-    const github = req.body.github;
-    const linkedIn = req.body.linkedIn;
-    const twitter = req.body.twitter;
-    
+    const {
+      name,
+      email,
+      company,
+      github,
+      linkedIn,
+      twitter
+    } = req.body;
+
     const speaker = {name,
                     email,
                     company,

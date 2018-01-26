@@ -24,12 +24,11 @@ export class ManageMeetupsComponent implements OnInit {
             .data;
     }
 
-    onDelete(meetup: Meetup){
-        if(confirm(`Are you sure you want to delete ${meetup.name} #${meetup.sequenceNo}?`)){
+    onDelete(meetup: Meetup, index: number) {
+        if (confirm(`Are you sure you want to delete ${meetup.name} #${meetup.sequenceNo}?`)) {
             this.service.delete(meetup._id).first()
-                .subscribe(val => this.service.getAll().first()
-                    .subscribe(res => this.meetups = res.data));
-        }      
+                .subscribe(val => this.meetups.splice(index, 1));
+        }
     }
 
 }

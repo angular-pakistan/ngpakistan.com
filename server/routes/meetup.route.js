@@ -27,23 +27,27 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   if(req.body.sequenceNo && 
-  req.body.name &&
-  req.body.date &&
-  req.body.startTime &&
-  req.body.endTime &&
-  req.body.location &&
-  req.body.city &&
-  req.body.host) {
-    const sequenceNo = req.body.sequenceNo;
-    const name = req.body.name;
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const location = req.body.location;
-    const city = req.body.city;
-    const host = req.body.host;
-    const talks = req.body.talks;
-    const subscribers = req.body.subscribers;
+    req.body.name &&
+    req.body.date &&
+    req.body.startTime &&
+    req.body.endTime &&
+    req.body.location &&
+    req.body.city &&
+    req.body.host &&
+    req.body.talks &&
+    req.body.subscribers) {
+    const {
+      name,
+      sequenceNo,      
+      date, 
+      startTime,
+      endTime, 
+      location,
+      city,
+      host,
+      talks,
+      subscribers
+    } = req.body;
     const meetup = {sequenceNo,
                     name,
                     date, 
@@ -66,22 +70,25 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   if(req.body.sequenceNo && 
-  req.body.name &&
-  req.body.date &&
-  req.body.startTime &&
-  req.body.endTime &&
-  req.body.location &&
-  req.body.city &&
-  req.body.host) {
-    const sequenceNo = req.body.sequenceNo;
-    const name = req.body.name;
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const location = req.body.location;
-    const city = req.body.city;
-    const host = req.body.host;
-    const talks = req.body.talks;
+    req.body.name &&
+    req.body.date &&
+    req.body.startTime &&
+    req.body.endTime &&
+    req.body.location &&
+    req.body.city &&
+    req.body.host &&
+    req.body.talks) {
+    const {
+      name,
+      sequenceNo,      
+      date, 
+      startTime,
+      endTime, 
+      location,
+      city,
+      host,
+      talks
+    } = req.body;
     const meetup = {sequenceNo,
                     name,
                     date, 
@@ -103,10 +110,7 @@ router.put('/:id', (req, res, next) => {
 })
 
 router.post('/:id/subscriber', (req, res, next) => {
-  const userID = req.body.userID;
-  const date = req.body.date;
-  const level = req.body.level;
-  const code = req.body.code;
+  const {userID, date, level, code} = req.body;
   const subscriber = {userID,date,level,code};
   const id = req.params.id;
 

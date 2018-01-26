@@ -24,12 +24,11 @@ export class ManageSpeakersComponent implements OnInit {
                             .data;
     }
 
-    onDelete(speaker: Speaker){
-        if(confirm(`Are you sure you want to delete ${speaker.name}?`)){
+    onDelete(speaker: Speaker, index: number) {
+        if (confirm(`Are you sure you want to delete ${speaker.name}?`)) {
             this.service.delete(speaker._id).first()
-                .subscribe(val => this.service.getAll().first()
-                    .subscribe(res => this.speakers = res.data));
-        }      
+                .subscribe(val => this.speakers.splice(index, 1));
+        }
     }
 
 }
