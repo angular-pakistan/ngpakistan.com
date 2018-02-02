@@ -1,9 +1,19 @@
 // Get dependencies
+const _ = require("lodash");
 const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+//Passport
+const passport = require('passport');
+const passportJWT = require("passport-jwt");
+const ExtractJwt = passportJWT.ExtractJwt;
+const JwtStrategy = passportJWT.Strategy;
+const jwt = require('jsonwebtoken');
+require('./server/config/passport')(passport);
+
+//db
 const db = require('./server/db/db');
 // Get our API routes
 const api = require('./server/routes/api');
@@ -13,6 +23,7 @@ const meetup = require('./server/routes/meetup.route');
 const speaker = require('./server/routes/speaker.route');
 const app = express();
 
+app.use(passport.initialize());
 
 // Parsers for POST data
 app.use(bodyParser.json());

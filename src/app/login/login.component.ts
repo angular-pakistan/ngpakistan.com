@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
+import 'rxjs/add/operator/first';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,28 +11,40 @@ import { Router } from '@angular/router';
   providers: [UserService]
 })
 export class LoginComponent implements OnInit {
-
   email;
   password;
   errorMessage;
-
+  showError = false;
+  disable = false;
+  loginBtnMsg = 'Login';
   constructor(private  userService: UserService,private Router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.userService.login(this.email, this.password).subscribe( data => {
-      if(data) {
-      console.log(data);
+    this.loginBtnMsg = 'Logging in...';
+    this.disable = true;
+    this.userService.login(this.email, this.password)
+    .first()
+    .subscribe( data => {
+      this.loginBtnMsg = 'Login';
+      this.disable = false;
+      if (data.token) {
+      this.showError = false;
       this.userService.setUser(data.token);
-      console.log("Login successful!");
-      this.errorMessage = '';
       this.Router.navigate(['profile']);
-      }else {
-        this.errorMessage = 'Incorrect email or password!';
-        console.log("Invalid password");
-        console.log(data);
+      window.location.reload();
+      } else {
+        this.errorMessage = 'Something went wrong, please try again.';
+        this.showError = true;
+      }
+    }, err => {
+      this.loginBtnMsg = 'Login';
+      this.disable = false;
+      if (err) {
+        this.errorMessage = 'Invalid username or password.';
+        this.showError = true;
       }
     });
   }

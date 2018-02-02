@@ -41,12 +41,12 @@
           <a [routerLink]=" ['../../admin']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Admin</a>
         </li>
         <li class="btn-trial">
-          <a [routerLink]=" ['../../login']" *ngIf="canLogin">login</a>
+          <a [routerLink]=" ['../../login']" *ngIf="canLogin">Login</a>
         </li>
         <li *ngIf="!canLogin">
           <a [routerLink]=" ['../../profile']">{{user.name}}</a></li>
-        <li>
-          <a [routerLink]=" ['../../home']" *ngIf="!canLogin" (click)="logout()">log out</a>
+        <li  class="btn-trial">
+          <a [routerLink]=" ['../../home']" *ngIf="!canLogin" (click)="logout()">Logout</a>
         </li> 
       </ul>
     </div>

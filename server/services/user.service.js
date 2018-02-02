@@ -12,12 +12,12 @@ const users = require('../models/user.model').users;
 module.exports ={
 
   getUsers : () => {
-    return users.find({}).exec;
+    return users.find({}).select('-password').exec();
   },
 
   getUser : (userID) => {
     const query = { _id: userID};
-    return users.findOne(query).exec();
+    return users.findOne(query).select('-password').exec();
   },
 
   login : (email,password) => {
@@ -29,7 +29,17 @@ module.exports ={
   },
 
   save: (user) => {
-    return users.create(user);
+    return users.findOne({ name: user.name }).exec().then(res => {
+      if (res) {
+        return Promise.reject('User already exists');
+      } else {
+        return users.create(user)
+        .then((newUser) => {
+          newUser.password = newUser.generateHash(user.password);
+          return newUser.save();
+        })
+      }
+    });
   }
 
 };

@@ -6,6 +6,7 @@ import { MeetupsComponent } from './meetups/meetups.component';
 import { SignupComponent } from './signup';
 import { ProfileComponent } from './profile';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import {
   MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
   SocialCardComponent, PartnersComponent, ContactusCardComponent, JoinUsComponent
@@ -14,9 +15,9 @@ import {
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent },
-{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'conferences', component: ConferenceCardComponent },
   { path: 'projects', component: ProjectCardComponent },
   { path: 'social', component: SocialCardComponent },

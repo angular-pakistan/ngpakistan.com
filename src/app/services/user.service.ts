@@ -3,6 +3,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 @Injectable()
 export class UserService {
 
@@ -38,7 +41,7 @@ export class UserService {
         return JSON.parse(atob(base64));
   }
 
-  login(email: string, password: string): any {
+  login(email: string, password: string): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
     const body = {

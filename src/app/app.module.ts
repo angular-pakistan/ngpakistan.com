@@ -38,6 +38,7 @@ import { ContactusService } from './services/contactus.service';
 import { UserService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import { ConferenceService } from './services/conference.service';
 import { SpeakerService } from './services/speaker.service';
 
@@ -81,11 +82,12 @@ import { ProfileComponent } from './profile/profile.component';
     AdminModule
   ],
   providers: [ErrorService,
-    AuthGuard, 
-    DefaultRequestOptions, 
-    ContactusService, 
-    UserService, 
-    MeetupService, 
+    AuthGuard,
+    LoginGuard,
+    DefaultRequestOptions,
+    ContactusService,
+    UserService,
+    MeetupService,
     ConferenceService,
     SpeakerService
   ],

@@ -11,20 +11,13 @@ import { UserService } from '../services/user.service';
   providers: [UserService]
 })
 export class SignupComponent implements OnInit {
-
-  password2= null;
-
-  User: User= {
+  confirmPassword = '';
+  disable = false;
+  user: User = {
     name: '',
-    email1: '',
-    email2: '',
-    phone1: '',
-    phone2: '',
-    dob: '',
+    email: '',
+    phone: '',
     github: '',
-    facebook: '',
-    twitter: '',
-    linkedin: '',
     password: ''
   };
 
@@ -33,11 +26,14 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  signup(){
-    this.userService.save(this.User).subscribe( data => {
-      if (data.data) {
-        this.Router.navigate(['login']);
+  signup() {
+    this.disable = true;
+    this.userService.save(this.user).subscribe( data => {
+      if (data.success) {
+        this.userService.setUser(data.token);
+        this.Router.navigate(['home']);
+        window.location.reload();
       }
-    });
+    }, err => this.disable = false);
   }
 }
