@@ -45,7 +45,7 @@ mongoose.connection.on('connected', function () {
         }
         user.create(users[0]).then((newUser) => {
             newUser.password = newUser.generateHash(process.argv[2]);
-            newUser.save();
+            return newUser.save();
         }).then(()=>{
             console.log('Admin user successfully saved');
             mongoose.connection.close(function () {
