@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const userService = require('../services/user.service');
-const secret = 'tasmanianDevil';
+const secret = process.env.SECRET || 'tasmanianDevil';
 const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
 // Models
 const User = require('../models/user.model').users;
@@ -56,10 +56,8 @@ router.post('/login', (req, res, next) => {
 
   User.findOne({ email }, (err, user) => {
     if(!user){
-      console.log('user not found!')
       res.sendStatus(401);
     } else {
-      console.log('imhere')
       if(user.validPassword(password)){
         var payload = {id: user.id};
         if(user.admin)
@@ -75,12 +73,6 @@ router.post('/login', (req, res, next) => {
 
 router.post('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.sendStatus(200);
-});
-
-
-router.get('/lala', passport.authenticate('jwt', { session: false }), isAdmin, (req, res) => {
-  console.log('yay!');
-  res.json('Success!')
 });
 
 module.exports = router;

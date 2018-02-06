@@ -12,18 +12,19 @@ export class MeetupService {
   private api = '/api/v1/meetup';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
-
+  private authHeaders = new Headers({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('user')});
+  private authOptions = new RequestOptions({headers: this.authHeaders});
   constructor(private http: Http) { }
 
   save(meetup: Meetup): Observable<Response | any> {
-    return this.http.post(this.api, meetup, this.options)
+    return this.http.post(this.api, meetup, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
 
   }
 
   delete(meetupID): Observable<Response | any>  {
-    return this.http.delete(`${this.api}/${meetupID}`, this.options)
+    return this.http.delete(`${this.api}/${meetupID}`, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
   }
@@ -41,20 +42,20 @@ export class MeetupService {
   }
 
   update(meetup: Meetup): Observable<Response | any> {
-    let meetupID = meetup._id;
-    return this.http.put(`${this.api}/${meetupID}`, meetup, this.options)
+    const meetupID = meetup._id;
+    return this.http.put(`${this.api}/${meetupID}`, meetup, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
   }
 
   addSubscriber(meetupID, subscriber): Observable<Response | any> {
-    return this.http.post(`${this.api}/${meetupID}`, subscriber, this.options)
+    return this.http.post(`${this.api}/${meetupID}`, subscriber, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
   }
 
   removeSubscriber(meetupID, subscriberID): Observable<Response | any>  {
-    return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.options)
+    return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
   }

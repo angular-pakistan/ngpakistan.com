@@ -6,7 +6,7 @@ var JwtStrategy = passportJWT.Strategy;
 //configure strategy options
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'tasmanianDevil';
+jwtOptions.secretOrKey = process.env.SECRET || 'tasmanianDevil';
 jwtOptions.usernameField = 'name';
 jwtOptions.passwordField = 'password';
 

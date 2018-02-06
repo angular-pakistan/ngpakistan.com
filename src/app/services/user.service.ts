@@ -28,11 +28,22 @@ export class UserService {
   }
 
   getUser() {
-    return localStorage.getItem('user') ? this.JwtDecode(localStorage.getItem('user')) : null;
+    if (localStorage.getItem('user')) {
+      const token = this.JwtDecode(localStorage.getItem('user'));
+      const now = Date.now() / 1000;
+      if (token.exp < now) {
+        this.clearUser();
+        return null;
+      }
+      return token;
+    }
+    return null;
   }
 
   clearUser() {
-    localStorage.clear();
+    if (localStorage.getItem('user')) {
+      localStorage.clear();
+    }
   }
 
   private JwtDecode(token: String) {

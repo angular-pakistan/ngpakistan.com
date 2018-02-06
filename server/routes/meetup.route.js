@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const meetupService = require('../services/meetup.service');
-const _ = require('lodash');
+const passport = require('passport');
+const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
 
 router.get('/', (req, res, next) => {
 
@@ -25,7 +26,7 @@ router.get('/:id', (req, res, next) => {
   .catch(err => {throw err;});
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.sequenceNo && 
     req.body.name &&
     req.body.date &&
@@ -68,7 +69,7 @@ router.post('/', (req, res, next) => {
   }
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.sequenceNo && 
     req.body.name &&
     req.body.date &&
@@ -109,7 +110,7 @@ router.put('/:id', (req, res, next) => {
   }
 })
 
-router.post('/:id/subscriber', (req, res, next) => {
+router.post('/:id/subscriber', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   const {userID, date, level, code} = req.body;
   const subscriber = {userID,date,level,code};
   const id = req.params.id;
@@ -122,7 +123,7 @@ router.post('/:id/subscriber', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.delete('/:id/subscriber/:subscriberID', (req, res, next) => {
+router.delete('/:id/subscriber/:subscriberID', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   const subscriberID = req.params.subscriberID;
   const id = req.params.id;
   meetupService.removeSubscriber(id, subscriberID)
@@ -133,7 +134,7 @@ router.delete('/:id/subscriber/:subscriberID', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   const id = req.params.id;
   meetupService.remove(id)
     .then((meetup) => res.json({
