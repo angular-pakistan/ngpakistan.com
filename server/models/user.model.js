@@ -13,11 +13,31 @@ var mongoose = require('mongoose')
 //////////////////////////
 
 var usersModel = Schema({
-  name: String,
-  email: { type: String, unique: true },
-  phone: String,
-  github: String,
-  password:String,
+  name: { 
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: { 
+    type: String,
+    required: true,
+    trim: true,
+    unique: true
+  },
+  phone: { 
+    type: String,
+    required: true,
+    trim: true,
+  },
+  github: { 
+    type: String,
+    trim: true,
+  },
+  password: { 
+    type: String,
+    required: true,
+    trim: true
+  },
   admin: { type: Boolean, default: false },
   verified: { type: Boolean, default: false }
 });
