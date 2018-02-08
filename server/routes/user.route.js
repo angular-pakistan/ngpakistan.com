@@ -5,6 +5,9 @@ const passport = require('passport');
 const userService = require('../services/user.service');
 const secret = process.env.SECRET || 'tasmanianDevil';
 const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
+var api_key = 'key-c0515d395d6d5188df64af9c2f783194';
+var DOMAIN = 'sandbox171d4d23ca894d458d322157f279255a.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
 // Models
 const User = require('../models/user.model').users;
 
@@ -40,13 +43,25 @@ router.post('/', (req, res, next) => {
   const user = {name,email,phone,github,password};
   userService.save(user)
     .then((user) => {
-      var payload = {id: user._id};
-      var token = jwt.sign(payload, secret, { expiresIn: '24h'});
-      res.json({success: true, token: 'bearer ' + token});
+      var data = {
+        from: 'Angular Pakistan <no-reply@ngpakistan.com>',
+        to: 'talhakhatri3@gmail.com',
+        subject: 'Verify your account',
+        text: `Click on the following link to verify your account: http://localhost:4200/#/verify/${user._id}`
+      };
+      mailgun.messages().send(data, function (error, body) {
+          if(error){
+              console.log(error);
+              res.json({success: false, error: error});
+          }
+          console.log(body);
+          console.log('Successfully sent!');
+          res.json({success: true});
+      });
     })
     .catch(err => {
       if(err)
-        res.json(err);
+        res.json({ error: err });
     })
 });
 
@@ -74,5 +89,23 @@ router.post('/login', (req, res, next) => {
 router.post('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.sendStatus(200);
 });
+
+router.get('/verify/:id', (req, res) => {
+  const id = req.params.id;
+
+  userService.getUser(id).then(user => {
+    if(user){
+      if(user.verified){
+        res.json({success: false});
+      } else {
+        user.verified = true;
+        user.save();
+        res.json({success: true});
+      }
+    } else {
+      res.sendStatus(404)
+    }
+  }).catch(err => res.json(err));
+})
 
 module.exports = router;
