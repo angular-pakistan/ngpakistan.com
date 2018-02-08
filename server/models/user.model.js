@@ -14,11 +14,12 @@ var mongoose = require('mongoose')
 
 var usersModel = Schema({
   name: String,
-  email: String,
+  email: { type: String, unique: true },
   phone: String,
   github: String,
   password:String,
-  admin: Boolean
+  admin: { type: Boolean, default: false },
+  verified: { type: Boolean, default: false }
 });
 
 // methods ======================
