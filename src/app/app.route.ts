@@ -5,12 +5,14 @@ import { LoginComponent } from './login';
 import { MeetupsComponent } from './meetups/meetups.component';
 import { SignupComponent } from './signup';
 import { ProfileComponent } from './profile';
+import { VerificationComponent } from './verification/verification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import {
   MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
   SocialCardComponent, PartnersComponent, ContactusCardComponent, JoinUsComponent
 } from './shared/index';
+import { VerificationResolver } from './resolvers/verification.resolver';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,6 +26,7 @@ export const ROUTES: Routes = [
   { path: 'partners', component: PartnersComponent },
   { path: 'contact', component: ContactusCardComponent },
   { path: 'joinUs', component: JoinUsComponent },
+  { path: 'verify/:id', component: VerificationComponent, resolve: { response: VerificationResolver } },
   { path: 'presskit', loadChildren: './presskit/presskit.module.ts#PressKitModule'},
   { path: '**', component: NoContentComponent },
 ];
