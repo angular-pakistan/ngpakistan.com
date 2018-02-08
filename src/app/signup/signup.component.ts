@@ -42,4 +42,8 @@ export class SignupComponent implements OnInit {
       }
     }, err => this.disable = false);
   }
+
+  resetError() {
+    this.showErrorMessage = false;
+  }
 }
