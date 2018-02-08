@@ -13,6 +13,9 @@ import { UserService } from '../services/user.service';
 export class SignupComponent implements OnInit {
   confirmPassword = '';
   disable = false;
+  success = false;
+  showErrorMessage = false;
+  errorMessage = '';
   user: User = {
     name: '',
     email: '',
@@ -30,9 +33,12 @@ export class SignupComponent implements OnInit {
     this.disable = true;
     this.userService.save(this.user).subscribe( data => {
       if (data.success) {
-        this.userService.setUser(data.token);
-        this.Router.navigate(['home']);
-        window.location.reload();
+        this.success = true;
+      }
+      if (data.error) {
+        this.disable = false;
+        this.errorMessage = data.error;
+        this.showErrorMessage = true;
       }
     }, err => this.disable = false);
   }
