@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   showError = false;
   disable = false;
   loginBtnMsg = 'Login';
-  constructor(private  userService: UserService,private Router: Router) { }
+  constructor(private  userService: UserService, private Router: Router) { }
 
   ngOnInit() {
   }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       if (data.token) {
       this.showError = false;
       this.userService.setUser(data.token);
-      this.Router.navigate(['profile']);
+      this.Router.navigate(['home']);
       window.location.reload();
       } else {
         this.errorMessage = 'Something went wrong, please try again.';
