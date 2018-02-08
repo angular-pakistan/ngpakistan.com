@@ -20,12 +20,8 @@ module.exports ={
     return users.findOne(query).select('-password').exec();
   },
 
-  login : (email,password) => {
-    const query = { 
-      email1: email,
-      password:password
-    };
-    return users.findOne(query).exec();
+  login : (email) => {
+    return users.findOne({email}).exec();
   },
 
   save: (user) => {
