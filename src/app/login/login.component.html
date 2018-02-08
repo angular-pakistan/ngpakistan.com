@@ -10,6 +10,7 @@
                         placeholder="Email"
                         class="form-control"
                         type="email"
+                        (input)="resetError()"
                         required
                         [(ngModel)]="email">
                     </div>
@@ -20,9 +21,10 @@
                         id="password"
                         class="form-control"
                         placeholder="Password"
+                        (input)="resetError()"
                         required
                         [(ngModel)]="password">
-                        <span class="help-block">{{errorMessage}}</span>
+                        <span *ngIf="showError" class="help-block">{{errorMessage}}</span>
                     </div>
             </div>
         </div>
