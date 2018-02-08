@@ -65,4 +65,13 @@ export class UserService {
               .catch(this.errorService.handleError);
   }
 
+  verify(id: string): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this.api + `/verify/${id}`, options)
+              .map(res => res.json())
+              .catch(this.errorService.handleError);
+  }
+
 }
