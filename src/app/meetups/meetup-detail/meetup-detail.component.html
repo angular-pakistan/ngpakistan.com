@@ -3,7 +3,13 @@
     <div class="row">
       <div class="col">
         <div class="service-box text-center">
-          <h1>{{meetup.name}}#{{meetup.sequenceNo}}</h1>
+          <div class="header row">
+            <h1 class="col-md-6 col-md-offset-3">{{meetup.name}}#{{meetup.sequenceNo}}</h1>
+            <span id="subscribe" class="col-md-3">
+              <a *ngIf="!userService.getUser()" class="btn" [routerLink]=" ['../../login']">Login to subscribe</a>
+              <button *ngIf="userService.getUser()" (click)="onSubscribe()"class="btn">Subscribe</button>
+            </span>
+          </div>
           <div class="icon-text">
             <span>
               <i class="material-icons">location_on</i>

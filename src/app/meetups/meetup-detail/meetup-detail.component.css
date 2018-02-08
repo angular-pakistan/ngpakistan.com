@@ -61,3 +61,14 @@ h1{
     padding-top: 2px;
     font-size: 15px;
 }
+#subscribe {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+    padding-top: 20px;
+}
+#subscribe .btn{
+    height: 40px;
+    padding: 10px 10px;
+    font-size: 15px;
+}

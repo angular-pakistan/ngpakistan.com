@@ -3,6 +3,8 @@ import { Meetup } from '../../model/meetup.interface';
 import { Speaker } from '../../model/speaker.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-meetups',
   templateUrl: './meetup-detail.component.html',
@@ -12,7 +14,8 @@ export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
   constructor(
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
