@@ -5,7 +5,8 @@ const users = [
         phone: '',
         github: 'https://github.com/angular-pakistan',
         password: '',
-        admin: true
+        admin: true,
+        verified: true
     }
 ];
 
