@@ -23,29 +23,34 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.showError = false;
     this.loginBtnMsg = 'Logging in...';
     this.disable = true;
     this.userService.login(this.email, this.password)
     .first()
     .subscribe( data => {
       this.loginBtnMsg = 'Login';
-      this.disable = false;
       if (data.token) {
-      this.showError = false;
-      this.userService.setUser(data.token);
-      this.Router.navigate(['home']);
-      window.location.reload();
-      } else {
-        this.errorMessage = 'Something went wrong, please try again.';
+        this.showError = false;
+        this.userService.setUser(data.token);
+        this.Router.navigate(['home']);
+        window.location.reload();
+      } else if (data.error) {
+        this.errorMessage = data.error;
         this.showError = true;
+        this.disable = false;
       }
     }, err => {
       this.loginBtnMsg = 'Login';
       this.disable = false;
       if (err) {
-        this.errorMessage = 'Invalid username or password.';
+        this.errorMessage = 'Something went wrong, please try again.';
         this.showError = true;
       }
     });
+  }
+
+  resetError() {
+    this.showError = false;
   }
 }
