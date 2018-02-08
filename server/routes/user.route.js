@@ -45,9 +45,9 @@ router.post('/', (req, res, next) => {
     .then((user) => {
       var data = {
         from: 'Angular Pakistan <no-reply@ngpakistan.com>',
-        to: 'talhakhatri3@gmail.com',
+        to: user.email,
         subject: 'Verify your account',
-        text: `Click on the following link to verify your account: http://localhost:4200/#/verify/${user._id}`
+        text: `Dear ${user.name},\nClick on the following link to verify your account: http://localhost:4200/#/verify/${user._id}`
       };
       mailgun.messages().send(data, function (error, body) {
           if(error){
@@ -68,22 +68,29 @@ router.post('/', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
-  User.findOne({ email }, (err, user) => {
-    if(!user){
-      res.sendStatus(401);
-    } else {
-      if(user.validPassword(password)){
-        var payload = {id: user.id};
-        if(user.admin)
-          payload.admin = true;
-        var token = jwt.sign(payload, secret, { expiresIn: '24h'});
-        res.json({success: true, token: 'bearer ' + token});
+  userService.login(email)
+    .then(user => {
+      if(!user){
+        res.json({error: 'Invalid username or password.'});
       } else {
-        res.sendStatus(401);
+        if (user.validPassword(password)) {
+          if (user.verified) {
+            var payload = {id: user.id};
+            if (user.admin) {
+              payload.admin = true;
+            }
+            var token = jwt.sign(payload, secret, { expiresIn: '24h'});
+            res.json({success: true, token: 'bearer ' + token});
+          } else {
+            res.json({error: `Your email hasn't been verified yet.
+            \nCheck your email, we've sent you a verification link.`});
+          }
+        } else {
+          res.json({error: 'Invalid username or password.'});
+        }
       }
-    }
-  })
+    })
+    .catch(err => res.json({error: err}))
 });
 
 router.post('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
