@@ -41,11 +41,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { ConferenceService } from './services/conference.service';
 import { SpeakerService } from './services/speaker.service';
+import { VerificationResolver } from './resolvers/verification.resolver';
+
 
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,8 @@ import { ProfileComponent } from './profile/profile.component';
     JoinComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ import { ProfileComponent } from './profile/profile.component';
     UserService,
     MeetupService,
     ConferenceService,
-    SpeakerService
+    SpeakerService,
+    VerificationResolver
   ],
   bootstrap: [AppComponent]
 })
