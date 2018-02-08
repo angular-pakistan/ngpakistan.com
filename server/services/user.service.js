@@ -29,9 +29,9 @@ module.exports ={
   },
 
   save: (user) => {
-    return users.findOne({ name: user.name }).exec().then(res => {
+    return users.findOne({ email: user.email }).exec().then(res => {
       if (res) {
-        return Promise.reject('User already exists');
+        return Promise.reject('User with this email already exists.');
       } else {
         return users.create(user)
         .then((newUser) => {
