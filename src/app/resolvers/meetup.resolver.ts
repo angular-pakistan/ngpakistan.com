@@ -9,7 +9,7 @@ import { MeetupService } from '../services/meetup.service';
 @Injectable()
 export class MeetupResolver implements Resolve<Observable<any>> {
   constructor(private service: MeetupService) {}
- 
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

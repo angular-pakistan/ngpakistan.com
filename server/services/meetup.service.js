@@ -47,8 +47,7 @@ module.exports = {
     removeSubscriber: (meetupID, subscriberID) => {
         return meetups.findByIdAndUpdate(
             meetupID,
-            {$pull: {"subscribers": { "_id": subscriberID}}},
-            { new: true }
+            {$pull: {"subscribers": { "userID": subscriberID}}}
         ).exec();     
     },
 

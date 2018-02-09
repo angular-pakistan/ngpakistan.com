@@ -48,8 +48,9 @@ export class MeetupService {
                 .catch(this.handleError);
   }
 
-  addSubscriber(meetupID, subscriber): Observable<Response | any> {
-    return this.http.post(`${this.api}/${meetupID}`, subscriber, this.authOptions)
+  addSubscriber(meetupID, userID): Observable<Response | any> {
+    const body = {userID, date: Date.now(), level: 0, code: 0};
+    return this.http.post(`${this.api}/${meetupID}/subscriber`, body, this.authOptions)
                 .map(res => res.json())
                 .catch(this.handleError);
   }

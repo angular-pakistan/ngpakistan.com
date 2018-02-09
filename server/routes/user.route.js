@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
         from: 'Angular Pakistan <no-reply@ngpakistan.com>',
         to: user.email,
         subject: 'Verify your account',
-        text: `Dear ${user.name},\nClick on the following link to verify your account: http://localhost:4200/#/verify/${user._id}`
+        text: `Dear ${user.name},\nClick on the following link to verify your account: http://ngpakistan.com/#/verify/${user._id}`
       };
       mailgun.messages().send(data, function (error, body) {
           if(error){

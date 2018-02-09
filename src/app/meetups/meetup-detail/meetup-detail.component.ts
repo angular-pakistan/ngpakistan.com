@@ -4,6 +4,9 @@ import { Speaker } from '../../model/speaker.interface';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
+import { MeetupService } from '../../services/meetup.service';
+
+import 'rxjs/add/operator/first';
 
 @Component({
   selector: 'app-meetups',
@@ -12,10 +15,12 @@ import { UserService } from '../../services/user.service';
 })
 export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
+  subscribed = false;
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private userService: UserService
+    private userService: UserService,
+    private meetupService: MeetupService
   ) { }
 
   ngOnInit() {
@@ -24,10 +29,36 @@ export class MeetupDetailComponent implements OnInit {
         .data
         .meetup
         .data;
+    if (this.userService.getUser()) {
+      this.meetup.subscribers.forEach(subscriber => {
+        if (subscriber.userID === this.userService.getUser().id) {
+          this.subscribed = true;
+        }
+      });
+    }
   }
 
-  sanitizeUrl(url: string){
+  sanitizeUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
+  onSubscribe() {
+    const userID = this.userService.getUser().id;
+    this.meetupService
+      .addSubscriber(this.meetup._id, userID)
+      .first()
+      .subscribe(res => {
+        this.subscribed = true;
+      });
+  }
+
+  onUnsubscribe() {
+    const userID = this.userService.getUser().id;
+    this.meetupService
+      .removeSubscriber(this.meetup._id, userID)
+      .first()
+      .subscribe(res => {
+        this.subscribed = false;
+      });
+  }
 }

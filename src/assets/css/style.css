@@ -87,7 +87,8 @@ Navigation bar
 .btn-trial a:hover, .btn-trial a:focus{
 	border: 1px solid #5FCF80;
 	background-color: #fff;
-	color: #5FCF80 !important;
+    color: #5FCF80 !important;
+    cursor: pointer;
 }
 .navbar-default .navbar-brand {
     font-family: 'Dosis', sans-serif !important;

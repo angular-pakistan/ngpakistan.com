@@ -61,11 +61,19 @@ h1{
     padding-top: 2px;
     font-size: 15px;
 }
+.blue {
+    background-color: darkgray;
+    border-color: darkgray;
+}
+.blue:hover {
+    background-color: white;
+    color: darkgray;
+}
 #subscribe {
     display: flex;
     justify-content: flex-end;
     padding-right: 60px;
-    padding-top: 20px;
+    padding-top: 22px;
 }
 #subscribe .btn{
     height: 40px;
