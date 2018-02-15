@@ -13,16 +13,10 @@ export class MeetupService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  private authOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('user')
-      })
-  };
   constructor(private http: HttpClient) { }
 
   save(meetup: Meetup): Observable<Response | any> {
-    return this.http.post(this.api, meetup, this.authOptions)
+    return this.http.post(this.api, meetup, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
@@ -30,7 +24,7 @@ export class MeetupService {
   }
 
   delete(meetupID): Observable<Response | any>  {
-    return this.http.delete(`${this.api}/${meetupID}`, this.authOptions)
+    return this.http.delete(`${this.api}/${meetupID}`, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
@@ -52,7 +46,7 @@ export class MeetupService {
 
   update(meetup: Meetup): Observable<Response | any> {
     const meetupID = meetup._id;
-    return this.http.put(`${this.api}/${meetupID}`, meetup, this.authOptions)
+    return this.http.put(`${this.api}/${meetupID}`, meetup, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
@@ -60,14 +54,14 @@ export class MeetupService {
 
   addSubscriber(meetupID, userID): Observable<Response | any> {
     const body = {userID, date: Date.now(), level: 0, code: 0};
-    return this.http.post(`${this.api}/${meetupID}/subscriber`, body, this.authOptions)
+    return this.http.post(`${this.api}/${meetupID}/subscriber`, body, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
   }
 
   removeSubscriber(meetupID, subscriberID): Observable<Response | any>  {
-    return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.authOptions)
+    return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );

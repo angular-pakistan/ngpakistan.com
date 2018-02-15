@@ -12,9 +12,9 @@ import {
 import { MeetupsModule } from './meetups/meetups.module';
 import { AdminModule } from './admin/admin.module';
 import { PressKitModule } from './presskit/presskit.module';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultRequestOptions } from './services/default-request-options.service';
-
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AppComponent } from './app.component';
 import { MeetupCardComponent } from './shared/meetup-card/meetup-card.component';
 import { IntroCardComponent } from './shared/intro-card/intro-card.component';
@@ -96,7 +96,12 @@ import { VerificationComponent } from './verification/verification.component';
     MeetupService,
     ConferenceService,
     SpeakerService,
-    VerificationResolver
+    VerificationResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

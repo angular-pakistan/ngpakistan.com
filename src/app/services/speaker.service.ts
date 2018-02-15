@@ -12,17 +12,10 @@ export class SpeakerService {
   private options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-
-  private authOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('user')
-      })
-  };
   constructor(private http: HttpClient) { }
 
   save(speaker: Speaker): Observable<Response | any> {
-    return this.http.post(this.api, speaker, this.authOptions)
+    return this.http.post(this.api, speaker, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
@@ -30,7 +23,7 @@ export class SpeakerService {
   }
 
   delete(speakerID): Observable<Response | any>  {
-    return this.http.delete(`${this.api}/${speakerID}`, this.authOptions)
+    return this.http.delete(`${this.api}/${speakerID}`, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );
@@ -52,7 +45,7 @@ export class SpeakerService {
 
   update(speaker: Speaker): Observable<Response | any> {
     const speakerID = speaker._id;
-    return this.http.put(`${this.api}/${speakerID}`, speaker, this.authOptions)
+    return this.http.put(`${this.api}/${speakerID}`, speaker, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );

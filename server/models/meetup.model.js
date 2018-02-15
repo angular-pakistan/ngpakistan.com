@@ -78,8 +78,7 @@ var meetupSchema = Schema({
         type: String,
         trim: true
       },
-      level: Number,
-      code: Number
+      confirmed: Boolean
     }
   ]
 });
