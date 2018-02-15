@@ -14,11 +14,11 @@ var config = convict({
         }
     },
     mailgun_api_key: {
-        default: 'key-c0515d395d6d5188df64af9c2f783194',
+        default: '',
         env: "MAILGUN_API"
     },
     mailgun_domain: {
-        default: 'sandbox171d4d23ca894d458d322157f279255a.mailgun.org',
+        default: '',
         env: "MAILGUN_DOMAIN"
     }
 });
