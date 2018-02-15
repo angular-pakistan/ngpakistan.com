@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MeetupService } from '../../services/meetup.service';
 import { SpeakerService } from '../../services/speaker.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-edit-meetup',

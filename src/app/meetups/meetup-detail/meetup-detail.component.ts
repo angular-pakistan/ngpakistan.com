@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 import { MeetupService } from '../../services/meetup.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-meetups',
@@ -52,16 +52,6 @@ export class MeetupDetailComponent implements OnInit {
       .first()
       .subscribe(res => {
         this.subscribed = true;
-      });
-  }
-
-  onUnsubscribe() {
-    const userID = this.userService.getUser().id;
-    this.meetupService
-      .removeSubscriber(this.meetup._id, userID)
-      .first()
-      .subscribe(res => {
-        this.subscribed = false;
       });
   }
 }

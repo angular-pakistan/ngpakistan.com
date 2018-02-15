@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-login',

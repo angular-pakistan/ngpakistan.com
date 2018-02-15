@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Meetup } from '../../model/meetup.interface';
 import { MeetupService } from '../../services/meetup.service';
 import { ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-manage-meetups',
