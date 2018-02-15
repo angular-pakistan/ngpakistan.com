@@ -16,12 +16,15 @@ import 'rxjs/add/operator/first';
 export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
   subscribed = false;
+  userService;
+
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private userService: UserService,
-    private meetupService: MeetupService
-  ) { }
+    private meetupService: MeetupService,
+    userService: UserService) {
+    this.userService = userService;
+  }
 
   ngOnInit() {
     this.meetup = this.route

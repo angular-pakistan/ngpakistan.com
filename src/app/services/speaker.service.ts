@@ -1,51 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { catchError } from 'rxjs/operators';
 
 import { Speaker } from '../model/speaker.interface';
 
 @Injectable()
 export class SpeakerService {
   private api = '/api/v1/speaker';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-  private options = new RequestOptions({ headers: this.headers });
-  private authHeaders = new Headers({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('user')});
-  private authOptions = new RequestOptions({headers: this.authHeaders});
-  constructor(private http: Http) { }
+  private options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
+  private authOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('user')
+      })
+  };
+  constructor(private http: HttpClient) { }
 
   save(speaker: Speaker): Observable<Response | any> {
     return this.http.post(this.api, speaker, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
 
   }
 
   delete(speakerID): Observable<Response | any>  {
     return this.http.delete(`${this.api}/${speakerID}`, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   getAll(): Observable<Response | any> {
     return this.http.get(this.api, this.options)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   getById(speakerID: string): Observable<Response | any> {
     return this.http.get(`${this.api}/${speakerID}`, this.options)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   update(speaker: Speaker): Observable<Response | any> {
     const speakerID = speaker._id;
     return this.http.put(`${this.api}/${speakerID}`, speaker, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   private handleError (error: Response | any) {

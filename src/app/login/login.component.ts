@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params.id) {
-      this.meetupID = this.route.snapshot.params.id;
+    if (this.route.snapshot.queryParams.id) {
+      this.meetupID = this.route.snapshot.queryParams.id;
     } else {
       this.meetupID = null;
     }

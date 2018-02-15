@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { catchError } from 'rxjs/operators';
 
 import { ContactUs } from '../model/contactus.interface';
 
@@ -11,15 +10,17 @@ import { ContactUs } from '../model/contactus.interface';
 export class ContactusService {
   private api = 'api/v1/contact';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   save(contactUs: ContactUs): any {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
 
     return this.http.post(this.api, contactUs, options)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
 
   }
 

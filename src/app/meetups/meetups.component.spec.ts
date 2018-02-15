@@ -5,8 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ROUTES } from '../app.route';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { map, catchError } from 'rxjs/operators';
+
 
 
 import { MeetupsComponent } from './meetups.component';

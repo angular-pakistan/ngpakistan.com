@@ -20,6 +20,11 @@ module.exports ={
     return users.findOne(query).select('-password').exec();
   },
 
+  getUserByEmail: (email) => {
+    const query = { email };
+    return users.findOne(query).select('-password').exec();
+  },
+
   login : (email) => {
     return users.findOne({email}).exec();
   },

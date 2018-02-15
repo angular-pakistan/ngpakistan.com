@@ -1,64 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { catchError } from 'rxjs/operators';
 
 import { Meetup } from '../model/meetup.interface';
 
 @Injectable()
 export class MeetupService {
   private api = '/api/v1/meetup';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-  private options = new RequestOptions({ headers: this.headers });
-  private authHeaders = new Headers({'Content-Type': 'application/json', 'Authorization': localStorage.getItem('user')});
-  private authOptions = new RequestOptions({headers: this.authHeaders});
-  constructor(private http: Http) { }
+  private options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
+  private authOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('user')
+      })
+  };
+  constructor(private http: HttpClient) { }
 
   save(meetup: Meetup): Observable<Response | any> {
     return this.http.post(this.api, meetup, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
 
   }
 
   delete(meetupID): Observable<Response | any>  {
     return this.http.delete(`${this.api}/${meetupID}`, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   getAll(): Observable<Response | any> {
     return this.http.get(this.api, this.options)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   getById(meetupID: string): Observable<Response | any> {
     return this.http.get(`${this.api}/${meetupID}`, this.options)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   update(meetup: Meetup): Observable<Response | any> {
     const meetupID = meetup._id;
     return this.http.put(`${this.api}/${meetupID}`, meetup, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   addSubscriber(meetupID, userID): Observable<Response | any> {
     const body = {userID, date: Date.now(), level: 0, code: 0};
     return this.http.post(`${this.api}/${meetupID}/subscriber`, body, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   removeSubscriber(meetupID, subscriberID): Observable<Response | any>  {
     return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.authOptions)
-                .map(res => res.json())
-                .catch(this.handleError);
+                .pipe(
+                  catchError(this.handleError)
+                );
   }
 
   private handleError (error: Response | any) {

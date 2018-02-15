@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { catchError } from 'rxjs/operators';
+
 @Injectable()
 export class UserService {
 
   private api = '/api/v1/user';
 
-  constructor(private http: Http, private errorService: ErrorService) { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   save(user: User): any {
-
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
 
     return this.http.post(this.api, user, options)
-                .map(res => res.json())
-                .catch(this.errorService.handleError);
+                .pipe(
+                  catchError(this.errorService.handleError)
+                );
   }
 
   setUser(token) {
@@ -53,25 +54,29 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
     const body = {
         email: email,
         password: password
     };
 
     return this.http.post(this.api + '/login', body, options)
-              .map(res => res.json())
-              .catch(this.errorService.handleError);
+              .pipe(
+                  catchError(this.errorService.handleError)
+                );
   }
 
-  verify(id: string): Observable<any> {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
+  verify(email: string, token: string): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
 
-    return this.http.get(this.api + `/verify/${id}`, options)
-              .map(res => res.json())
-              .catch(this.errorService.handleError);
+    return this.http.get(this.api + `/verify?email=${email}&token=${token}`, options)
+              .pipe(
+                  catchError(this.errorService.handleError)
+                );
   }
 
 }

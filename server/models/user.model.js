@@ -39,7 +39,8 @@ var usersModel = Schema({
     trim: true
   },
   admin: { type: Boolean, default: false },
-  verified: { type: Boolean, default: false }
+  verified: { type: Boolean, default: false },
+  token: { type: String }
 });
 
 // methods ======================

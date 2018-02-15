@@ -7,19 +7,19 @@ var JwtStrategy = passportJWT.Strategy;
 var jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.SECRET || 'tasmanianDevil';
-jwtOptions.usernameField = 'name';
+jwtOptions.usernameField = 'email';
 jwtOptions.passwordField = 'password';
 
 // Models
 const User = require('../models/user.model').users;
 
 // expose this function to our app using module.exports
-module.exports = function(passport) {
+module.exports = (passport) => {
 
     passport.use(new JwtStrategy(
         jwtOptions,
-        function(jwt_payload, done) {
-            User.findById(jwt_payload.id, function(err, user) {
+        (jwt_payload, done) => {
+            User.findById(jwt_payload.id, (err, user) => {
                 // if there are any errors, return the error before anything else
                 if (err)
                     return done(err);

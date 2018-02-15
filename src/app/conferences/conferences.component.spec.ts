@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
+import { map, catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
 import { ConferencesComponent } from './conferences.component';

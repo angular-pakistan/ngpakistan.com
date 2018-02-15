@@ -44,7 +44,7 @@
           <a [routerLink]=" ['../../login']" *ngIf="!userService.getUser()">Login</a>
         </li>
         <li *ngIf="userService.getUser()">
-          <a [routerLink]=" ['../../profile']">{{user.name}}</a></li>
+          <a [routerLink]=" ['../../profile']">{{userService.getUser().name}}</a></li>
         <li  class="btn-trial">
           <a *ngIf="userService.getUser()" (click)="logout()">Logout</a>
         </li> 

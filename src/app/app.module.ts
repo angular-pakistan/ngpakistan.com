@@ -4,13 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
 import { MeetupsModule } from './meetups/meetups.module';
 import { AdminModule } from './admin/admin.module';
+import { PressKitModule } from './presskit/presskit.module';
 
 import { DefaultRequestOptions } from './services/default-request-options.service';
 
@@ -80,10 +81,11 @@ import { VerificationComponent } from './verification/verification.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MeetupsModule,
-    AdminModule
+    AdminModule,
+    PressKitModule
   ],
   providers: [ErrorService,
     AuthGuard,

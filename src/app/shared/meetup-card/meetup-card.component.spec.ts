@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ROUTES } from '../../app.route';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { map, catchError } from 'rxjs/operators';
 
 import { MeetupCardComponent } from './meetup-card.component';
 import { BigCardComponent } from '../big-card/big-card.component';

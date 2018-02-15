@@ -18,7 +18,6 @@ export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'login/:id', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'conferences', component: ConferenceCardComponent },
@@ -27,8 +26,7 @@ export const ROUTES: Routes = [
   { path: 'partners', component: PartnersComponent },
   { path: 'contact', component: ContactusCardComponent },
   { path: 'joinUs', component: JoinUsComponent },
-  { path: 'verify/:id', component: VerificationComponent, resolve: { response: VerificationResolver } },
-  { path: 'presskit', loadChildren: './presskit/presskit.module.ts#PressKitModule'},
+  { path: 'verify', component: VerificationComponent, resolve: { response: VerificationResolver } },
   { path: '**', component: NoContentComponent },
 ];
 

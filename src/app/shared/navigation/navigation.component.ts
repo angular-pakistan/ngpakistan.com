@@ -8,8 +8,11 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
+  userService: UserService;
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, userService: UserService) {
+    this.userService = userService;
+  }
 
   logout() {
     this.userService.clearUser();

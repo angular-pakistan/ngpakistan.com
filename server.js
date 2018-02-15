@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
+const config = require('./server/config/config.js');
 //Passport
 const passport = require('passport');
 const passportJWT = require("passport-jwt");
@@ -46,7 +46,7 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
-const port = process.env.PORT || '80';
+const port = config.get('port');
 app.set('port', port);
 
 /**
