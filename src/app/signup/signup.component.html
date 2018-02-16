@@ -55,7 +55,7 @@
                         class="btn btn-custom btn-block"
                         value="Signup"
                         [disabled]="signUpForm.invalid || passwordMismatch() || disable">
-                        <br><span *ngIf="true" class="help-block white">User successfully created!
+                        <br><span *ngIf="success" class="help-block white">User successfully created!
                                 <br>An email has been sent to you with a verification link, click on it to verify your account.</span>
                     </div>
                 </div>
