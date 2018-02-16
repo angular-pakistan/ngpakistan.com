@@ -52,12 +52,13 @@ router.post('/', (req, res, next) => {
       const data = mailTemplate.createVerificationMail(user.email, user.name, token);
       mailgun.messages().send(data, (error, body) => {
           if(error){
-              console.log(error);
-              res.json({success: false, error: error});
+            console.log(error);
+            res.json({success: false, error: 'Invalid email address, please check.'});
+          } else {
+            console.log(body);
+            console.log('Successfully sent!');
+            res.json({success: true});
           }
-          console.log(body);
-          console.log('Successfully sent!');
-          res.json({success: true});
       });
       user.save();
     })
