@@ -50,13 +50,14 @@
                             formControlName="confirm">
                             <span *ngIf="passwordMismatch()"
                             class="help-block">Passwords do not match.</span>
-                            <span *ngIf="success" class="help-block">User successfully created!
-                                <br>An email has been sent to you with a verification link, click on it to verify your account.</span>
+                            
                         </div>
                         <input type="submit" id="btn-login"
                         class="btn btn-custom btn-block"
                         value="Signup"
                         [disabled]="signUpForm.invalid || passwordMismatch() || disable">
+                        <br><span *ngIf="true" class="help-block white">User successfully created!
+                                <br>An email has been sent to you with a verification link, click on it to verify your account.</span>
                     </div>
                 </div>
             </form>
