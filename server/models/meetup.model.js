@@ -73,12 +73,12 @@ var meetupSchema = Schema({
   ],
   subscribers:[
     {
-      userID: { type:ObjectId , ref:'users' },
+      user: { type:ObjectId , ref:'users' },
       date: {
         type: String,
         trim: true
       },
-      confirmed: Boolean
+      confirmed: { type: Boolean, default: false }
     }
   ]
 });

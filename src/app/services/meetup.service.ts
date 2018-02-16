@@ -52,8 +52,8 @@ export class MeetupService {
                 );
   }
 
-  addSubscriber(meetupID, userID): Observable<Response | any> {
-    const body = {userID, date: Date.now(), level: 0, code: 0};
+  addSubscriber(meetupID, user): Observable<Response | any> {
+    const body = {user, date: Date.now()};
     return this.http.post(`${this.api}/${meetupID}/subscriber`, body, this.options)
                 .pipe(
                   catchError(this.handleError)
@@ -62,6 +62,13 @@ export class MeetupService {
 
   removeSubscriber(meetupID, subscriberID): Observable<Response | any>  {
     return this.http.delete(`${this.api}/${meetupID}/subscriber/${subscriberID}`, this.options)
+                .pipe(
+                  catchError(this.handleError)
+                );
+  }
+
+  getSubscribers(meetupID): Observable<Response | any>  {
+    return this.http.get(`${this.api}/${meetupID}/subscriber`, this.options)
                 .pipe(
                   catchError(this.handleError)
                 );

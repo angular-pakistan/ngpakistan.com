@@ -14,6 +14,7 @@ import { SpeakerFormComponent } from './speaker-form/speaker-form.component';
 import { AddSpeakerComponent } from './add-speaker/add-speaker.component';
 import { EditSpeakerComponent } from './edit-speaker/edit-speaker.component';
 import { ManageSpeakersComponent } from './manage-speakers/manage-speakers.component';
+import { ManageSubscribersComponent } from './manage-subscribers/manage-subscribers.component';
 
 import { AdminGuard } from '../guards/admin.guard';
 import { MeetupsModule } from '../meetups/meetups.module';
@@ -21,6 +22,7 @@ import { MeetupsResolver } from '../resolvers/meetups.resolver';
 import { MeetupResolver } from '../resolvers/meetup.resolver';
 import { SpeakerResolver } from '../resolvers/speaker.resolver';
 import { SpeakersResolver } from '../resolvers/speakers.resolver';
+import { SubscribersResolver } from '../resolvers/subscribers.resolver';
 
 console.log('`Admin` bundle loaded asynchronously');
 
@@ -35,7 +37,8 @@ console.log('`Admin` bundle loaded asynchronously');
     SpeakerFormComponent,
     AddSpeakerComponent,
     EditSpeakerComponent,
-    ManageSpeakersComponent
+    ManageSpeakersComponent,
+    ManageSubscribersComponent
   ],
   imports: [
     CommonModule,
@@ -49,6 +52,7 @@ console.log('`Admin` bundle loaded asynchronously');
     MeetupResolver,
     SpeakersResolver,
     SpeakerResolver,
+    SubscribersResolver,
     AdminGuard
   ]
 })

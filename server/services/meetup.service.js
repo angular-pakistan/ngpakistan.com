@@ -20,6 +20,14 @@ module.exports = {
         return meetups.findOne(query).populate('talks.speaker').exec();
     },
 
+    getSubscribers: (meetupID) => {
+        const query = { _id: meetupID };
+        return meetups.findOne(query)
+                .select('subscribers name sequenceNo')
+                .populate('subscribers.user', '-password -admin -verified -__v')
+                .exec();
+    },
+
     save: (meetup) => {
         return meetups.create(meetup);
     },

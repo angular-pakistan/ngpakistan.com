@@ -111,15 +111,25 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (r
 })
 
 router.post('/:id/subscriber', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-  const {userID, date, level, code} = req.body;
-  const subscriber = {userID,date,level,code};
-  const id = req.params.id;
+  const {user, date} = req.body;
+  const subscriber = {user, date};
+  const meetupID = req.params.id;
 
-  meetupService.addSubscriber(id, subscriber)
+  meetupService.addSubscriber(meetupID, subscriber)
     .then((meetup) => res.json({
                         href: req.hostname,
                         data: meetup
                       }))
+    .catch(err => {throw err;});
+});
+
+router.get('/:id/subscriber', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  meetupService.getSubscribers(id)
+    .then((subscribers) => res.json({
+                              href: req.hostname,
+                              data: subscribers
+                          }))
     .catch(err => {throw err;});
 });
 

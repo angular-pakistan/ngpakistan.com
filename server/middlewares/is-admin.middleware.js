@@ -5,7 +5,7 @@ const isAdmin = (req, res, next) => {
   const base64Url = header.split('.')[1];
   const base64 = base64Url.replace('-', '+').replace('_', '/');
   const payload = JSON.parse(Buffer.from(base64, 'base64'));
-  userService.getUser(userID)
+  userService.getUser(payload.id)
     .then(user => {
       if(user.admin){
         next();

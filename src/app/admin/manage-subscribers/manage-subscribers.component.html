@@ -1,0 +1,15 @@
+<section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="header-section text-center">
+        <h2>Manage Subscribers - {{meetup.name}}#{{meetup.sequenceNo}}</h2>
+        <hr class="bottom-line"><br>
+      </div>
+      <div class="col" *ngFor="let subscriber of subscribers; let i = index;">
+        <div class="service-box text-center">
+            <h4>{{subscriber.user.name}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -12,14 +12,19 @@
       </div>
       <div class="col" *ngFor="let meetup of meetups; let i = index;">
         <meetup-list [meetup]="meetup">
-          <button class="admin-options"
-          (click)="onDelete(meetup, i)"
-          id="delete-btn" class="btn btn-default">Delete</button>
+          <a class="admin-options" 
+          [routerLink]=" ['.', meetup._id, 'subscribers'] " 
+          routerLinkActive="active" 
+          [routerLinkActiveOptions]="{exact: true}"
+          id="subscriber-btn" class="btn btn-default">Subcribers</a>
           <a class="admin-options" 
           [routerLink]=" ['./edit', meetup._id] " 
           routerLinkActive="active" 
           [routerLinkActiveOptions]="{exact: true}"
           id="edit-btn" class="btn btn-default">Edit</a>
+          <button class="admin-options"
+          (click)="onDelete(meetup, i)"
+          id="delete-btn" class="btn btn-default">Delete</button>
         </meetup-list>    
       </div>
     </div>
