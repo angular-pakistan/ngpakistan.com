@@ -65,7 +65,7 @@ Navigation bar
 .navbar-nav > li > a{
 	padding: 0px;
 	margin: 10px 5px;
-	padding: 10px 15px;
+	padding: 10px 10px;
 }
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover
 {
@@ -666,7 +666,7 @@ Footer
     width: 24%;
     padding: 10px 10px;
     margin-bottom: 15px;
-    color: #fff;: #fafafa;
+    color: #fff;
     border: 1px solid rgba(119, 81, 81, 0.34);
     width: 24%;
     margin-bottom: 15px;

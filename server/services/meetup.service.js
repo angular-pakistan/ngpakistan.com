@@ -55,8 +55,20 @@ module.exports = {
     removeSubscriber: (meetupID, subscriberID) => {
         return meetups.findByIdAndUpdate(
             meetupID,
-            {$pull: {"subscribers": { "userID": subscriberID}}}
+            {$pull: {"subscribers": { "_id": subscriberID}}}
         ).exec();     
     },
+
+    confirmSubscriber: (subscriberID) => {
+        return meetups.update({'subscribers._id': subscriberID},
+            {$set: {"subscribers.$.confirmed": true}}
+        ).exec();     
+    },
+
+    confirmAll: (meetupID) => {
+        return meetups.findById(meetupID)
+        .populate('subscribers.user', '-password -admin -verified -__v')
+        .exec();
+    }
 
 };

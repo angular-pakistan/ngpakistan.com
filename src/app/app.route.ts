@@ -18,7 +18,7 @@ export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signup', component: SignupComponent, canActivate: [LoginGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'conferences', component: ConferenceCardComponent },
   { path: 'projects', component: ProjectCardComponent },

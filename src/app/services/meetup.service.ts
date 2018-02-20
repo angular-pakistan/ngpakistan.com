@@ -67,6 +67,20 @@ export class MeetupService {
                 );
   }
 
+  confirmSubscriber(meetupID, subscriberID): Observable<Response | any>  {
+    return this.http.put(`${this.api}/${meetupID}/subscriber/confirm/${subscriberID}`, this.options)
+                .pipe(
+                  catchError(this.handleError)
+                );
+  }
+
+  confirmAllSubscribers(meetupID): Observable<Response | any>  {
+    return this.http.put(`${this.api}/${meetupID}/subscriber/confirm`, this.options)
+                .pipe(
+                  catchError(this.handleError)
+                );
+  }
+
   getSubscribers(meetupID): Observable<Response | any>  {
     return this.http.get(`${this.api}/${meetupID}/subscriber`, this.options)
                 .pipe(

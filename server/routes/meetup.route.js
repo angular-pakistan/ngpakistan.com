@@ -3,6 +3,11 @@ const router = express.Router();
 const meetupService = require('../services/meetup.service');
 const passport = require('passport');
 const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
+const config = require('../config/config.js');
+const api_key = config.get('mailgun_api_key');
+const DOMAIN = config.get('mailgun_domain');
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+const mailTemplate = require('../templates/mail');
 
 router.get('/', (req, res, next) => {
 
@@ -130,6 +135,70 @@ router.get('/:id/subscriber', passport.authenticate('jwt', { session: false }), 
                               href: req.hostname,
                               data: subscribers
                           }))
+    .catch(err => {throw err;});
+});
+
+router.put('/:id/subscriber/confirm/:subscriberID', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  const subscriberID = req.params.subscriberID;
+
+  meetupService.confirmAll(id)
+    .then((meetup) => {
+      meetup.subscribers.forEach(subscriber => {
+        if (subscriber._id == subscriberID) {
+          subscriber.confirmed = true;
+          const data = mailTemplate.createConfirmationMail(
+            subscriber.user.email,
+            subscriber.user.name,
+            meetup.name,
+            meetup.sequenceNo
+          );
+          mailgun.messages().send(data, (error, body) => {
+              if(error){
+                console.log(error);
+                res.json({success: false, error: 'Invalid email address, please check.'});
+              } else {
+                console.log(body);
+                console.log('Successfully sent!');
+                meetup.save();
+                res.json({success: true});
+              }
+          });
+        }
+      });
+    })
+    .catch(err => {throw err;});
+});
+
+router.put('/:id/subscriber/confirm', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  var err = false;
+  meetupService.confirmAll(id)
+    .then((meetup) => {
+      meetup.subscribers.forEach(subscriber => {
+        subscriber.confirmed = true;
+        const data = mailTemplate.createConfirmationMail(
+          subscriber.user.email,
+          subscriber.user.name,
+          meetup.name,
+          meetup.sequenceNo
+        );
+        mailgun.messages().send(data, (error, body) => {
+            if(error){
+              console.log(error);
+            } else {
+              console.log(body);
+              console.log('Successfully sent!');
+            }
+        });
+      });
+      if (err) {
+        res.json({success: false, error: 'Invalid email address, please check.'});
+      } else {
+        meetup.save();
+        res.json({success: true});
+      }
+    })
     .catch(err => {throw err;});
 });
 

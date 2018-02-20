@@ -12,7 +12,7 @@ import { first } from 'rxjs/operator/first';
   styleUrls: ['./manage-subscribers.component.css']
 })
 export class ManageSubscribersComponent implements OnInit {
-    subscribers: User[];
+    subscribers: any[];
     meetup;
 
     constructor(private route: ActivatedRoute,
@@ -26,6 +26,32 @@ export class ManageSubscribersComponent implements OnInit {
             .subscribers
             .data;
         this.subscribers = this.meetup.subscribers;
+    }
+
+    approve(id) {
+        this.service.confirmSubscriber(this.meetup._id, id)
+            .first()
+            .subscribe(res => {
+                if (res.success) {
+                    this.subscribers.forEach(subscriber => {
+                        if (subscriber._id === id) {
+                            subscriber.confirmed = true;
+                        }
+                    });
+                }
+            });
+    }
+
+    approveAll() {
+        this.service.confirmAllSubscribers(this.meetup._id)
+            .first()
+            .subscribe(res => {
+                if (res.success) {
+                    this.subscribers.forEach(subscriber => {
+                        subscriber.confirmed = true;
+                    });
+                }
+            });
     }
 
 }
