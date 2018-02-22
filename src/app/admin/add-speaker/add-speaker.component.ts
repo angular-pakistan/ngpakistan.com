@@ -3,7 +3,7 @@ import { Speaker } from '../../model/speaker.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpeakerService } from '../../services/speaker.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-add-speaker',
@@ -11,14 +11,14 @@ import 'rxjs/add/operator/first';
   styleUrls: ['./add-speaker.component.css']
 })
 export class AddSpeakerComponent {
-    disable: boolean = false;
+    disable = false;
 
     constructor(private route: ActivatedRoute, 
                 private router: Router, 
                 private service: SpeakerService) { }
 
-    handleSubmit(speaker: Speaker){
-        if(!this.disable){
+    handleSubmit(speaker: Speaker) {
+        if (!this.disable) {
             this.disable = true;
             this.service.save(speaker)
                 .first()
@@ -27,7 +27,7 @@ export class AddSpeakerComponent {
         }
     }
 
-    onCancel(event: boolean){
+    onCancel(event: boolean) {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 }

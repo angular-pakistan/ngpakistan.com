@@ -6,8 +6,8 @@ import { ROUTES } from '../app.route';
 
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { map, catchError } from 'rxjs/operators';
+
 
 import { HomeComponent } from './home.component';
 import { MainBannerComponent } from '../shared/main-banner/main-banner.component';

@@ -20,6 +20,14 @@ module.exports = {
         return meetups.findOne(query).populate('talks.speaker').exec();
     },
 
+    getSubscribers: (meetupID) => {
+        const query = { _id: meetupID };
+        return meetups.findOne(query)
+                .select('subscribers name sequenceNo')
+                .populate('subscribers.user', '-password -admin -verified -__v')
+                .exec();
+    },
+
     save: (meetup) => {
         return meetups.create(meetup);
     },
@@ -47,9 +55,20 @@ module.exports = {
     removeSubscriber: (meetupID, subscriberID) => {
         return meetups.findByIdAndUpdate(
             meetupID,
-            {$pull: {"subscribers": { "_id": subscriberID}}},
-            { new: true }
+            {$pull: {"subscribers": { "_id": subscriberID}}}
         ).exec();     
     },
+
+    confirmSubscriber: (subscriberID) => {
+        return meetups.update({'subscribers._id': subscriberID},
+            {$set: {"subscribers.$.confirmed": true}}
+        ).exec();     
+    },
+
+    confirmAll: (meetupID) => {
+        return meetups.findById(meetupID)
+        .populate('subscribers.user', '-password -admin -verified -__v')
+        .exec();
+    }
 
 };

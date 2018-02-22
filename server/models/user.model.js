@@ -4,7 +4,8 @@
 
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
-  , ObjectId = Schema.Types.ObjectId;
+  , ObjectId = Schema.Types.ObjectId
+  , bcrypt   = require('bcrypt-nodejs');
 
 
 //////////////////////////
@@ -12,19 +13,46 @@ var mongoose = require('mongoose')
 //////////////////////////
 
 var usersModel = Schema({
-  name: String,
-  email1: String,
-  email2: String,
-  phone1: String,
-  phone2:String,
-  dob: String,
-  github: String,
-  facebook:String,
-  twitter:String,
-  linkedin:String,
-  password:String
+  name: { 
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: { 
+    type: String,
+    required: true,
+    trim: true,
+    unique: true
+  },
+  phone: { 
+    type: String,
+    required: true,
+    trim: true,
+  },
+  github: { 
+    type: String,
+    trim: true,
+  },
+  password: { 
+    type: String,
+    required: true,
+    trim: true
+  },
+  admin: { type: Boolean, default: false },
+  verified: { type: Boolean, default: false },
+  token: { type: String }
 });
 
+// methods ======================
+// generating a hash
+usersModel.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+usersModel.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 //////////////////////////
 // Export Schema

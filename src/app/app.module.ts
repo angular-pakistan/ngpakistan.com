@@ -4,16 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {
   RouterModule,
   PreloadAllModules
 } from '@angular/router';
 import { MeetupsModule } from './meetups/meetups.module';
 import { AdminModule } from './admin/admin.module';
-
+import { PressKitModule } from './presskit/presskit.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultRequestOptions } from './services/default-request-options.service';
-
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AppComponent } from './app.component';
 import { MeetupCardComponent } from './shared/meetup-card/meetup-card.component';
 import { IntroCardComponent } from './shared/intro-card/intro-card.component';
@@ -35,16 +36,20 @@ import { ContactusComponent } from './contactus';
 import { JoinComponent } from './join';
 
 import { ContactusService } from './services/contactus.service';
-import { userService } from './services/user.service';
+import { UserService } from './services/user.service';
 import { MeetupService } from './services/meetup.service';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import { ConferenceService } from './services/conference.service';
 import { SpeakerService } from './services/speaker.service';
+import { VerificationResolver } from './resolvers/verification.resolver';
+
 
 import { ROUTES } from './app.route';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { VerificationComponent } from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -69,25 +74,34 @@ import { ProfileComponent } from './profile/profile.component';
     JoinComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    VerificationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot( ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     MeetupsModule,
-    AdminModule
+    AdminModule,
+    PressKitModule
   ],
   providers: [ErrorService,
-    AuthGuard, 
-    DefaultRequestOptions, 
-    ContactusService, 
-    userService, 
-    MeetupService, 
+    AuthGuard,
+    LoginGuard,
+    DefaultRequestOptions,
+    ContactusService,
+    UserService,
+    MeetupService,
     ConferenceService,
-    SpeakerService
+    SpeakerService,
+    VerificationResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

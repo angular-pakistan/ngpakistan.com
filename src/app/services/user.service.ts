@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from './error.service';
 import { User } from '../model/user.interface';
 
+import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
+
 @Injectable()
-export class userService {
+export class UserService {
 
   private api = '/api/v1/user';
 
-  constructor(private http: Http,private errorService: ErrorService) { }
-  
-  save(user: User): any {
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
 
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
+  save(user: User): any {
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
 
     return this.http.post(this.api, user, options)
-                .map(res => res.json())
-                .catch(this.errorService.handleError);
+                .pipe(
+                  catchError(this.errorService.handleError)
+                );
   }
 
   setUser(token) {
@@ -25,11 +29,22 @@ export class userService {
   }
 
   getUser() {
-    return localStorage.getItem('user') ? this.JwtDecode(localStorage.getItem('user')) : null;
+    if (localStorage.getItem('user')) {
+      const token = this.JwtDecode(localStorage.getItem('user'));
+      const now = Date.now() / 1000;
+      if (token.exp < now) {
+        this.clearUser();
+        return null;
+      }
+      return token;
+    }
+    return null;
   }
 
   clearUser() {
-    localStorage.clear();
+    if (localStorage.getItem('user')) {
+      localStorage.clear();
+    }
   }
 
   private JwtDecode(token: String) {
@@ -38,17 +53,30 @@ export class userService {
         return JSON.parse(atob(base64));
   }
 
-  login(email: string, password: string): any {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers });
-    let body = {
+  login(email: string, password: string): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    const body = {
         email: email,
         password: password
     };
 
     return this.http.post(this.api + '/login', body, options)
-              .map(res => res.json())
-              .catch(this.errorService.handleError);
+              .pipe(
+                  catchError(this.errorService.handleError)
+                );
+  }
+
+  verify(email: string, token: string): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+
+    return this.http.get(this.api + `/verify?email=${email}&token=${token}`, options)
+              .pipe(
+                  catchError(this.errorService.handleError)
+                );
   }
 
 }

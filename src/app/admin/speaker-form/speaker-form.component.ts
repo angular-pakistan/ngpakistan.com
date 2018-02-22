@@ -17,8 +17,8 @@ export class SpeakerFormComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder) { }
 
-    ngOnInit(){
-        const urlRegex = '^(http[s]?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}$';
+    ngOnInit() {
+        const urlRegex = '^(?:(http[s]?):\\/\\/)?([^:\\/\\s]+)(:[0-9]+)?((?:\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)([^#\\s]*)?(#[\\w\\-]+)?$';
         this.form = this.formBuilder.group({
             __v: [''],
             _id: [''],
@@ -28,15 +28,15 @@ export class SpeakerFormComponent implements OnInit {
             github: ['', Validators.pattern(urlRegex)],
             linkedIn: ['', Validators.pattern(urlRegex)],
             twitter: ['', Validators.pattern(urlRegex)]
-        })
+        });
 
-        if(this.speaker){
+        if (this.speaker) {
             this.form.patchValue(this.speaker);
         }
     }
 
     onSubmit(speaker: Speaker) {
-        if(this.form.valid && !this.disable){
+        if (this.form.valid && !this.disable) {
             this.submitEvent.emit(speaker);
         }
     }
@@ -45,7 +45,7 @@ export class SpeakerFormComponent implements OnInit {
         this.cancelEvent.emit(false);
     }
 
-    isValid(name: string){
+    isValid(name: string) {
         const field = this.form.get(name);
         return field.invalid && (field.dirty || field.touched);
     }

@@ -33,6 +33,14 @@
 .header-section{
     margin-bottom: 50px;
 }
+#subscriber-btn{
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
+}
+#subscriber-btn:hover{
+    background-color: white;
+    color: #2d8ce5;
+}
 #edit-btn{
     background-color: #2d8ce5;
     border-color: #2d8ce5;

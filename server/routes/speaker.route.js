@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const speakerService = require('../services/speaker.service');
-const _ = require('lodash');
+const passport = require('passport');
+const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
+
 
 router.get('/', (req, res, next) => {
 
@@ -25,15 +27,17 @@ router.get('/:id', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.name){
-    const name = req.body.name;
-    const email = req.body.email;
-    const company = req.body.company;
-    const github = req.body.github;
-    const linkedIn = req.body.linkedIn;
-    const twitter = req.body.twitter;
-    
+    const {
+      name,
+      email,
+      company,
+      github,
+      linkedIn,
+      twitter
+    } = req.body;
+
     const speaker = {name,
                     email,
                     company,
@@ -50,7 +54,7 @@ router.post('/', (req, res, next) => {
   } 
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.name){
     const name = req.body.name;
     const email = req.body.email;
@@ -77,7 +81,7 @@ router.put('/:id', (req, res, next) => {
   }
 })
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   const id = req.params.id;
   speakerService.remove(id)
     .then((speaker) => res.json({

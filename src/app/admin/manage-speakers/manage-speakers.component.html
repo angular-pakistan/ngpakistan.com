@@ -10,13 +10,13 @@
         [routerLinkActiveOptions]="{exact: true}"
         class="btn btn-default pull-right">+ Add Speaker</a>
       </div>
-      <div class="col" *ngFor="let speaker of speakers">
+      <div class="col" *ngFor="let speaker of speakers; let i = index;">
             <div class="service-box text-center" >
                 <div class="title">
                     <p class="ser-text">{{speaker.name}}</p>
                     <span>
                          <button class="admin-options"
-                        (click)="onDelete(speaker)"
+                        (click)="onDelete(speaker, i)"
                         id="delete-btn" class="btn btn-default">Delete</button>
                         <a class="admin-options" 
                         [routerLink]=" ['./edit', speaker._id] " 

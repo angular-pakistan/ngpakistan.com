@@ -4,30 +4,39 @@
         <div class="buffer">
         </div>
         <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-                    <div class="controls">
-                        <input name="email" placeholder="Enter Your email" class="form-control" type="email"  required [(ngModel)]="email">
+            <div class="col-md-4 col-md-offset-4">
+                    <div class="controls" [class.has-error]="showError">
+                        <input name="email"
+                        placeholder="Email"
+                        class="form-control"
+                        type="email"
+                        (input)="resetError()"
+                        required
+                        [(ngModel)]="email">
                     </div>
                     <br>
-                    <div class="form-group">
-                        <label for="password" class="sr-only">password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="password" required [(ngModel)]="password">
+                    <div class="form-group" [class.has-error]="showError">
+                        <input type="password"
+                        name="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Password"
+                        (input)="resetError()"
+                        required
+                        [(ngModel)]="password">
+                        <span *ngIf="showError" class="help-block">{{errorMessage}}</span>
                     </div>
-               
-            </div>
-            <div class="col-md-4">
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in" [disabled]="!loginForm.form.valid">
-                <a [routerLink]=" ['../signup']" id="btn-login" class="btn btn-custom btn-lg btn-block btn-success">sign up</a>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-md-offset-4">
+                <input type="submit" 
+                id="btn-login"
+                class="btn btn-custom btn-lg btn-block"
+                [value]="loginBtnMsg"
+                [disabled]="!loginForm.form.valid || disable">
+                <a [routerLink]=" ['../signup']"
+                id="btn-login" class="btn btn-custom btn-lg btn-block btn-success">Sign up</a>
             </div>
         </div>
         </form>

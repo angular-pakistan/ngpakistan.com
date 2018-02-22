@@ -1,0 +1,40 @@
+.service-box{
+    display: flex;
+    flex-direction: row;
+    padding-top: 25px;
+}
+.service-box p{
+    padding-left: 30px;
+}
+.text{
+    padding-left: 20px;
+    margin-top: 25px;
+    color: #5fcf80;
+    text-align: left;
+}
+.icon-text{
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding-left: 23px
+}
+.icon-text p{
+    margin-right: 30px;
+}
+.btn{
+    background-color: #5fcf80;
+    color: white;
+    height: 30px;
+    padding: 5px 5px;
+    margin-left: 50px;
+    border-color: #5fcf80;
+}
+.edit-btn{
+    background-color: #2d8ce5;
+    border-color: #2d8ce5;
+}
+.edit-btn:hover{
+    background-color: white;
+    color: #2d8ce5;
+}

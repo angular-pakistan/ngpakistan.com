@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const meetupService = require('../services/meetup.service');
-const _ = require('lodash');
+const passport = require('passport');
+const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
+const config = require('../config/config.js');
+const api_key = config.get('mailgun_api_key');
+const DOMAIN = config.get('mailgun_domain');
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+const mailTemplate = require('../templates/mail');
 
 router.get('/', (req, res, next) => {
 
@@ -25,25 +31,29 @@ router.get('/:id', (req, res, next) => {
   .catch(err => {throw err;});
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.sequenceNo && 
-  req.body.name &&
-  req.body.date &&
-  req.body.startTime &&
-  req.body.endTime &&
-  req.body.location &&
-  req.body.city &&
-  req.body.host) {
-    const sequenceNo = req.body.sequenceNo;
-    const name = req.body.name;
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const location = req.body.location;
-    const city = req.body.city;
-    const host = req.body.host;
-    const talks = req.body.talks;
-    const subscribers = req.body.subscribers;
+    req.body.name &&
+    req.body.date &&
+    req.body.startTime &&
+    req.body.endTime &&
+    req.body.location &&
+    req.body.city &&
+    req.body.host &&
+    req.body.talks &&
+    req.body.subscribers) {
+    const {
+      name,
+      sequenceNo,      
+      date, 
+      startTime,
+      endTime, 
+      location,
+      city,
+      host,
+      talks,
+      subscribers
+    } = req.body;
     const meetup = {sequenceNo,
                     name,
                     date, 
@@ -64,24 +74,27 @@ router.post('/', (req, res, next) => {
   }
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   if(req.body.sequenceNo && 
-  req.body.name &&
-  req.body.date &&
-  req.body.startTime &&
-  req.body.endTime &&
-  req.body.location &&
-  req.body.city &&
-  req.body.host) {
-    const sequenceNo = req.body.sequenceNo;
-    const name = req.body.name;
-    const date = req.body.date;
-    const startTime = req.body.startTime;
-    const endTime = req.body.endTime;
-    const location = req.body.location;
-    const city = req.body.city;
-    const host = req.body.host;
-    const talks = req.body.talks;
+    req.body.name &&
+    req.body.date &&
+    req.body.startTime &&
+    req.body.endTime &&
+    req.body.location &&
+    req.body.city &&
+    req.body.host &&
+    req.body.talks) {
+    const {
+      name,
+      sequenceNo,      
+      date, 
+      startTime,
+      endTime, 
+      location,
+      city,
+      host,
+      talks
+    } = req.body;
     const meetup = {sequenceNo,
                     name,
                     date, 
@@ -102,15 +115,12 @@ router.put('/:id', (req, res, next) => {
   }
 })
 
-router.post('/:id/subscriber', (req, res, next) => {
-  const userID = req.body.userID;
-  const date = req.body.date;
-  const level = req.body.level;
-  const code = req.body.code;
-  const subscriber = {userID,date,level,code};
-  const id = req.params.id;
+router.post('/:id/subscriber', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  const {user, date} = req.body;
+  const subscriber = {user, date};
+  const meetupID = req.params.id;
 
-  meetupService.addSubscriber(id, subscriber)
+  meetupService.addSubscriber(meetupID, subscriber)
     .then((meetup) => res.json({
                         href: req.hostname,
                         data: meetup
@@ -118,7 +128,81 @@ router.post('/:id/subscriber', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.delete('/:id/subscriber/:subscriberID', (req, res, next) => {
+router.get('/:id/subscriber', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  meetupService.getSubscribers(id)
+    .then((subscribers) => res.json({
+                              href: req.hostname,
+                              data: subscribers
+                          }))
+    .catch(err => {throw err;});
+});
+
+router.put('/:id/subscriber/confirm/:subscriberID', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  const subscriberID = req.params.subscriberID;
+
+  meetupService.confirmAll(id)
+    .then((meetup) => {
+      meetup.subscribers.forEach(subscriber => {
+        if (subscriber._id == subscriberID) {
+          subscriber.confirmed = true;
+          const data = mailTemplate.createConfirmationMail(
+            subscriber.user.email,
+            subscriber.user.name,
+            meetup.name,
+            meetup.sequenceNo
+          );
+          mailgun.messages().send(data, (error, body) => {
+              if(error){
+                console.log(error);
+                res.json({success: false, error: 'Invalid email address, please check.'});
+              } else {
+                console.log(body);
+                console.log('Successfully sent!');
+                meetup.save();
+                res.json({success: true});
+              }
+          });
+        }
+      });
+    })
+    .catch(err => {throw err;});
+});
+
+router.put('/:id/subscriber/confirm', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
+  const id = req.params.id;
+  var err = false;
+  meetupService.confirmAll(id)
+    .then((meetup) => {
+      meetup.subscribers.forEach(subscriber => {
+        subscriber.confirmed = true;
+        const data = mailTemplate.createConfirmationMail(
+          subscriber.user.email,
+          subscriber.user.name,
+          meetup.name,
+          meetup.sequenceNo
+        );
+        mailgun.messages().send(data, (error, body) => {
+            if(error){
+              console.log(error);
+            } else {
+              console.log(body);
+              console.log('Successfully sent!');
+            }
+        });
+      });
+      if (err) {
+        res.json({success: false, error: 'Invalid email address, please check.'});
+      } else {
+        meetup.save();
+        res.json({success: true});
+      }
+    })
+    .catch(err => {throw err;});
+});
+
+router.delete('/:id/subscriber/:subscriberID', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   const subscriberID = req.params.subscriberID;
   const id = req.params.id;
   meetupService.removeSubscriber(id, subscriberID)
@@ -129,7 +213,7 @@ router.delete('/:id/subscriber/:subscriberID', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
   const id = req.params.id;
   meetupService.remove(id)
     .then((meetup) => res.json({

@@ -5,18 +5,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MeetupService } from '../../services/meetup.service';
 import { SpeakerService } from '../../services/speaker.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
-  selector: 'edit-meetup',
+  selector: 'app-edit-meetup',
   templateUrl: './edit-meetup.component.html',
   styleUrls: ['./edit-meetup.component.css']
 })
 export class EditMeetupComponent implements OnInit {
   meetup: Meetup;
-  disable: boolean = false;
-  disableSpeakerSubmit: boolean = false;
-  showSpeakerForm: boolean = false;
+  disable = false;
+  disableSpeakerSubmit = false;
+  showSpeakerForm = false;
   speakers: Speaker[];
   constructor(private route: ActivatedRoute, 
               private router: Router, 
@@ -35,39 +35,34 @@ export class EditMeetupComponent implements OnInit {
         .speakers
         .data;
   }
-  
-  toggleSpeakerForm(event: boolean){
+
+  toggleSpeakerForm(event: boolean) {
     this.showSpeakerForm = event;
   }
 
-  onSpeakerSubmit(speaker: Speaker){
-    if(!this.disableSpeakerSubmit){
+  onSpeakerSubmit(speaker: Speaker) {
+    if (!this.disableSpeakerSubmit) {
       this.disableSpeakerSubmit = true;
       this.speakerService.save(speaker)
         .first()
         .subscribe(val => {
-          this.speakerService.getAll()
-            .first()
-            .subscribe(val => {
-              this.speakers = val.data;
-              this.showSpeakerForm = false;
-              this.disableSpeakerSubmit = false;
-            })
-        }, err => { 
+          this.speakers.unshift(val.data);
+          this.showSpeakerForm = false;
+        }, err => {
           this.disableSpeakerSubmit = false;
           this.showSpeakerForm = false;
-        })
+        });
     }
   }
 
-  onSubmit(meetup: Meetup){
-    if(!this.disable){
+  onSubmit(meetup: Meetup) {
+    if (!this.disable) {
       this.disable = true;
       this.service.update(meetup)
       .first()
       .subscribe( val => this.router.navigate(['../../'], { relativeTo: this.route }),
           err => this.disable = false);
-    } 
+    }
   }
 
   onCancel(cancel){

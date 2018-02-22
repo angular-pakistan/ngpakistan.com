@@ -5,24 +5,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MeetupService } from '../../services/meetup.service';
 import { SpeakerService } from '../../services/speaker.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
-  selector: 'add-meetup',
+  selector: 'app-add-meetup',
   templateUrl: './add-meetup.component.html',
   styleUrls: ['./add-meetup.component.css']
 })
 export class AddMeetupComponent implements OnInit{
-  disable: boolean = false;
+  disable = false;
   speakers: Speaker[];
-  disableSpeakerSubmit: boolean = false;
-  showSpeakerForm: boolean = false;
-  constructor(private route: ActivatedRoute, 
-              private router: Router, 
+  disableSpeakerSubmit = false;
+  showSpeakerForm = false;
+  constructor(private route: ActivatedRoute,
+              private router: Router,
               private service: MeetupService,
               private speakerService: SpeakerService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.speakers = this.route
           .snapshot
           .data
@@ -30,32 +30,27 @@ export class AddMeetupComponent implements OnInit{
           .data;
   }
 
-  toggleSpeakerForm(event: boolean){
+  toggleSpeakerForm(event: boolean) {
     this.showSpeakerForm = event;
   }
 
-  onSpeakerSubmit(speaker: Speaker){
-    if(!this.disableSpeakerSubmit){
+  onSpeakerSubmit(speaker: Speaker) {
+    if (!this.disableSpeakerSubmit) {
       this.disableSpeakerSubmit = true;
       this.speakerService.save(speaker)
         .first()
         .subscribe(val => {
-          this.speakerService.getAll()
-            .first()
-            .subscribe(val => {
-              this.speakers = val.data;
-              this.showSpeakerForm = false;
-              this.disableSpeakerSubmit = false;
-            })
-        }, err => { 
+          this.speakers.unshift(val.data);
+          this.showSpeakerForm = false;
+        }, err => {
           this.disableSpeakerSubmit = false;
           this.showSpeakerForm = false;
-        })
+        });
     }
   }
 
-  handleSubmit(meetup: Meetup){
-    if(!this.disable){
+  handleSubmit(meetup: Meetup) {
+    if (!this.disable) {
       this.disable = true;
       this.service.save(meetup)
       .first()
@@ -64,7 +59,7 @@ export class AddMeetupComponent implements OnInit{
     }
   }
 
-  onCancel(cancel){
+  onCancel(cancel) {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 

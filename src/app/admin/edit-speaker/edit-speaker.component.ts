@@ -3,7 +3,7 @@ import { Speaker } from '../../model/speaker.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpeakerService } from '../../services/speaker.service';
 
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operator/first';
 
 @Component({
   selector: 'app-edit-speaker',
@@ -11,13 +11,13 @@ import 'rxjs/add/operator/first';
   styleUrls: ['./edit-speaker.component.css']
 })
 export class EditSpeakerComponent implements OnInit {
-    disable: boolean = false;
+    disable = false;
     speaker: Speaker;
-    constructor(private route: ActivatedRoute, 
-                private router: Router, 
+    constructor(private route: ActivatedRoute,
+                private router: Router,
                 private service: SpeakerService) { }
 
-    ngOnInit(){
+    ngOnInit() {
         this.speaker = this.route
                         .snapshot
                         .data
@@ -25,8 +25,8 @@ export class EditSpeakerComponent implements OnInit {
                         .data;
     }
 
-    handleSubmit(speaker: Speaker){
-        if(!this.disable){
+    handleSubmit(speaker: Speaker) {
+        if (!this.disable) {
             this.disable = true;
             this.service.update(speaker)
                 .first()
@@ -35,7 +35,7 @@ export class EditSpeakerComponent implements OnInit {
         }
     }
 
-    onCancel(event: boolean){
+    onCancel(event: boolean) {
         this.router.navigate(['../../'], { relativeTo: this.route });
     }
 }

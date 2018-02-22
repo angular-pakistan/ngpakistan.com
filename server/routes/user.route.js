@@ -1,9 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const userService = require('../services/user.service');
-const _ = require('lodash');
+const secret = process.env.SECRET || 'tasmanianDevil';
+const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
+const config = require('../config/config.js');
+const api_key = config.get('mailgun_api_key');
+const DOMAIN = config.get('mailgun_domain');
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
+const mailTemplate = require('../templates/mail');
+var Chance = require('chance');
+// Models
+const User = require('../models/user.model').users;
 
-router.get('/', (req, res, next) => {
+router.get('/', passport.authenticate('jwt', { session: false }), isAdmin, (req, res, next) => {
 
   userService.getUsers()
     .then((users) => res.json({
@@ -13,7 +24,7 @@ router.get('/', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.get('/:ID', (req, res, next) => {
+router.get('/id/:ID', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   var userID = req.params.ID;
 
   userService.getUser(userID)
@@ -24,63 +35,92 @@ router.get('/:ID', (req, res, next) => {
     .catch(err => {throw err;});
 });
 
-router.get('/email/:email', (req, res, next) => {
-  var username = req.params.email;
-
-  userService.getUserByUsername(username)
-    .then((user) => res.json({
-                        href: req.hostname,
-                        data: user
-                      }))
-    .catch(err => {throw err;});
+router.post('/', (req, res, next) => {
+  const {
+    name,
+    email,
+    phone,
+    github,
+    password
+  } = req.body;
+  const user = {name,email,phone,github,password};
+  userService.save(user)
+    .then((user) => {
+      const chance = new Chance();
+      const token = chance.word({length: 16});
+      user.token = token;
+      const data = mailTemplate.createVerificationMail(user.email, user.name, token);
+      mailgun.messages().send(data, (error, body) => {
+          if(error){
+            console.log(error);
+            res.json({success: false, error: 'Invalid email address, please check.'});
+          } else {
+            console.log(body);
+            console.log('Successfully sent!');
+            res.json({success: true});
+          }
+      });
+      user.save();
+    })
+    .catch(err => {
+      if(err)
+        res.json({ error: err });
+    })
 });
 
-router.post('/', (req, res, next) => {
-  
-    const name = req.body.name;
-    const email1 = req.body.email1;
-    const email2= req.body.email2;
-    const phone1= req.body.phone1;
-    const phone2= req.body.phone2;
-    const dob= req.body.dob;
-    const github= req.body.github;
-    const facebook= req.body.facebook;
-    const twitter= req.body.twitter;
-    const linkedin= req.body.linkedin;
-    const password= req.body.password;
-  
-    const user = {
-          name: name,
-          email1: email1,
-          email2: email2,
-          phone1: phone1,
-          phone2:phone2,
-          dob: dob,
-          github:github,
-          facebook:facebook,
-          twitter:twitter,
-          linkedin:linkedin,
-          password:password
-        };
-    userService.save(user)
-      .then((user) => res.json({
-                          href: req.hostname,
-                          data: user
-                        }))
-      .catch(err => {throw err;});
-  });
+router.post('/login', (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  userService.login(email)
+    .then(user => {
+      if(!user){
+        res.json({error: 'Invalid username or password.'});
+      } else {
+        if (user.validPassword(password)) {
+          if (user.verified) {
+            var payload = {id: user.id, name: user.name};
+            if (user.admin) {
+              payload.admin = true;
+            }
+            var token = jwt.sign(payload, secret, { expiresIn: '7d'});
+            res.json({success: true, token: 'bearer ' + token});
+          } else {
+            res.json({error: `Your email hasn't been verified yet.
+            \nCheck your email, we've sent you a verification link.`});
+          }
+        } else {
+          res.json({error: 'Invalid username or password.'});
+        }
+      }
+    })
+    .catch(err => res.json({error: err}))
+});
 
-  router.post('/login', (req, res, next) => {
-    
-    const email = req.body.email;
-    const password = req.body.password;
-  
-    userService.login(email, password)
-      .then((user) => res.json({
-                          href: req.hostname,
-                          data: user
-                        }))
-      .catch(err => {throw err;});
-      });
+router.post('/logout', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.sendStatus(200);
+});
+
+router.get('/verify', (req, res) => {
+  const email = req.query.email;
+  const token = req.query.token;
+
+  userService.getUserByEmail(email).then(user => {
+    if(user){
+      if(user.verified){
+        res.json({success: false});
+      } else {
+        if(user.token === token) {
+          user.verified = true;
+          user.save();
+          res.json({success: true});
+        } else {
+          res.json({success: false});
+        }
+      }
+    } else {
+      res.sendStatus(404)
+    }
+  }).catch(err => res.json(err));
+})
 
 module.exports = router;

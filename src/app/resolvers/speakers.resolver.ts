@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+import { map, catchError } from 'rxjs/operators';
 import { Speaker } from '../model/speaker.interface';
 import { SpeakerService } from '../services/speaker.service';
 
