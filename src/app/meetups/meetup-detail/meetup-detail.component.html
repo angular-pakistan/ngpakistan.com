@@ -8,7 +8,7 @@
             <span id="subscribe" class="col-md-3">
               <a *ngIf="!userService.getUser()" class="btn" [routerLink]="['../../login']" [queryParams]="{id: meetup._id}">Login to register</a>
               <button *ngIf="userService.getUser() && !subscribed" (click)="onSubscribe()" class="btn">Register</button>
-              <button *ngIf="userService.getUser() && subscribed" class="btn grey" disable>Confirmation Pending</button>
+              <div *ngIf="userService.getUser() && subscribed" class="btn grey">Confirmation Pending</div>
             </span>
           </div>
           <div class="icon-text">

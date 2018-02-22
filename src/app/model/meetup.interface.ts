@@ -1,5 +1,5 @@
 export interface Meetup {
-  _id: string,
+  _id: string
   __v: number,
   sequenceNo: number,
   name: string,
@@ -29,10 +29,9 @@ export interface Meetup {
   ],
   subscribers:[
     {
-      userID: string,
+      user: string,
       date: string,
-      level: number,
-      code: number
+      confirmed: boolean
     }
   ]
 }

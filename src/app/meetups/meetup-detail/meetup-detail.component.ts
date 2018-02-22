@@ -34,7 +34,7 @@ export class MeetupDetailComponent implements OnInit {
         .data;
     if (this.userService.getUser()) {
       this.meetup.subscribers.forEach(subscriber => {
-        if (subscriber.userID === this.userService.getUser().id) {
+        if (subscriber.user === this.userService.getUser().id) {
           this.subscribed = true;
         }
       });

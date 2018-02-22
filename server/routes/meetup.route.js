@@ -117,7 +117,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), isAdmin, (r
 
 router.post('/:id/subscriber', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   const {user, date} = req.body;
-  const subscriber = {user, date};
+  const subscriber = {user, date, confirmed: true};
   const meetupID = req.params.id;
 
   meetupService.addSubscriber(meetupID, subscriber)

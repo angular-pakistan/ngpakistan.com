@@ -41,6 +41,20 @@ export class UserService {
     return null;
   }
 
+  getToken() {
+    const item = localStorage.getItem('user');
+    if (item) {
+      const token = this.JwtDecode(item);
+      const now = Date.now() / 1000;
+      if (token.exp < now) {
+        this.clearUser();
+        return null;
+      }
+      return item;
+    }
+    return null;
+  }
+
   clearUser() {
     if (localStorage.getItem('user')) {
       localStorage.clear();

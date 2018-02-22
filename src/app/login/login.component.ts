@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   errorMessage;
   meetupID;
   showError = false;
-  disable = false;
+  disableSubmit = false;
   loginBtnMsg = 'Login';
   constructor(
     private  userService: UserService,
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.showError = false;
     this.loginBtnMsg = 'Logging in...';
-    this.disable = true;
+    this.disableSubmit = true;
     this.userService.login(this.email, this.password)
     .first()
     .subscribe( data => {
@@ -51,11 +51,11 @@ export class LoginComponent implements OnInit {
       } else if (data.error) {
         this.errorMessage = data.error;
         this.showError = true;
-        this.disable = false;
+        this.disableSubmit = false;
       }
     }, err => {
       this.loginBtnMsg = 'Login';
-      this.disable = false;
+      this.disableSubmit = false;
       if (err) {
         this.errorMessage = 'Something went wrong, please try again.';
         this.showError = true;

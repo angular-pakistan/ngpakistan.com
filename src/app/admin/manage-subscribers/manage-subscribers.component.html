@@ -19,7 +19,7 @@
             <p class="col-md-3">{{subscriber.user.phone}}</p>
             <a *ngIf="subscriber.user?.github !== ''" [href]="subscriber.user?.github" class="col-md-3"><p>{{subscriber.user?.github}}</p></a>
             <button *ngIf="!subscriber?.confirmed" (click)="approve(subscriber._id)" class="btn btn-success edit-btn">Approve</button>
-            <button *ngIf="subscriber?.confirmed" class="btn btn-success" disabled>Approved</button>
+            <div *ngIf="subscriber?.confirmed" class="btn btn-success" disabled>Approved</div>
         </div>
       </div>
     </div>

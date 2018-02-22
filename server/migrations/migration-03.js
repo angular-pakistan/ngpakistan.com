@@ -28,6 +28,7 @@ if(!process.argv[2]){
     console.log('Admin user password: ',process.argv[2]);
     console.log('\n\n');
 }
+mongoose.Promise = global.Promise;
 // Create the database connection
 mongoose.connect(dbURI);
 
