@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   email;
   password;
   errorMessage;
-  meetupID;
+  redirectionID;
+  redirectionPath;
   showError = false;
   disableSubmit = false;
   loginBtnMsg = 'Login';
@@ -25,11 +26,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.route.snapshot.queryParams.id) {
-      this.meetupID = this.route.snapshot.queryParams.id;
-    } else {
-      this.meetupID = null;
-    }
+    this.redirectionPath = this.route.snapshot.queryParams.redirection;
+    this.redirectionID = this.route.snapshot.queryParams.id;
   }
 
   login() {
@@ -43,8 +41,10 @@ export class LoginComponent implements OnInit {
       if (data.token) {
         this.showError = false;
         this.userService.setUser(data.token);
-        if (this.meetupID) {
-          this.router.navigate([`meetups/${this.meetupID}`]);
+        if (this.redirectionID && this.redirectionPath) {
+          this.router.navigate([`${this.redirectionPath}/${this.redirectionID}`]);
+        } else if (this.redirectionPath) {
+          this.router.navigate([`${this.redirectionPath}`]);
         } else {
           this.router.navigate(['home']);
         }

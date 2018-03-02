@@ -64,10 +64,16 @@ h1{
 .grey {
     background-color: darkgray;
     border-color: darkgray;
+    cursor: default;
 }
 .grey:hover {
     background-color: darkgray;
     color: white;
+}
+.approved:hover {
+    background-color: #5fcf80;
+    color: white;
+    cursor: default;
 }
 #subscribe {
     display: flex;

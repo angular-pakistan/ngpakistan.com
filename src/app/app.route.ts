@@ -7,6 +7,7 @@ import { SignupComponent } from './signup';
 import { ProfileComponent } from './profile';
 import { VerificationComponent } from './verification/verification.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MeetupsResolver } from './resolvers/meetups.resolver';
 import { LoginGuard } from './guards/login.guard';
 import {
   MeetupCardComponent, ConferenceCardComponent, ProjectCardComponent,
@@ -16,7 +17,7 @@ import { VerificationResolver } from './resolvers/verification.resolver';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent , resolve: { response: MeetupsResolver } },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [LoginGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

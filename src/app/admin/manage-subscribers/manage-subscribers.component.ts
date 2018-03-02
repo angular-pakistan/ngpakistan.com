@@ -14,7 +14,7 @@ import { first } from 'rxjs/operator/first';
 export class ManageSubscribersComponent implements OnInit {
     subscribers: any[];
     meetup;
-
+    allSubscribersConfirmed = true;
     constructor(private route: ActivatedRoute,
                 private service: MeetupService,
                 private location: Location) {}
@@ -26,6 +26,17 @@ export class ManageSubscribersComponent implements OnInit {
             .subscribers
             .data;
         this.subscribers = this.meetup.subscribers;
+        this.checkAllConfirmed();
+    }
+
+    private checkAllConfirmed() {
+        let confirmed = true;
+        this.subscribers.forEach((subscriber) => {
+            if (!subscriber.confirmed) {
+                confirmed = false;
+            }
+        });
+        this.allSubscribersConfirmed = confirmed;
     }
 
     approve(id) {
@@ -38,6 +49,7 @@ export class ManageSubscribersComponent implements OnInit {
                             subscriber.confirmed = true;
                         }
                     });
+                    this.checkAllConfirmed();
                 }
             });
     }
@@ -47,9 +59,11 @@ export class ManageSubscribersComponent implements OnInit {
             .first()
             .subscribe(res => {
                 if (res.success) {
+                    this.allSubscribersConfirmed = true;
                     this.subscribers.forEach(subscriber => {
                         subscriber.confirmed = true;
                     });
+                    this.checkAllConfirmed();
                 }
             });
     }

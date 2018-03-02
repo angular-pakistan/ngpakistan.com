@@ -8,7 +8,7 @@ import { SpeakersResolver } from '../resolvers/speakers.resolver';
 export const routes = [
   {
     path: 'meetups', children: [
-    { path: '', component: MeetupCardComponent },
+    { path: '', component: MeetupCardComponent, resolve: { response: MeetupsResolver } },
     { path: 'all', component: MeetupsComponent, resolve: { response: MeetupsResolver } },
     { path: ':id', component: MeetupDetailComponent, resolve: { meetup: MeetupResolver } }
   ]

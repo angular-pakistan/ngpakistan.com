@@ -6,9 +6,11 @@
           <div class="header row">
             <h1 class="col-md-6 col-md-offset-3">{{meetup.name}}#{{meetup.sequenceNo}}</h1>
             <span id="subscribe" class="col-md-3">
-              <a *ngIf="!userService.getUser()" class="btn" [routerLink]="['../../login']" [queryParams]="{id: meetup._id}">Login to register</a>
-              <button *ngIf="userService.getUser() && !subscribed" (click)="onSubscribe()" class="btn">Register</button>
-              <div *ngIf="userService.getUser() && subscribed" class="btn grey">Confirmation Pending</div>
+              <div *ngIf="pastEvent && !userApproved" class="btn grey">Registrations Closed</div>
+              <a *ngIf="!userService.getUser() && !pastEvent" class="btn" [routerLink]="['../../login']" [queryParams]="{redirection: 'meetups', id: meetup._id}">Login to register</a>
+              <button *ngIf="userService.getUser() && !userSubscribed && !pastEvent && !userApproved" (click)="onSubscribe()" class="btn">Register</button>
+              <div *ngIf="userService.getUser() && userSubscribed && !pastEvent && !userApproved" class="btn grey">Confirmation Pending</div>
+              <div *ngIf="userService.getUser() && userSubscribed && userApproved" class="btn approved">Approved</div>
             </span>
           </div>
           <div class="icon-text">

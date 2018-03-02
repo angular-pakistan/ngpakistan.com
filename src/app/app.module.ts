@@ -50,6 +50,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VerificationComponent } from './verification/verification.component';
+import { MeetupsResolver } from './resolvers/meetups.resolver';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { VerificationComponent } from './verification/verification.component';
     MeetupService,
     ConferenceService,
     SpeakerService,
+    MeetupsResolver,
     VerificationResolver,
     {
       provide: HTTP_INTERCEPTORS,

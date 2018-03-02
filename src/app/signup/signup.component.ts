@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../model/user.interface';
 import { Router } from '@angular/router';
 
+
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private Router: Router) { }
+    private router: Router) { }
 
   ngOnInit() {
     const urlPattern = '^(?:(http[s]?):\\/\\/)?([^:\\/\\s]+)(:[0-9]+)?((?:\\/\\w+)*\\/)([\\w\\-\\.]+[^#?\\s]+)([^#\\s]*)?(#[\\w\\-]+)?$';
@@ -45,8 +46,8 @@ export class SignupComponent implements OnInit {
       this.userService.save(user).subscribe( data => {
         if (data.success) {
           this.success = true;
-        }
-        if (data.error) {
+          this.router.navigate(['/verify'], {queryParams: {email: user.email, token: data.token}});
+        } else if (data.error) {
           this.disable = false;
           this.errorMessage = data.error;
           this.showErrorMessage = true;

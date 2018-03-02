@@ -6,10 +6,7 @@ const userService = require('../services/user.service');
 const secret = process.env.SECRET || 'tasmanianDevil';
 const isAdmin = require('../middlewares/is-admin.middleware').isAdmin;
 const config = require('../config/config.js');
-const api_key = config.get('mailgun_api_key');
-const DOMAIN = config.get('mailgun_domain');
-const mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
-const mailTemplate = require('../templates/mail');
+const mailingService = require('../services/mailing.service');
 var Chance = require('chance');
 // Models
 const User = require('../models/user.model').users;
@@ -49,22 +46,21 @@ router.post('/', (req, res, next) => {
       const chance = new Chance();
       const token = chance.word({length: 16});
       user.token = token;
-      const data = mailTemplate.createVerificationMail(user.email, user.name, token);
-      mailgun.messages().send(data, (error, body) => {
-          if(error){
-            console.log(error);
-            res.json({success: false, error: 'Invalid email address, please check.'});
-          } else {
-            console.log(body);
-            console.log('Successfully sent!');
-            res.json({success: true});
-          }
+      mailingService.sendVerificationMail(user.email, user.name, token)
+      .then((body) => {
+        console.log(body);
+        console.log('Successfully sent!');
+        res.json({success: true, token});
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json({success: true, token, error: 'Invalid email address, please check.'});
       });
       user.save();
     })
     .catch(err => {
       if(err)
-        res.json({ error: err });
+        res.json({ success: false, error: err });
     })
 });
 
