@@ -1,4 +1,5 @@
 const createVerificationMail = (address, name, token) => {
+    console.log(`http://ngpakistan.com/#/verify?email=${address}&token=${token}`);
     return {
         from: 'Angular Pakistan <no-reply@ngpakistan.com>',
         to: address,

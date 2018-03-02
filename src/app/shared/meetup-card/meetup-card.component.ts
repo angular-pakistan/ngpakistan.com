@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MeetupService } from '../../services/meetup.service';
 import { Meetup } from '../../model/meetup.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-meetup-card',
@@ -12,15 +13,15 @@ export class MeetupCardComponent implements OnInit {
   currentMeetup = '../../../assets/img/meetup-4-banner.png';
   meetups: Meetup[];
   previousMeetups: Meetup[];
-  constructor(private service: MeetupService) { }
+  constructor(private service: MeetupService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.service.getAll().subscribe(val => {
-      this.meetups = val.data;
-      this.previousMeetups = this.meetups.filter(meetup => Date.now() > Date.parse(meetup.date));
-      this.previousMeetups.sort((a: Meetup, b: Meetup) => Date.parse(b.date) - Date.parse(a.date));
-      this.previousMeetups = this.previousMeetups.slice(0,3);
-    });
+    this.meetups = this.route
+        .snapshot
+        .data
+        .response
+        .data;
+    this.previousMeetups = this.meetups.slice(0, 3);
   }
 
 }

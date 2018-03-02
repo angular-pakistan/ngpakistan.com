@@ -5,16 +5,19 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-
+import { UserService } from '../services/user.service';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor() {}
+  private userService: UserService;
+  constructor(userService: UserService) {
+    this.userService = userService;
+  }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     request = request.clone({
       setHeaders: {
-        Authorization: localStorage.getItem('user') || ''
+        Authorization: this.userService.getToken() || ''
       }
     });
     return next.handle(request);

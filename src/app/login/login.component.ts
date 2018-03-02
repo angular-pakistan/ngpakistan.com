@@ -14,9 +14,10 @@ export class LoginComponent implements OnInit {
   email;
   password;
   errorMessage;
-  meetupID;
+  redirectionID;
+  redirectionPath;
   showError = false;
-  disable = false;
+  disableSubmit = false;
   loginBtnMsg = 'Login';
   constructor(
     private  userService: UserService,
@@ -25,17 +26,14 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.route.snapshot.queryParams.id) {
-      this.meetupID = this.route.snapshot.queryParams.id;
-    } else {
-      this.meetupID = null;
-    }
+    this.redirectionPath = this.route.snapshot.queryParams.redirection;
+    this.redirectionID = this.route.snapshot.queryParams.id;
   }
 
   login() {
     this.showError = false;
     this.loginBtnMsg = 'Logging in...';
-    this.disable = true;
+    this.disableSubmit = true;
     this.userService.login(this.email, this.password)
     .first()
     .subscribe( data => {
@@ -43,19 +41,21 @@ export class LoginComponent implements OnInit {
       if (data.token) {
         this.showError = false;
         this.userService.setUser(data.token);
-        if (this.meetupID) {
-          this.router.navigate([`meetups/${this.meetupID}`]);
+        if (this.redirectionID && this.redirectionPath) {
+          this.router.navigate([`${this.redirectionPath}/${this.redirectionID}`]);
+        } else if (this.redirectionPath) {
+          this.router.navigate([`${this.redirectionPath}`]);
         } else {
           this.router.navigate(['home']);
         }
       } else if (data.error) {
         this.errorMessage = data.error;
         this.showError = true;
-        this.disable = false;
+        this.disableSubmit = false;
       }
     }, err => {
       this.loginBtnMsg = 'Login';
-      this.disable = false;
+      this.disableSubmit = false;
       if (err) {
         this.errorMessage = 'Something went wrong, please try again.';
         this.showError = true;

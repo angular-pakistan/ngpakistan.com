@@ -89,6 +89,12 @@ mongoose.connection.on('connected', function () {
                                         console.log('Disconnecting Mongoose default connection');
                                         process.exit(1);
                                     }); 
+                                } else if(doc.sequenceNo === 6) {
+                                    console.log('\nSuccessfully saved all docs and migration complete!');
+                                    mongoose.connection.close(function () {
+                                        console.log('Disconnecting Mongoose default connection');
+                                        process.exit(1);
+                                    }); 
                                 }
                             });
                         });

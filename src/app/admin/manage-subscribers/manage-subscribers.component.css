@@ -38,3 +38,6 @@
     background-color: white;
     color: #2d8ce5;
 }
+.btn-success{
+    cursor: default;
+}

@@ -14,7 +14,7 @@ import { first } from 'rxjs/operator/first';
 })
 export class EditMeetupComponent implements OnInit {
   meetup: Meetup;
-  disable = false;
+  disableMeetupSubmit = false;
   disableSpeakerSubmit = false;
   showSpeakerForm = false;
   speakers: Speaker[];
@@ -56,17 +56,17 @@ export class EditMeetupComponent implements OnInit {
   }
 
   onSubmit(meetup: Meetup) {
-    if (!this.disable) {
-      this.disable = true;
+    if (!this.disableMeetupSubmit) {
+      this.disableMeetupSubmit = true;
       this.service.update(meetup)
       .first()
       .subscribe( val => this.router.navigate(['../../'], { relativeTo: this.route }),
-          err => this.disable = false);
+          err => this.disableMeetupSubmit = false);
     }
   }
 
-  onCancel(cancel){
-    this.disable = true;
+  onCancel(cancel) {
+    this.disableMeetupSubmit = true;
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
 

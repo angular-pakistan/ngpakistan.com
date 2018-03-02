@@ -12,7 +12,7 @@
         <app-big-card [meetupImage]="currentMeetup" ></app-big-card>
         <span id="past">Latest</span>
       </div>
-      <div class="col-md-3 col-sm-0">
+      <div class="col-md-3 col-sm-12">
         <div class="service-box text-center" *ngFor="let meetup of previousMeetups">
           <div class="icon-text">
             <h4 class="ser-text"><a [routerLink]=" ['../meetups', meetup._id] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{meetup.name}} #{{meetup.sequenceNo}}</a></h4>
@@ -21,7 +21,7 @@
         </div>
 
          <div class="service-box text-center">
-            <a [routerLink]=" ['../meetups/all'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> See all meetups </a>
+            <a [routerLink]=" ['../meetups/all'] " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> See all past meetups </a>
           </div>
 
         <span id="past">Past</span>

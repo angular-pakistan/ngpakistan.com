@@ -34,7 +34,7 @@
                 id="btn-login"
                 class="btn btn-custom btn-lg btn-block"
                 [value]="loginBtnMsg"
-                [disabled]="!loginForm.form.valid || disable">
+                [disabled]="!loginForm.form.valid || disableSubmit">
                 <a [routerLink]=" ['../signup']"
                 id="btn-login" class="btn btn-custom btn-lg btn-block btn-success">Sign up</a>
             </div>

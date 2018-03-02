@@ -15,9 +15,10 @@ import { first } from 'rxjs/operator/first';
 })
 export class MeetupDetailComponent implements OnInit {
   meetup: Meetup;
-  subscribed = false;
+  userSubscribed = false;
+  userApproved = false;
   userService;
-
+  pastEvent;
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -32,10 +33,14 @@ export class MeetupDetailComponent implements OnInit {
         .data
         .meetup
         .data;
+    this.pastEvent = Date.now() > Date.parse(this.meetup.date);
     if (this.userService.getUser()) {
       this.meetup.subscribers.forEach(subscriber => {
-        if (subscriber.userID === this.userService.getUser().id) {
-          this.subscribed = true;
+        if (subscriber.user === this.userService.getUser().id) {
+          if (subscriber.confirmed) {
+            this.userApproved = true;
+          }
+          this.userSubscribed = true;
         }
       });
     }
@@ -51,7 +56,7 @@ export class MeetupDetailComponent implements OnInit {
       .addSubscriber(this.meetup._id, userID)
       .first()
       .subscribe(res => {
-        this.subscribed = true;
+        this.userSubscribed = true;
       });
   }
 }
