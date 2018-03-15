@@ -26,7 +26,6 @@ export const ROUTES: Routes = [
   { path: 'social', component: SocialCardComponent },
   { path: 'partners', component: PartnersComponent },
   { path: 'contact', component: ContactusCardComponent },
-  { path: 'joinUs', component: JoinUsComponent },
   { path: 'verify', component: VerificationComponent, resolve: { response: VerificationResolver } },
   { path: '**', component: NoContentComponent },
 ];
